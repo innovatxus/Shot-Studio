@@ -4,7 +4,7 @@ export const TRUST_PAGES: LegalPage[] = [
   {
     slug: "index",
     tree: "trust",
-    status: "draft",
+    status: "final",
     title: { en: "Trust Center — ShotStudio", ar: "مركز الثقة — سناب برو" },
     meta: {
       en: "ShotStudio's Trust Center: security, compliance, privacy commitments, sub-processors, status, and incident response.",
@@ -47,7 +47,7 @@ export const TRUST_PAGES: LegalPage[] = [
   {
     slug: "security",
     tree: "trust",
-    status: "draft",
+    status: "final",
     title: {
       en: "Security Overview — ShotStudio",
       ar: "نظرة عامة على الأمن — سناب برو",
@@ -137,7 +137,7 @@ export const TRUST_PAGES: LegalPage[] = [
   {
     slug: "compliance",
     tree: "trust",
-    status: "draft",
+    status: "final",
     title: {
       en: "Compliance Center — ShotStudio",
       ar: "مركز الامتثال — سناب برو",
@@ -185,7 +185,7 @@ export const TRUST_PAGES: LegalPage[] = [
   {
     slug: "vdp",
     tree: "trust",
-    status: "draft",
+    status: "final",
     title: {
       en: "Vulnerability Disclosure Program — ShotStudio",
       ar: "برنامج الإفصاح عن الثغرات — سناب برو",
@@ -236,7 +236,7 @@ export const TRUST_PAGES: LegalPage[] = [
   {
     slug: "incident-response",
     tree: "trust",
-    status: "draft",
+    status: "final",
     title: {
       en: "Incident Response — ShotStudio",
       ar: "الاستجابة للحوادث — سناب برو",
@@ -290,7 +290,7 @@ export const TRUST_PAGES: LegalPage[] = [
   {
     slug: "business-continuity",
     tree: "trust",
-    status: "draft",
+    status: "final",
     title: {
       en: "Business Continuity & DR — ShotStudio",
       ar: "استمرارية الأعمال والتعافي من الكوارث — سناب برو",

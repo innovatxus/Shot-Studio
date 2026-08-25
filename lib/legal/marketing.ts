@@ -96,7 +96,6 @@ export const MARKETING_PAGES: MarketingPageContent[] = [
       en: "Active openings publish here. To express interest before we list a role, send your CV and portfolio to careers@shotstudio.ai.",
       ar: "تُنشر الوظائف المفتوحة هنا. للتعبير عن اهتمامك قبل إعلان دور محدد، أرسل سيرتك الذاتية ومعرض أعمالك إلى careers@shotstudio.ai.",
     },
-    draft: true,
   },
   {
     slug: "press",

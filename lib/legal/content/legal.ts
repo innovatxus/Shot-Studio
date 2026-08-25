@@ -14,23 +14,25 @@ export const LEGAL_PAGES: LegalPage[] = [
   {
     slug: "privacy",
     tree: "legal",
-    status: "draft",
-    updated: "2026-07-13",
+    status: "final",
+    updated: "2026-08-25",
     title: {
       en: "Privacy Policy — ShotStudio",
       ar: "Privacy Policy — ShotStudio",
     },
     meta: {
-      en: "How ShotStudio collects, uses, stores, and protects your personal data. Compliant with Egyptian Personal Data Protection Law No. 151/2020 (PDPL) and applicable international frameworks.",
-      ar: "How ShotStudio collects, uses, stores, and protects your personal data. Compliant with Egyptian Personal Data Protection Law No. 151/2020 (PDPL) and applicable international frameworks.",
+      en: "How ShotStudio collects, uses, stores, and protects your personal data. Written to the standards of Egyptian Personal Data Protection Law No. 151/2020 (PDPL), with the same rights extended to users in Iraq.",
+      ar: "How ShotStudio collects, uses, stores, and protects your personal data. Written to the standards of Egyptian Personal Data Protection Law No. 151/2020 (PDPL), with the same rights extended to users in Iraq.",
     },
-    h1: { en: "Privacy Policy", ar: "Privacy Policy" },
+    h1: {
+      en: "Privacy Policy",
+      ar: "Privacy Policy",
+    },
     summary: {
-      en: "We collect the minimum personal data needed to operate ShotStudio. We never sell your data. We never train our production AI models on your uploaded images without your explicit, separate consent. You have full rights over your data under Egyptian Personal Data Protection Law No. 151/2020 — including access, rectification, erasure, and portability — and you can exercise them at any time by emailing privacy@shotstudio.ai.",
-      ar: "We collect the minimum personal data needed to operate ShotStudio. We never sell your data. We never train our production AI models on your uploaded images without your explicit, separate consent. You have full rights over your data under Egyptian Personal Data Protection Law No. 151/2020 — including access, rectification, erasure, and portability — and you can exercise them at any time by emailing privacy@shotstudio.ai.",
+      en: "We collect the minimum personal data needed to operate ShotStudio. We never sell your data. We never train our production AI models on your uploaded images without your explicit, separate consent. You have full rights over your data under Egyptian Personal Data Protection Law No. 151/2020 — including access, rectification, erasure, and portability — and we extend those same rights to users in Iraq. You can exercise them at any time by emailing privacy@shotstudio.ai.",
+      ar: "We collect the minimum personal data needed to operate ShotStudio. We never sell your data. We never train our production AI models on your uploaded images without your explicit, separate consent. You have full rights over your data under Egyptian Personal Data Protection Law No. 151/2020 — including access, rectification, erasure, and portability — and we extend those same rights to users in Iraq. You can exercise them at any time by emailing privacy@shotstudio.ai.",
     },
     sections: [
-      // ── 1. CONTROLLER IDENTITY ──────────────────────────────────────────────
       {
         id: "controller",
         heading: {
@@ -39,18 +41,19 @@ export const LEGAL_PAGES: LegalPage[] = [
         },
         paragraphs: {
           en: [
-            "The data controller responsible for your personal data is [COMPANY LEGAL NAME] (trading as \"ShotStudio\"), registered under Commercial Registration No. [CR NUMBER] issued by [ISSUING CHAMBER], with its principal place of business at [REGISTERED ADDRESS], Egypt. Tax Card No.: [TAX CARD NUMBER]. Complete commercial disclosures are published at /legal/business-info.",
-            "Data Protection Officer (DPO): privacy@shotstudio.ai. You may also write to us at [REGISTERED ADDRESS], Egypt, marked \"Attn: Data Protection Officer\".",
-            "This Privacy Policy applies to personal data processed through the ShotStudio platform at shotstudio.ai and any associated APIs or integrations (the \"Service\"). It does not apply to third-party websites or services that we link to.",
+            "The data controller responsible for your personal data is Innovatx (trading as “ShotStudio”), with its principal place of business at Austin, Texas, USA. Complete commercial disclosures are published at /legal/business-info.",
+            "ShotStudio is released in Egypt and Iraq. Where we process the personal data of users located in Egypt, we do so in accordance with Egyptian Personal Data Protection Law No. 151/2020 (“PDPL”), and this Policy describes the PDPL standards we apply. Iraq has no comprehensive data-protection statute equivalent to the PDPL; we extend the same rights and safeguards described in this Policy to users in Iraq as a contractual commitment. Consumer disclosures for Iraq, including those under Consumer Protection Law No. 1 of 2010, are published at /legal/iraq-consumer.",
+            "Data Protection Officer (DPO): privacy@shotstudio.ai.",
+            "This Privacy Policy applies to personal data processed through the ShotStudio platform at shotstudio.ai and any associated APIs or integrations (the “Service”). It does not apply to third-party websites or services that we link to.",
           ],
           ar: [
-            "The data controller responsible for your personal data is [COMPANY LEGAL NAME] (trading as \"ShotStudio\"), registered under Commercial Registration No. [CR NUMBER] issued by [ISSUING CHAMBER], with its principal place of business at [REGISTERED ADDRESS], Egypt. Tax Card No.: [TAX CARD NUMBER]. Complete commercial disclosures are published at /legal/business-info.",
-            "Data Protection Officer (DPO): privacy@shotstudio.ai. You may also write to us at [REGISTERED ADDRESS], Egypt, marked \"Attn: Data Protection Officer\".",
-            "This Privacy Policy applies to personal data processed through the ShotStudio platform at shotstudio.ai and any associated APIs or integrations (the \"Service\"). It does not apply to third-party websites or services that we link to.",
+            "The data controller responsible for your personal data is Innovatx (trading as “ShotStudio”), with its principal place of business at Austin, Texas, USA. Complete commercial disclosures are published at /legal/business-info.",
+            "ShotStudio is released in Egypt and Iraq. Where we process the personal data of users located in Egypt, we do so in accordance with Egyptian Personal Data Protection Law No. 151/2020 (“PDPL”), and this Policy describes the PDPL standards we apply. Iraq has no comprehensive data-protection statute equivalent to the PDPL; we extend the same rights and safeguards described in this Policy to users in Iraq as a contractual commitment. Consumer disclosures for Iraq, including those under Consumer Protection Law No. 1 of 2010, are published at /legal/iraq-consumer.",
+            "Data Protection Officer (DPO): privacy@shotstudio.ai.",
+            "This Privacy Policy applies to personal data processed through the ShotStudio platform at shotstudio.ai and any associated APIs or integrations (the “Service”). It does not apply to third-party websites or services that we link to.",
           ],
         },
       },
-      // ── 2. WHAT WE COLLECT ──────────────────────────────────────────────────
       {
         id: "what-we-collect",
         heading: {
@@ -63,49 +66,70 @@ export const LEGAL_PAGES: LegalPage[] = [
         },
         defs: [
           {
-            term: { en: "Account data", ar: "Account data" },
+            term: {
+              en: "Account data",
+              ar: "Account data",
+            },
             meaning: {
               en: "Name, email address, password (stored as a salted hash — never in plain text), business name, billing address, VAT/tax ID (where provided), and account preferences.",
               ar: "Name, email address, password (stored as a salted hash — never in plain text), business name, billing address, VAT/tax ID (where provided), and account preferences.",
             },
           },
           {
-            term: { en: "Uploaded content", ar: "Uploaded content" },
+            term: {
+              en: "Uploaded content",
+              ar: "Uploaded content",
+            },
             meaning: {
               en: "Photographs and images you upload to the Service for AI processing. These are treated as potentially containing personal data (e.g. images of people) and are handled with heightened care. See Section 5 for how AI processing works.",
               ar: "Photographs and images you upload to the Service for AI processing. These are treated as potentially containing personal data (e.g. images of people) and are handled with heightened care. See Section 5 for how AI processing works.",
             },
           },
           {
-            term: { en: "Generated outputs", ar: "Generated outputs" },
+            term: {
+              en: "Generated outputs",
+              ar: "Generated outputs",
+            },
             meaning: {
               en: "AI-edited images and outputs produced by the Service in response to your uploads and prompts. Stored in your library until you delete them.",
               ar: "AI-edited images and outputs produced by the Service in response to your uploads and prompts. Stored in your library until you delete them.",
             },
           },
           {
-            term: { en: "Usage data", ar: "Usage data" },
+            term: {
+              en: "Usage data",
+              ar: "Usage data",
+            },
             meaning: {
               en: "Pages and features visited, AI tools used, Credits consumed, session duration, error logs, and device and browser metadata (browser type, operating system, screen resolution, IP address, referring URL).",
               ar: "Pages and features visited, AI tools used, Credits consumed, session duration, error logs, and device and browser metadata (browser type, operating system, screen resolution, IP address, referring URL).",
             },
           },
           {
-            term: { en: "Payment metadata", ar: "Payment metadata" },
+            term: {
+              en: "Payment metadata",
+              ar: "Payment metadata",
+            },
             meaning: {
-              en: "Last four digits of your card, card brand, expiry month/year, billing country, and transaction reference numbers. We do not store full card numbers — payment data is tokenised and held by Stripe, Inc. or Paymob under their own PCI DSS certifications.",
-              ar: "Last four digits of your card, card brand, expiry month/year, billing country, and transaction reference numbers. We do not store full card numbers — payment data is tokenised and held by Stripe, Inc. or Paymob under their own PCI DSS certifications.",
+              en: "Subscriptions and Credit Pack purchases are processed by Google Play, which acts as merchant of record. We do not receive or store your card number, card brand, or expiry date. We receive the order and transaction identifiers, subscription status and renewal dates, and the billing country associated with your purchase.",
+              ar: "Subscriptions and Credit Pack purchases are processed by Google Play, which acts as merchant of record. We do not receive or store your card number, card brand, or expiry date. We receive the order and transaction identifiers, subscription status and renewal dates, and the billing country associated with your purchase.",
             },
           },
           {
-            term: { en: "Support communications", ar: "Support communications" },
+            term: {
+              en: "Support communications",
+              ar: "Support communications",
+            },
             meaning: {
               en: "Messages, attachments, and metadata from support tickets, live chat, or email you send to support@shotstudio.ai or appeals@shotstudio.ai.",
               ar: "Messages, attachments, and metadata from support tickets, live chat, or email you send to support@shotstudio.ai or appeals@shotstudio.ai.",
             },
           },
           {
-            term: { en: "Cookie and tracking data", ar: "Cookie and tracking data" },
+            term: {
+              en: "Cookie and tracking data",
+              ar: "Cookie and tracking data",
+            },
             meaning: {
               en: "Data collected via essential, analytics, and marketing cookies — subject to your consent choices. See our Cookie Policy at /legal/cookies for the full list of cookies we use.",
               ar: "Data collected via essential, analytics, and marketing cookies — subject to your consent choices. See our Cookie Policy at /legal/cookies for the full list of cookies we use.",
@@ -113,83 +137,138 @@ export const LEGAL_PAGES: LegalPage[] = [
           },
         ],
       },
-      // ── 3. LAWFUL BASES ─────────────────────────────────────────────────────
       {
         id: "lawful-bases",
         heading: {
           en: "3. Lawful Bases for Processing (PDPL Art. 4)",
           ar: "3. Lawful Bases for Processing (PDPL Art. 4)",
         },
-        paragraphs: {
-          en: [
-            "Egyptian Personal Data Protection Law No. 151/2020 requires us to identify a lawful basis for each processing activity. We rely on the following:",
-          ],
-          ar: [
-            "Egyptian Personal Data Protection Law No. 151/2020 requires us to identify a lawful basis for each processing activity. We rely on the following:",
-          ],
+        lede: {
+          en: "Egyptian Personal Data Protection Law No. 151/2020 requires us to identify a lawful basis for each processing activity. We rely on the following:",
+          ar: "Egyptian Personal Data Protection Law No. 151/2020 requires us to identify a lawful basis for each processing activity. We rely on the following:",
         },
         defs: [
           {
-            term: { en: "Contract performance", ar: "Contract performance" },
-            meaning: {
-              en: "Processing necessary to deliver the Service you signed up for — account management, AI processing of your uploads, delivery of AI Outputs, billing, and customer support.",
-              ar: "Processing necessary to deliver the Service you signed up for — account management, AI processing of your uploads, delivery of AI Outputs, billing, and customer support.",
+            term: {
+              en: "Consent",
+              ar: "Consent",
             },
-          },
-          {
-            term: { en: "Consent", ar: "Consent" },
             meaning: {
               en: "Where we ask for your specific, informed, freely given consent: marketing communications, optional analytics cookies, marketing cookies, and any opt-in to using your uploads for AI model improvement. You may withdraw consent at any time without affecting prior lawful processing.",
               ar: "Where we ask for your specific, informed, freely given consent: marketing communications, optional analytics cookies, marketing cookies, and any opt-in to using your uploads for AI model improvement. You may withdraw consent at any time without affecting prior lawful processing.",
             },
           },
           {
-            term: { en: "Legitimate interests", ar: "Legitimate interests" },
+            term: {
+              en: "Legitimate interests",
+              ar: "Legitimate interests",
+            },
             meaning: {
-              en: "Where our legitimate business interests — or those of a third party — are not overridden by your rights: fraud prevention, security monitoring, abuse detection, service improvement analytics (aggregated and de-identified), and communicating product updates to existing customers. You may object to this processing at any time (see Section 8).",
-              ar: "Where our legitimate business interests — or those of a third party — are not overridden by your rights: fraud prevention, security monitoring, abuse detection, service improvement analytics (aggregated and de-identified), and communicating product updates to existing customers. You may object to this processing at any time (see Section 8).",
+              en: "Where our legitimate business interests or those of a third party are not overridden by your rights: fraud prevention, security monitoring, abuse detection, service improvement analytics (aggregated and de-identified), and communicating product updates to existing customers. You may object to this processing at any time (see Section 9).",
+              ar: "Where our legitimate business interests or those of a third party are not overridden by your rights: fraud prevention, security monitoring, abuse detection, service improvement analytics (aggregated and de-identified), and communicating product updates to existing customers. You may object to this processing at any time (see Section 9).",
             },
           },
           {
-            term: { en: "Legal obligation", ar: "Legal obligation" },
+            term: {
+              en: "Legal obligation",
+              ar: "Legal obligation",
+            },
             meaning: {
-              en: "Where processing is required to comply with a legal obligation: retention of tax and financial records under Egyptian tax law, responding to valid court orders or regulatory requests, and reporting obligations under Anti-Cybercrime Law No. 175/2018.",
-              ar: "Where processing is required to comply with a legal obligation: retention of tax and financial records under Egyptian tax law, responding to valid court orders or regulatory requests, and reporting obligations under Anti-Cybercrime Law No. 175/2018.",
+              en: "Where processing is required to comply with a legal obligation: retention of tax and financial records under applicable tax and accounting law, responding to valid court orders or regulatory requests, and — in respect of the Service as offered in Egypt — reporting obligations under Anti-Cybercrime Law No. 175/2018.",
+              ar: "Where processing is required to comply with a legal obligation: retention of tax and financial records under applicable tax and accounting law, responding to valid court orders or regulatory requests, and — in respect of the Service as offered in Egypt — reporting obligations under Anti-Cybercrime Law No. 175/2018.",
             },
           },
         ],
       },
-      // ── 4. HOW WE USE DATA ──────────────────────────────────────────────────
       {
         id: "how-we-use",
         heading: {
           en: "4. How We Use Your Personal Data",
           ar: "4. How We Use Your Personal Data",
         },
-        bullets: {
-          en: [
-            "Account management: create, authenticate, and maintain your Account; verify your identity; enforce our Terms of Service.",
-            "AI processing: receive your uploaded images, route them to the appropriate AI tool or provider, return AI Outputs to you, and temporarily cache data as needed for performance.",
-            "Payment processing: transmit billing data to Stripe or Paymob to process subscription fees and Credit Pack purchases; issue e-invoices in compliance with the Egyptian Tax Authority e-invoicing mandate.",
-            "Customer support: respond to support requests, investigate complaints, and process Account appeals.",
-            "Security and fraud prevention: detect, investigate, and prevent abuse, unauthorised access, and fraudulent transactions.",
-            "Service improvement (aggregated): analyse anonymised usage patterns to identify bugs, improve performance, and prioritise features. We do not use your individually identifiable data for this purpose without your consent.",
-            "Communications: send essential service communications (payment receipts, renewal reminders, security alerts, planned maintenance notices) that you cannot opt out of; and marketing communications if you have opted in.",
-            "Legal compliance: retain records as required by Egyptian tax law (10 years for financial records), respond to valid legal process, and report certain offences as required by law.",
-          ],
-          ar: [
-            "Account management: create, authenticate, and maintain your Account; verify your identity; enforce our Terms of Service.",
-            "AI processing: receive your uploaded images, route them to the appropriate AI tool or provider, return AI Outputs to you, and temporarily cache data as needed for performance.",
-            "Payment processing: transmit billing data to Stripe or Paymob to process subscription fees and Credit Pack purchases; issue e-invoices in compliance with the Egyptian Tax Authority e-invoicing mandate.",
-            "Customer support: respond to support requests, investigate complaints, and process Account appeals.",
-            "Security and fraud prevention: detect, investigate, and prevent abuse, unauthorised access, and fraudulent transactions.",
-            "Service improvement (aggregated): analyse anonymised usage patterns to identify bugs, improve performance, and prioritise features. We do not use your individually identifiable data for this purpose without your consent.",
-            "Communications: send essential service communications (payment receipts, renewal reminders, security alerts, planned maintenance notices) that you cannot opt out of; and marketing communications if you have opted in.",
-            "Legal compliance: retain records as required by Egyptian tax law (10 years for financial records), respond to valid legal process, and report certain offences as required by law.",
-          ],
-        },
+        defs: [
+          {
+            term: {
+              en: "Account management",
+              ar: "Account management",
+            },
+            meaning: {
+              en: "Create, authenticate, and maintain your Account; verify your identity; enforce our Terms of Service.",
+              ar: "Create, authenticate, and maintain your Account; verify your identity; enforce our Terms of Service.",
+            },
+          },
+          {
+            term: {
+              en: "AI processing",
+              ar: "AI processing",
+            },
+            meaning: {
+              en: "Receive your uploaded images, route them to the appropriate AI tool or provider, return AI Outputs to you, and temporarily cache data as needed for performance.",
+              ar: "Receive your uploaded images, route them to the appropriate AI tool or provider, return AI Outputs to you, and temporarily cache data as needed for performance.",
+            },
+          },
+          {
+            term: {
+              en: "Payment processing",
+              ar: "Payment processing",
+            },
+            meaning: {
+              en: "Confirm and maintain your subscription and Credit Pack entitlements through Google Play billing, validate purchase receipts, and keep the transaction records required for tax and accounting purposes.",
+              ar: "Confirm and maintain your subscription and Credit Pack entitlements through Google Play billing, validate purchase receipts, and keep the transaction records required for tax and accounting purposes.",
+            },
+          },
+          {
+            term: {
+              en: "Customer support",
+              ar: "Customer support",
+            },
+            meaning: {
+              en: "Respond to support requests, investigate complaints, and process Account appeals.",
+              ar: "Respond to support requests, investigate complaints, and process Account appeals.",
+            },
+          },
+          {
+            term: {
+              en: "Security and fraud prevention",
+              ar: "Security and fraud prevention",
+            },
+            meaning: {
+              en: "Detect, investigate, and prevent abuse, unauthorised access, and fraudulent transactions.",
+              ar: "Detect, investigate, and prevent abuse, unauthorised access, and fraudulent transactions.",
+            },
+          },
+          {
+            term: {
+              en: "Service improvement (aggregated)",
+              ar: "Service improvement (aggregated)",
+            },
+            meaning: {
+              en: "Analyse anonymised usage patterns to identify bugs, improve performance, and prioritise features. We do not use your individually identifiable data for this purpose without your consent.",
+              ar: "Analyse anonymised usage patterns to identify bugs, improve performance, and prioritise features. We do not use your individually identifiable data for this purpose without your consent.",
+            },
+          },
+          {
+            term: {
+              en: "Communications",
+              ar: "Communications",
+            },
+            meaning: {
+              en: "Send essential service communications (payment receipts, renewal reminders, security alerts, planned maintenance notices) that you cannot opt out of; and marketing communications if you have opted in.",
+              ar: "Send essential service communications (payment receipts, renewal reminders, security alerts, planned maintenance notices) that you cannot opt out of; and marketing communications if you have opted in.",
+            },
+          },
+          {
+            term: {
+              en: "Legal compliance",
+              ar: "Legal compliance",
+            },
+            meaning: {
+              en: "Retain records as required by applicable tax and accounting law (see Section 8 for retention periods), respond to valid legal process, and report certain offences as required by law.",
+              ar: "Retain records as required by applicable tax and accounting law (see Section 8 for retention periods), respond to valid legal process, and report certain offences as required by law.",
+            },
+          },
+        ],
       },
-      // ── 5. AI PROCESSING ────────────────────────────────────────────────────
       {
         id: "ai-processing",
         heading: {
@@ -198,50 +277,98 @@ export const LEGAL_PAGES: LegalPage[] = [
         },
         paragraphs: {
           en: [
-            "When you upload an image to a ShotStudio AI tool (e.g. background removal, ghost mannequin, scene staging, jewellery retouching), the image is transmitted securely over TLS to our processing infrastructure and, where the relevant AI capability is provided by a third-party model or inference provider, to that provider's API. The image is used solely to generate your requested AI Output. A full list of the AI providers used by each tool is published at /policies/ai-providers.",
-            "Transient processing: by default, uploaded images are processed transiently and are not retained after your AI Output is returned to you. If you choose to save an image to your library, it is stored in your Account until you delete it.",
-            "No training on your uploads by default: we do not use your uploaded images or AI Outputs to train or fine-tune production AI models without your explicit, granular opt-in consent. This opt-in is separate from acceptance of these Terms and is entirely voluntary. You may review and revoke any training consent at any time from Account → Privacy → AI training preferences, or by visiting /policies/ai-training-opt-out.",
-            "Images of people: if your uploads contain images of identifiable individuals, you are responsible for holding the necessary consents from those individuals under applicable privacy law before uploading. We apply heightened data-handling standards to images that appear to contain biometric data (facial features) as required by PDPL Art. 1 (definition of sensitive personal data).",
+            "When you upload an image to a ShotStudio AI tool (e.g. background removal, ghost mannequin, scene staging, jewellery retouching), the image is transmitted securely over TLS to our processing infrastructure and, where the relevant AI capability is provided by a third-party model or inference provider, to that provider’s API. The image is used solely to generate your requested AI Output. A full list of the AI providers used by each tool is published at /policies/ai-providers.",
           ],
           ar: [
-            "When you upload an image to a ShotStudio AI tool (e.g. background removal, ghost mannequin, scene staging, jewellery retouching), the image is transmitted securely over TLS to our processing infrastructure and, where the relevant AI capability is provided by a third-party model or inference provider, to that provider's API. The image is used solely to generate your requested AI Output. A full list of the AI providers used by each tool is published at /policies/ai-providers.",
-            "Transient processing: by default, uploaded images are processed transiently and are not retained after your AI Output is returned to you. If you choose to save an image to your library, it is stored in your Account until you delete it.",
-            "No training on your uploads by default: we do not use your uploaded images or AI Outputs to train or fine-tune production AI models without your explicit, granular opt-in consent. This opt-in is separate from acceptance of these Terms and is entirely voluntary. You may review and revoke any training consent at any time from Account → Privacy → AI training preferences, or by visiting /policies/ai-training-opt-out.",
-            "Images of people: if your uploads contain images of identifiable individuals, you are responsible for holding the necessary consents from those individuals under applicable privacy law before uploading. We apply heightened data-handling standards to images that appear to contain biometric data (facial features) as required by PDPL Art. 1 (definition of sensitive personal data).",
+            "When you upload an image to a ShotStudio AI tool (e.g. background removal, ghost mannequin, scene staging, jewellery retouching), the image is transmitted securely over TLS to our processing infrastructure and, where the relevant AI capability is provided by a third-party model or inference provider, to that provider’s API. The image is used solely to generate your requested AI Output. A full list of the AI providers used by each tool is published at /policies/ai-providers.",
           ],
         },
+        defs: [
+          {
+            term: {
+              en: "Transient processing",
+              ar: "Transient processing",
+            },
+            meaning: {
+              en: "By default, uploaded images are processed transiently and are not retained after your AI Output is returned to you. If you choose to save an image to your library, it is stored in your Account until you delete it.",
+              ar: "By default, uploaded images are processed transiently and are not retained after your AI Output is returned to you. If you choose to save an image to your library, it is stored in your Account until you delete it.",
+            },
+          },
+          {
+            term: {
+              en: "No training on your uploads by default",
+              ar: "No training on your uploads by default",
+            },
+            meaning: {
+              en: "We do not use your uploaded images or AI Outputs to train or fine-tune production AI models without your explicit, granular opt-in consent. This opt-in is separate from acceptance of these Terms and is entirely voluntary. You may review and revoke any training consent at any time from Account → Privacy → AI training preferences, or by visiting /policies/ai-training-opt-out.",
+              ar: "We do not use your uploaded images or AI Outputs to train or fine-tune production AI models without your explicit, granular opt-in consent. This opt-in is separate from acceptance of these Terms and is entirely voluntary. You may review and revoke any training consent at any time from Account → Privacy → AI training preferences, or by visiting /policies/ai-training-opt-out.",
+            },
+          },
+          {
+            term: {
+              en: "Images of people",
+              ar: "Images of people",
+            },
+            meaning: {
+              en: "If your uploads contain images of identifiable individuals, you are responsible for holding the necessary consents from those individuals under applicable privacy law before uploading. We apply heightened data-handling standards to images that appear to contain biometric data (facial features) as required by PDPL Art. 1 (definition of sensitive personal data).",
+              ar: "If your uploads contain images of identifiable individuals, you are responsible for holding the necessary consents from those individuals under applicable privacy law before uploading. We apply heightened data-handling standards to images that appear to contain biometric data (facial features) as required by PDPL Art. 1 (definition of sensitive personal data).",
+            },
+          },
+        ],
       },
-      // ── 6. SHARING ──────────────────────────────────────────────────────────
       {
         id: "sharing",
         heading: {
           en: "6. Sharing Personal Data with Third Parties",
           ar: "6. Sharing Personal Data with Third Parties",
         },
-        paragraphs: {
-          en: [
-            "We do not sell your personal data. We do not share it with third parties for their own marketing purposes. We share personal data only in the following circumstances:",
-          ],
-          ar: [
-            "We do not sell your personal data. We do not share it with third parties for their own marketing purposes. We share personal data only in the following circumstances:",
-          ],
+        lede: {
+          en: "We do not sell your personal data. We do not share it with third parties for their own marketing purposes. We share personal data only in the following circumstances:",
+          ar: "We do not sell your personal data. We do not share it with third parties for their own marketing purposes. We share personal data only in the following circumstances:",
         },
-        bullets: {
-          en: [
-            "Service providers (sub-processors): companies that help us operate the Service under contractual data-processing obligations — including Vercel, Inc. (hosting), Cloudflare, Inc. (CDN and security), Firebase / Google LLC (authentication), Stripe, Inc. (payment processing), Paymob (payment processing — Egypt and GCC), and AI model/inference providers listed at /policies/ai-providers. A complete, up-to-date list of sub-processors is published at /legal/sub-processors.",
-            "Business transfers: in the event of a merger, acquisition, or sale of all or substantially all of our assets, your personal data may be transferred to the acquirer. We will give you 30 days' notice by email before any such transfer takes effect and describe your options at that time.",
-            "Legal disclosures: where we are required by a valid Egyptian court order, regulatory authority request, or mandatory law to disclose personal data. We will notify you of such disclosures where legally permitted. Our principles and annual statistics are published at /legal/government-requests.",
-            "Safety: where disclosure is necessary to protect the vital interests of any person, or to detect or prevent illegal activity posing a risk to public safety.",
-          ],
-          ar: [
-            "Service providers (sub-processors): companies that help us operate the Service under contractual data-processing obligations — including Vercel, Inc. (hosting), Cloudflare, Inc. (CDN and security), Firebase / Google LLC (authentication), Stripe, Inc. (payment processing), Paymob (payment processing — Egypt and GCC), and AI model/inference providers listed at /policies/ai-providers. A complete, up-to-date list of sub-processors is published at /legal/sub-processors.",
-            "Business transfers: in the event of a merger, acquisition, or sale of all or substantially all of our assets, your personal data may be transferred to the acquirer. We will give you 30 days' notice by email before any such transfer takes effect and describe your options at that time.",
-            "Legal disclosures: where we are required by a valid Egyptian court order, regulatory authority request, or mandatory law to disclose personal data. We will notify you of such disclosures where legally permitted. Our principles and annual statistics are published at /legal/government-requests.",
-            "Safety: where disclosure is necessary to protect the vital interests of any person, or to detect or prevent illegal activity posing a risk to public safety.",
-          ],
-        },
+        defs: [
+          {
+            term: {
+              en: "Service providers (sub-processors)",
+              ar: "Service providers (sub-processors)",
+            },
+            meaning: {
+              en: "Companies that help us operate the Service under contractual data-processing obligations, including Vercel, Inc. (CDN and security), Firebase / Google LLC (authentication), and AI model/inference providers listed at /policies/ai-providers. A complete, up-to-date list of sub-processors is published at /legal/sub-processors.",
+              ar: "Companies that help us operate the Service under contractual data-processing obligations, including Vercel, Inc. (CDN and security), Firebase / Google LLC (authentication), and AI model/inference providers listed at /policies/ai-providers. A complete, up-to-date list of sub-processors is published at /legal/sub-processors.",
+            },
+          },
+          {
+            term: {
+              en: "Business transfers",
+              ar: "Business transfers",
+            },
+            meaning: {
+              en: "In the event of a merger, acquisition, or sale of all or substantially all of our assets, your personal data may be transferred to the acquirer. We will give you 30 days’ notice by email before any such transfer takes effect and describe your options at that time.",
+              ar: "In the event of a merger, acquisition, or sale of all or substantially all of our assets, your personal data may be transferred to the acquirer. We will give you 30 days’ notice by email before any such transfer takes effect and describe your options at that time.",
+            },
+          },
+          {
+            term: {
+              en: "Legal disclosures",
+              ar: "Legal disclosures",
+            },
+            meaning: {
+              en: "Where we are required by a valid Egyptian court order, regulatory authority request, or mandatory law to disclose personal data. We will notify you of such disclosures where legally permitted. Our principles and annual statistics are published at /legal/government-requests.",
+              ar: "Where we are required by a valid Egyptian court order, regulatory authority request, or mandatory law to disclose personal data. We will notify you of such disclosures where legally permitted. Our principles and annual statistics are published at /legal/government-requests.",
+            },
+          },
+          {
+            term: {
+              en: "Safety",
+              ar: "Safety",
+            },
+            meaning: {
+              en: "Where disclosure is necessary to protect the vital interests of any person, or to detect or prevent illegal activity posing a risk to public safety.",
+              ar: "Where disclosure is necessary to protect the vital interests of any person, or to detect or prevent illegal activity posing a risk to public safety.",
+            },
+          },
+        ],
       },
-      // ── 7. CROSS-BORDER TRANSFERS ───────────────────────────────────────────
       {
         id: "international-transfers",
         heading: {
@@ -250,86 +377,146 @@ export const LEGAL_PAGES: LegalPage[] = [
         },
         paragraphs: {
           en: [
-            "ShotStudio is built on global cloud infrastructure. When you use the Service, your personal data — including uploaded images — may be transferred to and processed in countries outside Egypt, including the United States and the European Union. Under Article 14 of Egyptian Personal Data Protection Law No. 151/2020, cross-border transfers of personal data are permitted only under specified conditions.",
-            "The safeguards we rely on for each transfer destination are:",
-          ],
-          ar: [
-            "ShotStudio is built on global cloud infrastructure. When you use the Service, your personal data — including uploaded images — may be transferred to and processed in countries outside Egypt, including the United States and the European Union. Under Article 14 of Egyptian Personal Data Protection Law No. 151/2020, cross-border transfers of personal data are permitted only under specified conditions.",
-            "The safeguards we rely on for each transfer destination are:",
-          ],
-        },
-        bullets: {
-          en: [
-            "United States (Vercel, Stripe, Firebase/Google, AI inference providers): we rely on (a) your explicit, informed consent given at the point of uploading images to the Service, and (b) the contractual necessity exception in PDPL Art. 14 — the transfer is necessary to perform the Service contract with you. We additionally apply Standard Contractual Clause-equivalent data-processing agreements with each US-based sub-processor.",
+            "ShotStudio is built on global cloud infrastructure. The Service is offered in Egypt and Iraq, but the hosting, authentication, and AI providers we rely on operate outside both countries — principally in the United States and the European Union. Your personal data, including uploaded images, is therefore transferred out of your country and processed abroad.",
+            "For users located in Egypt, those transfers are made under Article 14 of Egyptian Personal Data Protection Law No. 151/2020, which permits cross-border transfers only under specified conditions. For users located in Iraq, no equivalent statutory transfer regime currently applies, and we apply the same safeguards as a matter of contract. The safeguards we rely on for each destination are:",
+            "United States (Vercel, Firebase/Google, AI inference providers): we rely on (a) your explicit, informed consent given at the point of uploading images to the Service, and (b) the contractual necessity exception in PDPL Art. 14; the transfer is necessary to perform the Service contract with you. We additionally apply Standard Contractual Clause-equivalent data-processing agreements with each US-based sub-processor.",
             "European Union (certain AI providers, analytics): we rely on the EU adequacy framework and, where applicable, Standard Contractual Clauses. EU-based processing benefits from GDPR-level protections.",
-            "Egypt (Paymob — primary payment processing for Egyptian customers): data processed within Egypt is subject to PDPL Law No. 151/2020 in full.",
+            "Data processed within Egypt is subject to PDPL Law No. 151/2020 in full.",
             "Full details of transfer mechanisms per sub-processor are available on request from privacy@shotstudio.ai and are summarised at /legal/international-transfers.",
           ],
           ar: [
-            "United States (Vercel, Stripe, Firebase/Google, AI inference providers): we rely on (a) your explicit, informed consent given at the point of uploading images to the Service, and (b) the contractual necessity exception in PDPL Art. 14 — the transfer is necessary to perform the Service contract with you. We additionally apply Standard Contractual Clause-equivalent data-processing agreements with each US-based sub-processor.",
+            "ShotStudio is built on global cloud infrastructure. The Service is offered in Egypt and Iraq, but the hosting, authentication, and AI providers we rely on operate outside both countries — principally in the United States and the European Union. Your personal data, including uploaded images, is therefore transferred out of your country and processed abroad.",
+            "For users located in Egypt, those transfers are made under Article 14 of Egyptian Personal Data Protection Law No. 151/2020, which permits cross-border transfers only under specified conditions. For users located in Iraq, no equivalent statutory transfer regime currently applies, and we apply the same safeguards as a matter of contract. The safeguards we rely on for each destination are:",
+            "United States (Vercel, Firebase/Google, AI inference providers): we rely on (a) your explicit, informed consent given at the point of uploading images to the Service, and (b) the contractual necessity exception in PDPL Art. 14; the transfer is necessary to perform the Service contract with you. We additionally apply Standard Contractual Clause-equivalent data-processing agreements with each US-based sub-processor.",
             "European Union (certain AI providers, analytics): we rely on the EU adequacy framework and, where applicable, Standard Contractual Clauses. EU-based processing benefits from GDPR-level protections.",
-            "Egypt (Paymob — primary payment processing for Egyptian customers): data processed within Egypt is subject to PDPL Law No. 151/2020 in full.",
+            "Data processed within Egypt is subject to PDPL Law No. 151/2020 in full.",
             "Full details of transfer mechanisms per sub-processor are available on request from privacy@shotstudio.ai and are summarised at /legal/international-transfers.",
           ],
         },
       },
-      // ── 8. RETENTION ────────────────────────────────────────────────────────
       {
         id: "retention",
         heading: {
           en: "8. How Long We Keep Your Data",
           ar: "8. How Long We Keep Your Data",
         },
-        paragraphs: {
-          en: [
-            "We retain personal data only for as long as necessary to fulfil the purpose for which it was collected, to comply with legal obligations, or to resolve disputes. The table below shows our standard retention periods.",
-          ],
-          ar: [
-            "We retain personal data only for as long as necessary to fulfil the purpose for which it was collected, to comply with legal obligations, or to resolve disputes. The table below shows our standard retention periods.",
-          ],
+        lede: {
+          en: "We retain personal data only for as long as necessary to fulfil the purpose for which it was collected, to comply with legal obligations, or to resolve disputes. The table below shows our standard retention periods.",
+          ar: "We retain personal data only for as long as necessary to fulfil the purpose for which it was collected, to comply with legal obligations, or to resolve disputes. The table below shows our standard retention periods.",
         },
         table: {
           head: {
-            en: ["Data category", "Retention period", "Basis"],
-            ar: ["Data category", "Retention period", "Basis"],
+            en: [
+              "Data category",
+              "Retention period",
+              "Basis",
+            ],
+            ar: [
+              "Data category",
+              "Retention period",
+              "Basis",
+            ],
           },
           rows: [
             {
-              en: ["Account profile and preferences", "Lifetime of Account + 30 days grace period after closure", "Contract / legal obligation"],
-              ar: ["Account profile and preferences", "Lifetime of Account + 30 days grace period after closure", "Contract / legal obligation"],
+              en: [
+                "Account profile and preferences",
+                "Lifetime of Account + 30 days grace period after closure",
+                "Contract / legal obligation",
+              ],
+              ar: [
+                "Account profile and preferences",
+                "Lifetime of Account + 30 days grace period after closure",
+                "Contract / legal obligation",
+              ],
             },
             {
-              en: ["Uploaded images (not saved to library)", "Deleted immediately after AI Output is returned (typically < 1 hour)", "Transient processing only"],
-              ar: ["Uploaded images (not saved to library)", "Deleted immediately after AI Output is returned (typically < 1 hour)", "Transient processing only"],
+              en: [
+                "Uploaded images (not saved to library)",
+                "Deleted immediately after AI Output is returned (typically < 1 hour)",
+                "Transient processing only",
+              ],
+              ar: [
+                "Uploaded images (not saved to library)",
+                "Deleted immediately after AI Output is returned (typically < 1 hour)",
+                "Transient processing only",
+              ],
             },
             {
-              en: ["Uploaded images (saved to library)", "Until you delete them, or 30 days after Account closure", "Contract"],
-              ar: ["Uploaded images (saved to library)", "Until you delete them, or 30 days after Account closure", "Contract"],
+              en: [
+                "Uploaded images (saved to library)",
+                "Until you delete them, or 30 days after Account closure",
+                "Contract",
+              ],
+              ar: [
+                "Uploaded images (saved to library)",
+                "Until you delete them, or 30 days after Account closure",
+                "Contract",
+              ],
             },
             {
-              en: ["AI-generated outputs", "Until you delete them, or 30 days after Account closure", "Contract"],
-              ar: ["AI-generated outputs", "Until you delete them, or 30 days after Account closure", "Contract"],
+              en: [
+                "AI-generated outputs",
+                "Until you delete them, or 30 days after Account closure",
+                "Contract",
+              ],
+              ar: [
+                "AI-generated outputs",
+                "Until you delete them, or 30 days after Account closure",
+                "Contract",
+              ],
             },
             {
-              en: ["Billing and tax records (invoices, payment metadata)", "10 years from transaction date", "Legal obligation (Egyptian tax law, e-invoicing mandate)"],
-              ar: ["Billing and tax records (invoices, payment metadata)", "10 years from transaction date", "Legal obligation (Egyptian tax law, e-invoicing mandate)"],
+              en: [
+                "Billing and tax records (invoices, payment metadata)",
+                "10 years from transaction date",
+                "Legal obligation (tax and accounting record-keeping)",
+              ],
+              ar: [
+                "Billing and tax records (invoices, payment metadata)",
+                "10 years from transaction date",
+                "Legal obligation (tax and accounting record-keeping)",
+              ],
             },
             {
-              en: ["Support ticket records", "3 years from closure of ticket", "Legitimate interests (dispute resolution)"],
-              ar: ["Support ticket records", "3 years from closure of ticket", "Legitimate interests (dispute resolution)"],
+              en: [
+                "Support ticket records",
+                "3 years from closure of ticket",
+                "Legitimate interests (dispute resolution)",
+              ],
+              ar: [
+                "Support ticket records",
+                "3 years from closure of ticket",
+                "Legitimate interests (dispute resolution)",
+              ],
             },
             {
-              en: ["Server access and security logs", "90 days rolling", "Legitimate interests (security)"],
-              ar: ["Server access and security logs", "90 days rolling", "Legitimate interests (security)"],
+              en: [
+                "Server access and security logs",
+                "90 days rolling",
+                "Legitimate interests (security)",
+              ],
+              ar: [
+                "Server access and security logs",
+                "90 days rolling",
+                "Legitimate interests (security)",
+              ],
             },
             {
-              en: ["Marketing consent records", "Until consent is withdrawn + 3 years (proof of consent)", "Legal obligation"],
-              ar: ["Marketing consent records", "Until consent is withdrawn + 3 years (proof of consent)", "Legal obligation"],
+              en: [
+                "Marketing consent records",
+                "Until consent is withdrawn + 3 years (proof of consent)",
+                "Legal obligation",
+              ],
+              ar: [
+                "Marketing consent records",
+                "Until consent is withdrawn + 3 years (proof of consent)",
+                "Legal obligation",
+              ],
             },
           ],
         },
       },
-      // ── 9. YOUR RIGHTS ──────────────────────────────────────────────────────
       {
         id: "your-rights",
         heading: {
@@ -337,94 +524,119 @@ export const LEGAL_PAGES: LegalPage[] = [
           ar: "9. Your Rights Under PDPL (Arts. 17–25)",
         },
         lede: {
-          en: "Egyptian Personal Data Protection Law No. 151/2020 grants you the following rights in respect of your personal data. These rights apply to the extent that we act as data controller of the relevant data. To exercise any right, email privacy@shotstudio.ai with the subject line \"Privacy Right Request — [right name]\" and include your account email address. We will respond within 30 days. Where we are unable to fulfil your request, we will explain why in writing.",
-          ar: "Egyptian Personal Data Protection Law No. 151/2020 grants you the following rights in respect of your personal data. These rights apply to the extent that we act as data controller of the relevant data. To exercise any right, email privacy@shotstudio.ai with the subject line \"Privacy Right Request — [right name]\" and include your account email address. We will respond within 30 days. Where we are unable to fulfil your request, we will explain why in writing.",
+          en: "Egyptian Personal Data Protection Law No. 151/2020 grants you the following rights in respect of your personal data. These rights apply to the extent that we act as data controller of the relevant data. If you are located in Iraq, we grant you the same rights contractually, even though they are not currently conferred by Iraqi statute. To exercise any right, email privacy@shotstudio.ai with the subject line “Privacy Right Request [right name]” and include your account email address. We will respond within 30 days. Where we are unable to fulfil your request, we will explain why in writing.",
+          ar: "Egyptian Personal Data Protection Law No. 151/2020 grants you the following rights in respect of your personal data. These rights apply to the extent that we act as data controller of the relevant data. If you are located in Iraq, we grant you the same rights contractually, even though they are not currently conferred by Iraqi statute. To exercise any right, email privacy@shotstudio.ai with the subject line “Privacy Right Request [right name]” and include your account email address. We will respond within 30 days. Where we are unable to fulfil your request, we will explain why in writing.",
         },
         defs: [
           {
-            term: { en: "Right of access (Art. 17)", ar: "Right of access (Art. 17)" },
+            term: {
+              en: "Right of access (Art. 17)",
+              ar: "Right of access (Art. 17)",
+            },
             meaning: {
               en: "Request a copy of the personal data we hold about you, the purposes for which we process it, the recipients we share it with, and our retention periods.",
               ar: "Request a copy of the personal data we hold about you, the purposes for which we process it, the recipients we share it with, and our retention periods.",
             },
           },
           {
-            term: { en: "Right to rectification (Art. 18)", ar: "Right to rectification (Art. 18)" },
+            term: {
+              en: "Right to rectification (Art. 18)",
+              ar: "Right to rectification (Art. 18)",
+            },
             meaning: {
               en: "Request correction of inaccurate or incomplete personal data.",
               ar: "Request correction of inaccurate or incomplete personal data.",
             },
           },
           {
-            term: { en: "Right to erasure (Art. 19)", ar: "Right to erasure (Art. 19)" },
+            term: {
+              en: "Right to erasure (Art. 19)",
+              ar: "Right to erasure (Art. 19)",
+            },
             meaning: {
               en: "Request deletion of your personal data when it is no longer necessary for the purpose collected, when you withdraw consent (where consent was the lawful basis), or when processing is unlawful. Deletion may be limited by legal-retention obligations.",
               ar: "Request deletion of your personal data when it is no longer necessary for the purpose collected, when you withdraw consent (where consent was the lawful basis), or when processing is unlawful. Deletion may be limited by legal-retention obligations.",
             },
           },
           {
-            term: { en: "Right to data portability (Art. 20)", ar: "Right to data portability (Art. 20)" },
+            term: {
+              en: "Right to data portability (Art. 20)",
+              ar: "Right to data portability (Art. 20)",
+            },
             meaning: {
               en: "Receive your personal data in a structured, machine-readable format (JSON or CSV) and transmit it to another controller, where technically feasible.",
               ar: "Receive your personal data in a structured, machine-readable format (JSON or CSV) and transmit it to another controller, where technically feasible.",
             },
           },
           {
-            term: { en: "Right to object (Art. 21)", ar: "Right to object (Art. 21)" },
+            term: {
+              en: "Right to object (Art. 21)",
+              ar: "Right to object (Art. 21)",
+            },
             meaning: {
               en: "Object at any time to processing based on legitimate interests, including profiling and direct marketing. Where you object to marketing, we will stop processing immediately.",
               ar: "Object at any time to processing based on legitimate interests, including profiling and direct marketing. Where you object to marketing, we will stop processing immediately.",
             },
           },
           {
-            term: { en: "Right to restrict processing (Art. 22)", ar: "Right to restrict processing (Art. 22)" },
+            term: {
+              en: "Right to restrict processing (Art. 22)",
+              ar: "Right to restrict processing (Art. 22)",
+            },
             meaning: {
-              en: "Request that we restrict processing of your data — for example, while the accuracy of data you have contested is verified.",
-              ar: "Request that we restrict processing of your data — for example, while the accuracy of data you have contested is verified.",
+              en: "Request that we restrict processing of your data, for example, while the accuracy of data you have contested is verified.",
+              ar: "Request that we restrict processing of your data, for example, while the accuracy of data you have contested is verified.",
             },
           },
           {
-            term: { en: "Right to withdraw consent (Art. 23)", ar: "Right to withdraw consent (Art. 23)" },
+            term: {
+              en: "Right to withdraw consent (Art. 23)",
+              ar: "Right to withdraw consent (Art. 23)",
+            },
             meaning: {
               en: "Withdraw any consent you have given at any time without penalty. Withdrawal does not affect the lawfulness of processing carried out before withdrawal.",
               ar: "Withdraw any consent you have given at any time without penalty. Withdrawal does not affect the lawfulness of processing carried out before withdrawal.",
             },
           },
           {
-            term: { en: "Right not to be subject to automated decisions (Art. 24)", ar: "Right not to be subject to automated decisions (Art. 24)" },
+            term: {
+              en: "Right not to be subject to automated decisions (Art. 24)",
+              ar: "Right not to be subject to automated decisions (Art. 24)",
+            },
             meaning: {
               en: "We do not make solely automated decisions that produce legal or similarly significant effects on you. AI image processing is a tool you actively direct — it does not determine eligibility, creditworthiness, or access to rights.",
               ar: "We do not make solely automated decisions that produce legal or similarly significant effects on you. AI image processing is a tool you actively direct — it does not determine eligibility, creditworthiness, or access to rights.",
             },
           },
           {
-            term: { en: "Right to lodge a complaint (Art. 25)", ar: "Right to lodge a complaint (Art. 25)" },
+            term: {
+              en: "Right to lodge a complaint (Art. 25)",
+              ar: "Right to lodge a complaint (Art. 25)",
+            },
             meaning: {
-              en: "Lodge a complaint with the Personal Data Protection Center (PDPC), Ministry of Communications and Information Technology, Smart Village, Giza, Egypt (pdpc.gov.eg), or with your local data-protection authority if you are based outside Egypt.",
-              ar: "Lodge a complaint with the Personal Data Protection Center (PDPC), Ministry of Communications and Information Technology, Smart Village, Giza, Egypt (pdpc.gov.eg), or with your local data-protection authority if you are based outside Egypt.",
+              en: "If you are in Egypt, lodge a complaint with the Personal Data Protection Center (PDPC), Ministry of Communications and Information Technology, Smart Village, Giza, Egypt (pdpc.gov.eg). Iraq has no dedicated data-protection authority at present; if you are in Iraq, contact our Data Protection Officer first, and you may also raise consumer complaints through the channels described at /legal/iraq-consumer.",
+              ar: "If you are in Egypt, lodge a complaint with the Personal Data Protection Center (PDPC), Ministry of Communications and Information Technology, Smart Village, Giza, Egypt (pdpc.gov.eg). Iraq has no dedicated data-protection authority at present; if you are in Iraq, contact our Data Protection Officer first, and you may also raise consumer complaints through the channels described at /legal/iraq-consumer.",
             },
           },
         ],
       },
-      // ── 10. CHILDREN ────────────────────────────────────────────────────────
       {
         id: "children",
         heading: {
-          en: "10. Children's Privacy",
-          ar: "10. Children's Privacy",
+          en: "10. Children’s Privacy",
+          ar: "10. Children’s Privacy",
         },
         paragraphs: {
           en: [
-            "The Service is not directed at children under 18 years of age. We do not knowingly collect personal data from children. If you are a parent or guardian and believe your child has created an Account or provided personal data to us, contact privacy@shotstudio.ai immediately. We will verify the report and delete the child's data within 15 business days.",
+            "The Service is not directed at children under 18 years of age. We do not knowingly collect personal data from children. If you are a parent or guardian and believe your child has created an Account or provided personal data to us, contact privacy@shotstudio.ai immediately. We will verify the report and delete the child’s data within 15 business days.",
             "If a paid Account is found to belong to a person under 18, we will suspend the Account, refund any unused credits or subscription fees pro-rata, and notify the registered email address as required by consumer protection law.",
           ],
           ar: [
-            "The Service is not directed at children under 18 years of age. We do not knowingly collect personal data from children. If you are a parent or guardian and believe your child has created an Account or provided personal data to us, contact privacy@shotstudio.ai immediately. We will verify the report and delete the child's data within 15 business days.",
+            "The Service is not directed at children under 18 years of age. We do not knowingly collect personal data from children. If you are a parent or guardian and believe your child has created an Account or provided personal data to us, contact privacy@shotstudio.ai immediately. We will verify the report and delete the child’s data within 15 business days.",
             "If a paid Account is found to belong to a person under 18, we will suspend the Account, refund any unused credits or subscription fees pro-rata, and notify the registered email address as required by consumer protection law.",
           ],
         },
       },
-      // ── 11. SECURITY ────────────────────────────────────────────────────────
       {
         id: "security",
         heading: {
@@ -435,26 +647,69 @@ export const LEGAL_PAGES: LegalPage[] = [
           en: "We apply technical and organisational measures appropriate to the risk of processing. Current measures include:",
           ar: "We apply technical and organisational measures appropriate to the risk of processing. Current measures include:",
         },
-        bullets: {
-          en: [
-            "Encryption in transit: TLS 1.3 for all data transmitted between your browser and our servers, and between our servers and sub-processors.",
-            "Encryption at rest: AES-256 encryption for stored data, including uploaded images and Account data.",
-            "Access controls: least-privilege access for all staff; role-based permissions; MFA required for all internal systems.",
-            "Vendor risk management: all sub-processors are assessed for security posture before onboarding and reviewed annually.",
-            "Network security: Cloudflare WAF and DDoS mitigation; isolated processing environments for AI workloads.",
-            "Incident response: documented incident response plan; breach notification to PDPC within 72 hours where required by PDPL Art. 26; notification to affected users without undue delay by email to their registered address. Full details are at /trust/security.",
-          ],
-          ar: [
-            "Encryption in transit: TLS 1.3 for all data transmitted between your browser and our servers, and between our servers and sub-processors.",
-            "Encryption at rest: AES-256 encryption for stored data, including uploaded images and Account data.",
-            "Access controls: least-privilege access for all staff; role-based permissions; MFA required for all internal systems.",
-            "Vendor risk management: all sub-processors are assessed for security posture before onboarding and reviewed annually.",
-            "Network security: Cloudflare WAF and DDoS mitigation; isolated processing environments for AI workloads.",
-            "Incident response: documented incident response plan; breach notification to PDPC within 72 hours where required by PDPL Art. 26; notification to affected users without undue delay by email to their registered address. Full details are at /trust/security.",
-          ],
-        },
+        defs: [
+          {
+            term: {
+              en: "Encryption in transit",
+              ar: "Encryption in transit",
+            },
+            meaning: {
+              en: "TLS 1.3 for all data transmitted between your browser and our servers, and between our servers and sub-processors.",
+              ar: "TLS 1.3 for all data transmitted between your browser and our servers, and between our servers and sub-processors.",
+            },
+          },
+          {
+            term: {
+              en: "Encryption at rest",
+              ar: "Encryption at rest",
+            },
+            meaning: {
+              en: "AES-256 encryption for stored data, including uploaded images and Account data.",
+              ar: "AES-256 encryption for stored data, including uploaded images and Account data.",
+            },
+          },
+          {
+            term: {
+              en: "Access controls",
+              ar: "Access controls",
+            },
+            meaning: {
+              en: "Least-privilege access for all staff; role-based permissions; MFA required for all internal systems.",
+              ar: "Least-privilege access for all staff; role-based permissions; MFA required for all internal systems.",
+            },
+          },
+          {
+            term: {
+              en: "Vendor risk management",
+              ar: "Vendor risk management",
+            },
+            meaning: {
+              en: "All sub-processors are assessed for security posture before onboarding and reviewed annually.",
+              ar: "All sub-processors are assessed for security posture before onboarding and reviewed annually.",
+            },
+          },
+          {
+            term: {
+              en: "Network security",
+              ar: "Network security",
+            },
+            meaning: {
+              en: "Isolated processing environments for AI workloads.",
+              ar: "Isolated processing environments for AI workloads.",
+            },
+          },
+          {
+            term: {
+              en: "Incident response",
+              ar: "Incident response",
+            },
+            meaning: {
+              en: "Documented incident response plan; breach notification to PDPC within 72 hours where required by PDPL Art. 26; notification to affected users without undue delay by email to their registered address. Full details are at /trust/security.",
+              ar: "Documented incident response plan; breach notification to PDPC within 72 hours where required by PDPL Art. 26; notification to affected users without undue delay by email to their registered address. Full details are at /trust/security.",
+            },
+          },
+        ],
       },
-      // ── 12. COOKIES ─────────────────────────────────────────────────────────
       {
         id: "cookies",
         heading: {
@@ -463,16 +718,15 @@ export const LEGAL_PAGES: LegalPage[] = [
         },
         paragraphs: {
           en: [
-            "We use three categories of cookies: essential (required for the Service to function — no consent needed), analytics (help us understand how the Service is used — require your consent), and marketing (personalised outreach — require your consent). You choose your preferences in the consent banner on your first visit. You can update your preferences at any time via the cookie preferences link in the footer.",
+            "We use three categories of cookies: essential (required for the Service to function; no consent needed), analytics (help us understand how the Service is used; require your consent), and marketing (personalised outreach requires your consent). You choose your preferences in the consent banner on your first visit. You can update your preferences at any time via the cookie preferences link in the footer.",
             "Full details of each cookie, its provider, its purpose, and its duration are in our Cookie Policy at /legal/cookies.",
           ],
           ar: [
-            "We use three categories of cookies: essential (required for the Service to function — no consent needed), analytics (help us understand how the Service is used — require your consent), and marketing (personalised outreach — require your consent). You choose your preferences in the consent banner on your first visit. You can update your preferences at any time via the cookie preferences link in the footer.",
+            "We use three categories of cookies: essential (required for the Service to function; no consent needed), analytics (help us understand how the Service is used; require your consent), and marketing (personalised outreach requires your consent). You choose your preferences in the consent banner on your first visit. You can update your preferences at any time via the cookie preferences link in the footer.",
             "Full details of each cookie, its provider, its purpose, and its duration are in our Cookie Policy at /legal/cookies.",
           ],
         },
       },
-      // ── 13. CHANGES ─────────────────────────────────────────────────────────
       {
         id: "changes",
         heading: {
@@ -481,16 +735,15 @@ export const LEGAL_PAGES: LegalPage[] = [
         },
         paragraphs: {
           en: [
-            "We may update this Privacy Policy from time to time. For material changes — including changes that expand the categories of data we collect, add new processing purposes, or reduce your rights — we will give you at least 30 days' advance notice by email to your registered address and by a prominent in-app notification. The updated Policy will be posted at shotstudio.ai/legal/privacy with a new \"Last updated\" date.",
+            "We may update this Privacy Policy from time to time. For material changes, including changes that expand the categories of data we collect, add new processing purposes, or reduce your rights, we will give you at least 30 days’ advance notice by email to your registered address and by a prominent in-app notification. The updated Policy will be posted at shotstudio.ai/legal/privacy with a new “Last updated” date.",
             "For non-material changes (updated contact details, clarifications, typographical corrections), we may update the Policy immediately on posting. Continued use of the Service after the effective date of any change constitutes acceptance of the updated Policy.",
           ],
           ar: [
-            "We may update this Privacy Policy from time to time. For material changes — including changes that expand the categories of data we collect, add new processing purposes, or reduce your rights — we will give you at least 30 days' advance notice by email to your registered address and by a prominent in-app notification. The updated Policy will be posted at shotstudio.ai/legal/privacy with a new \"Last updated\" date.",
+            "We may update this Privacy Policy from time to time. For material changes, including changes that expand the categories of data we collect, add new processing purposes, or reduce your rights, we will give you at least 30 days’ advance notice by email to your registered address and by a prominent in-app notification. The updated Policy will be posted at shotstudio.ai/legal/privacy with a new “Last updated” date.",
             "For non-material changes (updated contact details, clarifications, typographical corrections), we may update the Policy immediately on posting. Continued use of the Service after the effective date of any change constitutes acceptance of the updated Policy.",
           ],
         },
       },
-      // ── 14. CONTACT ─────────────────────────────────────────────────────────
       {
         id: "contact",
         heading: {
@@ -499,16 +752,10 @@ export const LEGAL_PAGES: LegalPage[] = [
         },
         paragraphs: {
           en: [
-            "For any privacy-related query, request, or complaint, contact us at: privacy@shotstudio.ai · Subject line: \"Privacy — [your query type]\".",
-            "Postal address: [COMPANY LEGAL NAME], [REGISTERED ADDRESS], Egypt. Attn: Data Protection Officer.",
-            "Egypt PDPL supervisory authority: Personal Data Protection Center (PDPC), Ministry of Communications and Information Technology, Smart Village, Giza, Egypt · pdpc.gov.eg.",
-            "Attorney Review Notice: This Privacy Policy has been drafted with reference to Egyptian Personal Data Protection Law No. 151/2020 as at 13 July 2026 but has not yet been reviewed by a licensed Egyptian attorney. It should be reviewed by qualified Egyptian legal counsel before the Service is commercially launched.",
+            "For questions about this Privacy Policy or to exercise your privacy rights, contact our Data Protection Officer at privacy@shotstudio.ai.",
           ],
           ar: [
-            "For any privacy-related query, request, or complaint, contact us at: privacy@shotstudio.ai · Subject line: \"Privacy — [your query type]\".",
-            "Postal address: [COMPANY LEGAL NAME], [REGISTERED ADDRESS], Egypt. Attn: Data Protection Officer.",
-            "Egypt PDPL supervisory authority: Personal Data Protection Center (PDPC), Ministry of Communications and Information Technology, Smart Village, Giza, Egypt · pdpc.gov.eg.",
-            "Attorney Review Notice: This Privacy Policy has been drafted with reference to Egyptian Personal Data Protection Law No. 151/2020 as at 13 July 2026 but has not yet been reviewed by a licensed Egyptian attorney. It should be reviewed by qualified Egyptian legal counsel before the Service is commercially launched.",
+            "For questions about this Privacy Policy or to exercise your privacy rights, contact our Data Protection Officer at privacy@shotstudio.ai.",
           ],
         },
       },
@@ -516,31 +763,59 @@ export const LEGAL_PAGES: LegalPage[] = [
     related: [
       {
         href: "/legal/cookies",
-        label: { en: "Cookie Policy", ar: "Cookie Policy" },
+        label: {
+          en: "Cookie Policy",
+          ar: "Cookie Policy",
+        },
       },
       {
         href: "/legal/terms",
-        label: { en: "Terms of Service", ar: "Terms of Service" },
+        label: {
+          en: "Terms of Service",
+          ar: "Terms of Service",
+        },
       },
       {
         href: "/legal/dpa",
-        label: { en: "Data Processing Agreement", ar: "Data Processing Agreement" },
+        label: {
+          en: "Data Processing Agreement",
+          ar: "Data Processing Agreement",
+        },
       },
       {
         href: "/legal/sub-processors",
-        label: { en: "Sub-processors", ar: "Sub-processors" },
+        label: {
+          en: "Sub-processors",
+          ar: "Sub-processors",
+        },
       },
       {
         href: "/policies/ai-training-opt-out",
-        label: { en: "AI Training Opt-Out", ar: "AI Training Opt-Out" },
+        label: {
+          en: "AI Training Opt-Out",
+          ar: "AI Training Opt-Out",
+        },
+      },
+      {
+        href: "/legal/iraq-consumer",
+        label: {
+          en: "Iraq Consumer Disclosure",
+          ar: "Iraq Consumer Disclosure",
+        },
       },
       {
         href: "/legal/egypt-pdpl",
-        label: { en: "Egypt PDPL Notice", ar: "Egypt PDPL Notice" },
+        label: {
+          en: "Egypt PDPL Notice",
+          ar: "Egypt PDPL Notice",
+        },
       },
       {
         href: "/legal/international-transfers",
-        label: { en: "International Transfers", ar: "International Transfers" },
+        label: {
+          en: "International Transfers",
+          ar: "International Transfers",
+        },
       },
     ],
   },
@@ -1144,7 +1419,7 @@ export const LEGAL_PAGES: LegalPage[] = [
   {
     slug: "cookies",
     tree: "legal",
-    status: "draft",
+    status: "final",
     updated: "2026-06-05",
     title: {
       en: "Cookie Policy — ShotStudio",
@@ -1274,7 +1549,7 @@ export const LEGAL_PAGES: LegalPage[] = [
   {
     slug: "acceptable-use",
     tree: "legal",
-    status: "draft",
+    status: "final",
     updated: "2026-06-05",
     title: {
       en: "Acceptable Use Policy — ShotStudio",
@@ -1386,7 +1661,7 @@ export const LEGAL_PAGES: LegalPage[] = [
   {
     slug: "refunds",
     tree: "legal",
-    status: "draft",
+    status: "final",
     updated: "2026-06-05",
     title: {
       en: "Refund & Cancellation Policy — ShotStudio",
@@ -1497,7 +1772,7 @@ export const LEGAL_PAGES: LegalPage[] = [
   {
     slug: "subscription",
     tree: "legal",
-    status: "draft",
+    status: "final",
     updated: "2026-06-05",
     title: {
       en: "Subscription Terms — ShotStudio",
@@ -1696,7 +1971,7 @@ export const LEGAL_PAGES: LegalPage[] = [
   {
     slug: "sub-processors",
     tree: "legal",
-    status: "draft",
+    status: "final",
     updated: "2026-06-05",
     title: {
       en: "Sub-processors — ShotStudio",
@@ -1785,7 +2060,7 @@ export const LEGAL_PAGES: LegalPage[] = [
   {
     slug: "international-transfers",
     tree: "legal",
-    status: "draft",
+    status: "final",
     title: {
       en: "International Data Transfers — ShotStudio",
       ar: "نقل البيانات الدولي — سناب برو",
@@ -2086,7 +2361,7 @@ export const LEGAL_PAGES: LegalPage[] = [
   {
     slug: "iraq-consumer",
     tree: "legal",
-    status: "draft",
+    status: "final",
     title: {
       en: "Iraq — Consumer Rights & E-commerce Disclosure",
       ar: "العراق — حقوق المستهلك وإفصاح التجارة الإلكترونية",
@@ -2302,7 +2577,7 @@ export const LEGAL_PAGES: LegalPage[] = [
   {
     slug: "dmca",
     tree: "legal",
-    status: "draft",
+    status: "final",
     title: {
       en: "DMCA / Takedown — ShotStudio",
       ar: "إزالة المحتوى المنتهِك — سناب برو",

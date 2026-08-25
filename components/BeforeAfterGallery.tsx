@@ -12,6 +12,8 @@ const GALLERY_ITEMS = [
     cat: "CUT",
     catClass: "tag-cut",
     src: "/assets/images/object erase.png",
+    w: 1672,
+    h: 941,
     alt: "Object erase demonstration",
     beforeFilter:
       "brightness(0.45) contrast(1.25) saturate(0.45) sepia(0.25) hue-rotate(8deg)",
@@ -23,6 +25,8 @@ const GALLERY_ITEMS = [
     cat: "STAGE",
     catClass: "tag-stage",
     src: "/assets/images/studio white.png",
+    w: 1448,
+    h: 1086,
     alt: "Studio white background demonstration",
     beforeFilter:
       "brightness(0.5) contrast(1.15) saturate(0.55) sepia(0.3) hue-rotate(-6deg)",
@@ -34,6 +38,8 @@ const GALLERY_ITEMS = [
     cat: "STAGE",
     catClass: "tag-stage",
     src: "/assets/images/Sky-Replace.png",
+    w: 1448,
+    h: 1086,
     alt: "Sky replacement demonstration",
     beforeFilter:
       "brightness(0.55) contrast(1.2) saturate(0.4) hue-rotate(-12deg)",
@@ -45,6 +51,8 @@ const GALLERY_ITEMS = [
     cat: "ENHANCE",
     catClass: "tag-enhance",
     src: "/assets/images/4k upscale.png",
+    w: 1448,
+    h: 1086,
     alt: "4K upscale enhancement demonstration",
     beforeFilter:
       "brightness(0.55) contrast(0.9) saturate(0.4) sepia(0.35) hue-rotate(20deg)",
@@ -56,6 +64,8 @@ const GALLERY_ITEMS = [
     cat: "ENHANCE",
     catClass: "tag-enhance",
     src: "/assets/images/skin smooth.png",
+    w: 1122,
+    h: 1402,
     alt: "Skin smoothing demonstration",
     beforeFilter:
       "brightness(0.55) contrast(1.1) saturate(0.5) sepia(0.25) hue-rotate(-10deg)",
@@ -67,6 +77,8 @@ const GALLERY_ITEMS = [
     cat: "ENHANCE",
     catClass: "tag-enhance",
     src: "/assets/images/reflection clean.png",
+    w: 1536,
+    h: 1024,
     alt: "Reflection cleaning demonstration",
     beforeFilter:
       "brightness(0.5) contrast(1.2) saturate(0.4) hue-rotate(-20deg)",
@@ -78,6 +90,8 @@ const GALLERY_ITEMS = [
     cat: "STAGE",
     catClass: "tag-stage",
     src: "/assets/images/room-declutring.png",
+    w: 1672,
+    h: 941,
     alt: "Room decluttering demonstration",
     beforeFilter:
       "brightness(0.5) contrast(1.3) saturate(0.45) sepia(0.4) hue-rotate(12deg)",
@@ -89,6 +103,8 @@ const GALLERY_ITEMS = [
     cat: "ENHANCE",
     catClass: "tag-enhance",
     src: "/assets/images/light and mood.png",
+    w: 1536,
+    h: 1024,
     alt: "Light and mood adjustment demonstration",
     beforeFilter:
       "brightness(0.55) contrast(1.15) saturate(0.5) sepia(0.2) hue-rotate(-18deg)",
@@ -100,6 +116,8 @@ const GALLERY_ITEMS = [
     cat: "ENHANCE",
     catClass: "tag-enhance",
     src: "/assets/images/studio pack.png",
+    w: 1672,
+    h: 941,
     alt: "Studio pack professional tools demonstration",
     beforeFilter:
       "brightness(0.6) contrast(1.1) saturate(0.5) sepia(0.2) hue-rotate(-15deg)",
@@ -111,6 +129,8 @@ const GALLERY_ITEMS = [
     cat: "CUT",
     catClass: "tag-cut",
     src: "/assets/images/ghost mannequin-snap-pro.png",
+    w: 1122,
+    h: 1402,
     alt: "Ghost mannequin garment isolation demonstration",
     beforeFilter:
       "brightness(0.45) contrast(1.2) saturate(0.45) sepia(0.2) hue-rotate(10deg)",
@@ -122,6 +142,8 @@ const GALLERY_ITEMS = [
     cat: "ENHANCE",
     catClass: "tag-enhance",
     src: "/assets/images/glass-reflection.png",
+    w: 1122,
+    h: 1402,
     alt: "Glass reflection cleanup demonstration",
     beforeFilter:
       "brightness(0.5) contrast(1.25) saturate(0.4) hue-rotate(-15deg)",
@@ -133,6 +155,8 @@ const GALLERY_ITEMS = [
     cat: "ENHANCE",
     catClass: "tag-enhance",
     src: "/assets/images/Studio Perspective Fix. .png",
+    w: 1448,
+    h: 1086,
     alt: "Perspective fix correction demonstration",
     beforeFilter:
       "brightness(0.5) contrast(1.2) saturate(0.45) sepia(0.15) hue-rotate(6deg)",
@@ -144,6 +168,8 @@ const GALLERY_ITEMS = [
     cat: "STAGE",
     catClass: "tag-stage",
     src: "/assets/images/twilght .png",
+    w: 1672,
+    h: 941,
     alt: "Twilight conversion demonstration",
     beforeFilter:
       "brightness(0.65) contrast(1.1) saturate(0.5) hue-rotate(-8deg)",
@@ -155,6 +181,8 @@ const GALLERY_ITEMS = [
     cat: "ENHANCE",
     catClass: "tag-enhance",
     src: "/assets/images/macro sharpen.png",
+    w: 1448,
+    h: 1086,
     alt: "Macro sharpen detail demonstration",
     beforeFilter:
       "brightness(0.55) contrast(0.95) saturate(0.45) sepia(0.3) hue-rotate(15deg)",
@@ -166,19 +194,31 @@ const GALLERY_ITEMS = [
     cat: "ENHANCE",
     catClass: "tag-enhance",
     src: "/assets/images/pattren repeat.png",
+    w: 1672,
+    h: 941,
     alt: "Pattern repeat tiling demonstration",
     beforeFilter:
       "brightness(0.55) contrast(1.05) saturate(0.4) sepia(0.2) hue-rotate(18deg)",
   },
 ];
 
+/** Uniform card height — each card's width follows its image's native aspect
+    ratio, so nothing is cropped or stretched. */
+const CARD_H = 320;
+
+/** One card-ish nudge per arrow press. */
+const SCROLL_STEP = 400;
+
 function BACard({ item }: { item: (typeof GALLERY_ITEMS)[0] }) {
+  // Width is derived from aspect-ratio so the box matches the bitmap exactly;
+  // this rounded value is only the `sizes` hint for srcset selection.
+  const cardW = Math.round(CARD_H * (item.w / item.h));
   return (
     <div
       className='shrink-0 overflow-hidden relative'
       style={{
-        width: 280,
-        aspectRatio: "3/4",
+        height: CARD_H,
+        aspectRatio: `${item.w} / ${item.h}`,
         borderRadius: "var(--r-lg)",
         border: "1px solid var(--line)",
         boxShadow: "var(--shadow-card)",
@@ -188,7 +228,7 @@ function BACard({ item }: { item: (typeof GALLERY_ITEMS)[0] }) {
         src={item.src}
         alt={item.alt}
         fill
-        sizes='280px'
+        sizes={`${cardW}px`}
         style={{ objectFit: "cover" }}
         draggable={false}
       />
@@ -233,6 +273,16 @@ export default function BeforeAfterGallery() {
   const isDown = useRef(false);
   const startX = useRef(0);
   const scrollLeft = useRef(0);
+
+  const scrollCards = (direction: "left" | "right") => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const amount = direction === "left" ? -SCROLL_STEP : SCROLL_STEP;
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    el.scrollBy({ left: amount, behavior: reducedMotion ? "auto" : "smooth" });
+  };
 
   return (
     <section id='gallery' className='relative z-10 mt-40'>
@@ -282,6 +332,65 @@ export default function BeforeAfterGallery() {
           >
             {GALLERY_ITEMS.length} transformations
           </div>
+        </div>
+
+        <div className='flex items-center justify-end gap-2 mb-4'>
+          <button
+            type='button'
+            aria-label='Scroll gallery left'
+            onClick={() => scrollCards("left")}
+            style={{
+              width: 34,
+              height: 34,
+              borderRadius: 999,
+              border: "none",
+              background: "var(--silver-grad)",
+              color: "#000",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              boxShadow: "var(--shadow-silver)",
+            }}
+          >
+            <svg width='12' height='12' viewBox='0 0 12 12' fill='none'>
+              <path
+                d='M7.5 2.5L4 6l3.5 3.5'
+                stroke='currentColor'
+                strokeWidth='1.3'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+              />
+            </svg>
+          </button>
+          <button
+            type='button'
+            aria-label='Scroll gallery right'
+            onClick={() => scrollCards("right")}
+            style={{
+              width: 34,
+              height: 34,
+              borderRadius: 999,
+              border: "none",
+              background: "var(--silver-grad)",
+              color: "#000",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              boxShadow: "var(--shadow-silver)",
+            }}
+          >
+            <svg width='12' height='12' viewBox='0 0 12 12' fill='none'>
+              <path
+                d='M4.5 2.5L8 6l-3.5 3.5'
+                stroke='currentColor'
+                strokeWidth='1.3'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+              />
+            </svg>
+          </button>
         </div>
       </div>
 

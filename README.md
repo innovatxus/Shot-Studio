@@ -2,15 +2,16 @@
 
   <img src="public/logo/snap-pro-logo.svg" alt="Shot Studio" width="80" />
 
-  # Shot Studio
+# Shot Studio
 
-  **AI-powered product photo editing for e-commerce sellers, photographers, and content creators.**
+**AI-powered product photo editing for e-commerce sellers, photographers, and
+content creators.**
 
-  ![Next.js](https://img.shields.io/badge/Next.js-16.2.6-black?logo=next.js)
-  ![React](https://img.shields.io/badge/React-19.2.4-61dafb?logo=react&logoColor=black)
-  ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)
-  ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38bdf8?logo=tailwindcss&logoColor=white)
-  ![Version](https://img.shields.io/badge/version-1.0.0-silver)
+![Next.js](https://img.shields.io/badge/Next.js-16.2.6-black?logo=next.js)
+![React](https://img.shields.io/badge/React-19.2.4-61dafb?logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38bdf8?logo=tailwindcss&logoColor=white)
+![Version](https://img.shields.io/badge/version-1.0.0-silver)
 
 </div>
 
@@ -33,13 +34,34 @@
 
 ## Overview
 
-Shot Studio is a web-based AI photo editing studio that transforms raw product photographs into publication-ready assets. Users upload an image, select a niche-specific tool from a curated catalogue, and receive an edited result in seconds — no design software, no photography studio, no technical skill required.
+Shot Studio is a web-based AI photo editing studio that transforms raw product
+photographs into publication-ready assets. Users upload an image, select a
+niche-specific tool from a curated catalogue, and receive an edited result in
+seconds — no design software, no photography studio, no technical skill
+required.
 
-The primary audience is e-commerce sellers who need consistent, professional imagery across product listings, marketplace platforms, and social media channels. Shot Studio covers 20 commercial verticals — from fashion and jewelry to real estate and automotive — each with a hand-tuned service catalogue. A separate social format engine handles every major platform's export dimensions (Facebook, Instagram, TikTok, Twitter/X, LinkedIn, Pinterest, Snapchat, YouTube), so a single edited image can be correctly sized for any channel without manual cropping.
+The primary audience is e-commerce sellers who need consistent, professional
+imagery across product listings, marketplace platforms, and social media
+channels. Shot Studio covers 20 commercial verticals — from fashion and jewelry
+to real estate and automotive — each with a hand-tuned service catalogue. A
+separate social format engine handles every major platform's export dimensions
+(Facebook, Instagram, TikTok, Twitter/X, LinkedIn, Pinterest, Snapchat,
+YouTube), so a single edited image can be correctly sized for any channel
+without manual cropping.
 
-What separates Shot Studio from a generic image editor is vertical specificity. Every tool preset is named, priced, and tuned for its domain: Ghost Mannequin for fashion, Room Stage for furniture, Twilight Convert for real estate, Sparkle Boost for jewelry. The editor surface is fully data-driven; adding a niche or tool in `features/editor/data/niches.ts` propagates it to the marketing page, editor routes, and static generation with no further changes.
+What separates Shot Studio from a generic image editor is vertical specificity.
+Every tool preset is named, priced, and tuned for its domain: Ghost Mannequin
+for fashion, Room Stage for furniture, Twilight Convert for real estate, Sparkle
+Boost for jewelry. The editor surface is fully data-driven; adding a niche or
+tool in `features/editor/data/niches.ts` propagates it to the marketing page,
+editor routes, and static generation with no further changes.
 
-The application ships at version 1.0.0 as a fully rendered marketing and editor front-end. The editor UI presents a simulated AI pipeline — progress bar, before/after compare slider, credit cost — ready for a real inference backend to be wired to the `onApply` handler in `features/editor/components/EditorCanvas.tsx`. The learning center, pricing, template gallery, and all static routes are production-ready.
+The application ships at version 1.0.0 as a fully rendered marketing and editor
+front-end. The editor UI presents a simulated AI pipeline — progress bar,
+before/after compare slider, credit cost — ready for a real inference backend to
+be wired to the `onApply` handler in
+`features/editor/components/EditorCanvas.tsx`. The learning center, pricing,
+template gallery, and all static routes are production-ready.
 
 ---
 
@@ -47,61 +69,104 @@ The application ships at version 1.0.0 as a fully rendered marketing and editor 
 
 ### Niche-specific photo editor
 
-The core editing surface lives at `features/editor/components/EditorCanvas.tsx`. It renders a drag-and-drop upload zone, a scrollable tool rail showing every preset for the active niche, a before/after compare slider, and an apply bar with a per-tool credit cost indicator. The editor operates in two modes: full-niche (all tools available) and focused (single tool, reached via `/edit/[niche]/[tool]`). Both modes are statically generated at build time for every niche and tool in the catalogue.
+The core editing surface lives at `features/editor/components/EditorCanvas.tsx`.
+It renders a drag-and-drop upload zone, a scrollable tool rail showing every
+preset for the active niche, a before/after compare slider, and an apply bar
+with a per-tool credit cost indicator. The editor operates in two modes:
+full-niche (all tools available) and focused (single tool, reached via
+`/edit/[niche]/[tool]`). Both modes are statically generated at build time for
+every niche and tool in the catalogue.
 
 ### 20 primary industry niches
 
-Defined in `features/editor/data/niches.ts`, the primary niche list covers Fashion, Textile, Real Estate, Electronics, Beauty, Antiques, Furniture, Automotive, Jewelry, Products, Events, Food & Drink, E-commerce, Hotels, Weddings, Construction, Creators, Cafés, Travel, and Editorial. Each niche ships with 2–9 presets tailored to that vertical.
+Defined in `features/editor/data/niches.ts`, the primary niche list covers
+Fashion, Textile, Real Estate, Electronics, Beauty, Antiques, Furniture,
+Automotive, Jewelry, Products, Events, Food & Drink, E-commerce, Hotels,
+Weddings, Construction, Creators, Cafés, Travel, and Editorial. Each niche ships
+with 2–9 presets tailored to that vertical.
 
 ### 16 sub-tool categories
 
-`features/editor/data/niches.ts` also defines `SUB_TOOLS`: a second set of purpose-built niches covering personal use cases (Graduations, Hajj & Umrah, Face Recognition, Gym Staging) and business documents (Digital Brochure, Brand Kit, Product Catalogues, Business Cards, Logo Creation). All sub-tools resolve through the same `/edit/[niche]` route and `getNicheBySlug` lookup as primary niches.
+`features/editor/data/niches.ts` also defines `SUB_TOOLS`: a second set of
+purpose-built niches covering personal use cases (Graduations, Hajj & Umrah,
+Face Recognition, Gym Staging) and business documents (Digital Brochure, Brand
+Kit, Product Catalogues, Business Cards, Logo Creation). All sub-tools resolve
+through the same `/edit/[niche]` route and `getNicheBySlug` lookup as primary
+niches.
 
 ### Social platform size presets
 
-`features/editor/data/social.ts` defines export size presets for Facebook, Instagram, TikTok, Twitter/X, LinkedIn, Pinterest, Snapchat, and YouTube. Each platform's sizes are exposed as a `Niche`-shaped editor surface under `/edit/social-[platform]`, so the existing editor UI handles format delivery without additional code.
+`features/editor/data/social.ts` defines export size presets for Facebook,
+Instagram, TikTok, Twitter/X, LinkedIn, Pinterest, Snapchat, and YouTube. Each
+platform's sizes are exposed as a `Niche`-shaped editor surface under
+`/edit/social-[platform]`, so the existing editor UI handles format delivery
+without additional code.
 
 ### Unified studio tool catalogue
 
-`features/editor/data/studio.ts` defines 17 cross-niche tools grouped into four categories: cut (Background Remove, Ghost Mannequin, Object Erase), stage (Auto Backdrop, Room Stage, Cast Shadow, Glass Reflection, Sky Replace, Room Declutter, Showroom Gen, Perspective Fix, Studio White, Twilight Convert), enhance (HDR Balance, Upscale 4K, Macro Sharpen, Color Match), and format (Marketplace Resize). The studio niche is accessible at `/edit/studio`.
+`features/editor/data/studio.ts` defines 17 cross-niche tools grouped into four
+categories: cut (Background Remove, Ghost Mannequin, Object Erase), stage (Auto
+Backdrop, Room Stage, Cast Shadow, Glass Reflection, Sky Replace, Room
+Declutter, Showroom Gen, Perspective Fix, Studio White, Twilight Convert),
+enhance (HDR Balance, Upscale 4K, Macro Sharpen, Color Match), and format
+(Marketplace Resize). The studio niche is accessible at `/edit/studio`.
 
 ### Learning center
 
-A full learning hub lives at `/learn` (`app/learn/page.tsx`) backed by the `features/learning/` module. It includes a featured tutorial carousel, categorized tutorials with difficulty levels, learning paths, downloadable resources, certification cards, FAQ accordion, progress tracker, and a help center. User progress (started, completed, and saved tutorials; watch ratio; streaks; badges) persists to `localStorage` via a custom `useSyncExternalStore` hook in `features/learning/hooks/useLearningProgress.ts`.
+A full learning hub lives at `/learn` (`app/learn/page.tsx`) backed by the
+`features/learning/` module. It includes a featured tutorial carousel,
+categorized tutorials with difficulty levels, learning paths, downloadable
+resources, certification cards, FAQ accordion, progress tracker, and a help
+center. User progress (started, completed, and saved tutorials; watch ratio;
+streaks; badges) persists to `localStorage` via a custom `useSyncExternalStore`
+hook in `features/learning/hooks/useLearningProgress.ts`.
 
 ### Template gallery
 
-`app/templates/page.tsx` presents a gallery across 12 industries. Each industry shows a collage of source images alongside four finished template cards, giving prospective customers a before/after view of output quality at scale.
+`app/templates/page.tsx` presents a gallery across 12 industries. Each industry
+shows a collage of source images alongside four finished template cards, giving
+prospective customers a before/after view of output quality at scale.
 
 ### Credit-based pricing
 
-Four tiers are defined in `components/Pricing.tsx`: Free ($0/mo, 25 credits, 5 services), Starter ($20/mo, 200 credits, all 17 services, batch up to 20), Pro ($50/mo, 500 credits with rollover, batch 50, Shopify and Amazon sync), and Studio ($100/mo, unlimited credits, 5 seats, full API access).
+Four tiers are defined in `components/Pricing.tsx`: Free ($0/mo, 25 credits, 5
+services), Starter ($20/mo, 200 credits, all 17 services, batch up to 20), Pro
+($50/mo, 500 credits with rollover, batch 50, Shopify and Amazon sync), and
+Studio ($100/mo, unlimited credits, 5 seats, full API access).
 
 ### Scroll-reveal and motion system
 
-`components/ScrollReveal.tsx` provides an `IntersectionObserver`-based reveal component with four animation variants (fade, blur, slide, scale) and configurable stagger. All animations respect `prefers-reduced-motion` via a global CSS reset and per-component guards. Only composited properties (`transform`, `opacity`) are animated throughout the codebase.
+`components/ScrollReveal.tsx` provides an `IntersectionObserver`-based reveal
+component with four animation variants (fade, blur, slide, scale) and
+configurable stagger. All animations respect `prefers-reduced-motion` via a
+global CSS reset and per-component guards. Only composited properties
+(`transform`, `opacity`) are animated throughout the codebase.
 
 ### Marketing landing page
 
-`app/page.tsx` assembles 13 sections: Hero with fullscreen video background, NichesSection, CreativePowerSection, SubCategoriesSection, ServicesSection, PhoneShowcase, BeforeAfterGallery, SocialSizes, Pricing, Integrations, AIFeaturesSection, BentoSection, and FinalCTA. Each section is a server component where possible; client interactivity is scoped to leaf components.
+`app/page.tsx` assembles 13 sections: Hero with fullscreen video background,
+NichesSection, CreativePowerSection, SubCategoriesSection, ServicesSection,
+PhoneShowcase, BeforeAfterGallery, SocialSizes, Pricing, Integrations,
+AIFeaturesSection, BentoSection, and FinalCTA. Each section is a server
+component where possible; client interactivity is scoped to leaf components.
 
 ---
 
 ## Tech stack
 
-| Category       | Technology             | Version  |
-|----------------|------------------------|----------|
-| Framework      | Next.js                | 16.2.6   |
-| Language       | TypeScript             | 5.x      |
-| UI library     | React                  | 19.2.4   |
-| Styling        | Tailwind CSS           | 4.x      |
-| PostCSS plugin | @tailwindcss/postcss   | 4.x      |
-| Fonts          | next/font/google       | bundled  |
-| Linting        | ESLint                 | 9.x      |
-| ESLint config  | eslint-config-next     | 16.2.6   |
-| Type defs      | @types/node            | 20.x     |
-| Type defs      | @types/react           | 19.x     |
-| Type defs      | @types/react-dom       | 19.x     |
+| Category       | Technology           | Version |
+| -------------- | -------------------- | ------- |
+| Framework      | Next.js              | 16.2.6  |
+| Language       | TypeScript           | 5.x     |
+| UI library     | React                | 19.2.4  |
+| Styling        | Tailwind CSS         | 4.x     |
+| PostCSS plugin | @tailwindcss/postcss | 4.x     |
+| Fonts          | next/font/google     | bundled |
+| Linting        | ESLint               | 9.x     |
+| ESLint config  | eslint-config-next   | 16.2.6  |
+| Type defs      | @types/node          | 20.x    |
+| Type defs      | @types/react         | 19.x    |
+| Type defs      | @types/react-dom     | 19.x    |
 
 ---
 
@@ -199,7 +264,11 @@ npm install
 
 ### Environment variables
 
-Snap Pro has no required environment variables in its current state. The editor UI is fully client-rendered and does not connect to an external API. When a backend inference service is added, environment variables should be defined in a `.env.local` file at the project root and prefixed with `NEXT_PUBLIC_` for browser-accessible values.
+Snap Pro has no required environment variables in its current state. The editor
+UI is fully client-rendered and does not connect to an external API. When a
+backend inference service is added, environment variables should be defined in a
+`.env.local` file at the project root and prefixed with `NEXT_PUBLIC_` for
+browser-accessible values.
 
 ### Running locally
 
@@ -214,7 +283,7 @@ The development server starts at `http://localhost:3000`.
 ## Available scripts
 
 | Script          | Description                                   |
-|-----------------|-----------------------------------------------|
+| --------------- | --------------------------------------------- |
 | `npm run dev`   | Start the development server with Turbopack   |
 | `npm run build` | Compile and statically generate the full site |
 | `npm run start` | Serve the production build on port 3000       |
@@ -226,14 +295,18 @@ The development server starts at `http://localhost:3000`.
 
 ### Vercel
 
-Snap Pro is a standard Next.js application and deploys directly to Vercel with no additional configuration.
+Snap Pro is a standard Next.js application and deploys directly to Vercel with
+no additional configuration.
 
-1. Push the repository to GitHub (remote: `https://github.com/innovatxus/snap-pro.git`).
+1. Push the repository to GitHub (remote:
+   `https://github.com/innovatxus/snap-pro.git`).
 2. Import the repository in the [Vercel dashboard](https://vercel.com/new).
-3. Accept the default build settings (`npm run build`, output directory `.next`).
+3. Accept the default build settings (`npm run build`, output directory
+   `.next`).
 4. Deploy.
 
-Every push to the default branch triggers a production deployment. Branch pushes create preview deployments automatically.
+Every push to the default branch triggers a production deployment. Branch pushes
+create preview deployments automatically.
 
 ### Manual deployment
 
@@ -245,24 +318,28 @@ npm run build
 npm run start
 ```
 
-The production server listens on port 3000 by default. Set the `PORT` environment variable to override.
+The production server listens on port 3000 by default. Set the `PORT`
+environment variable to override.
 
 ---
 
 ## Environment configuration
 
-The application behaves identically across environments. There are no feature flags, environment-specific API endpoints, or runtime secrets in the current codebase.
+The application behaves identically across environments. There are no feature
+flags, environment-specific API endpoints, or runtime secrets in the current
+codebase.
 
 When adding a backend, use the standard Next.js `.env` hierarchy:
 
-| File               | Scope                           |
-|--------------------|---------------------------------|
-| `.env`             | All environments (committed)    |
-| `.env.local`       | Local only (not committed)      |
-| `.env.production`  | Production builds only          |
-| `.env.development` | Development server only         |
+| File               | Scope                        |
+| ------------------ | ---------------------------- |
+| `.env`             | All environments (committed) |
+| `.env.local`       | Local only (not committed)   |
+| `.env.production`  | Production builds only       |
+| `.env.development` | Development server only      |
 
-Values prefixed with `NEXT_PUBLIC_` are inlined into the browser bundle at build time. All other values remain server-side only.
+Values prefixed with `NEXT_PUBLIC_` are inlined into the browser bundle at build
+time. All other values remain server-side only.
 
 ---
 
@@ -276,28 +353,34 @@ Values prefixed with `NEXT_PUBLIC_` are inlined into the browser bundle at build
 
 ### Commit conventions
 
-This project follows [Conventional Commits](https://www.conventionalcommits.org/):
+This project follows
+[Conventional Commits](https://www.conventionalcommits.org/):
 
-| Prefix      | Use for                                             |
-|-------------|-----------------------------------------------------|
-| `feat:`     | New feature or user-visible addition                |
-| `fix:`      | Bug fix                                             |
-| `perf:`     | Performance improvement without behavior change     |
-| `refactor:` | Code change that is neither a fix nor a feature     |
-| `docs:`     | Documentation only                                  |
-| `chore:`    | Maintenance, dependency updates, tooling            |
-| `test:`     | Adding or updating tests                            |
+| Prefix      | Use for                                         |
+| ----------- | ----------------------------------------------- |
+| `feat:`     | New feature or user-visible addition            |
+| `fix:`      | Bug fix                                         |
+| `perf:`     | Performance improvement without behavior change |
+| `refactor:` | Code change that is neither a fix nor a feature |
+| `docs:`     | Documentation only                              |
+| `chore:`    | Maintenance, dependency updates, tooling        |
+| `test:`     | Adding or updating tests                        |
 
 Commit messages must be imperative, present tense, and 72 characters or fewer.
 
 ### Adding a niche or tool
 
-To add a new industry niche, append an entry to the `NICHES` array in `features/editor/data/niches.ts`. The niche appears automatically in the marketing grid, the niche editor, and `generateStaticParams`. No additional code changes are required.
+To add a new industry niche, append an entry to the `NICHES` array in
+`features/editor/data/niches.ts`. The niche appears automatically in the
+marketing grid, the niche editor, and `generateStaticParams`. No additional code
+changes are required.
 
-To add a tool to an existing niche, append a `NicheService` entry to that niche's `services` array. Use `featured: true` on the primary tool only.
+To add a tool to an existing niche, append a `NicheService` entry to that
+niche's `services` array. Use `featured: true` on the primary tool only.
 
 ---
 
 ## License
 
-No `LICENSE` file is present in this repository. All rights reserved by Innovatx.
+No `LICENSE` file is present in this repository. All rights reserved by
+Innovatx.

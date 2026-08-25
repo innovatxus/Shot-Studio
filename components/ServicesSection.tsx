@@ -528,6 +528,7 @@ export default function ServicesSection() {
                     <LazyVideo
                       src={svc.video}
                       poster={svc.video.replace(/\.mp4$/i, ".jpg")}
+                      posterSizes='(max-width: 1024px) 50vw, (max-width: 1280px) 33vw, (max-width: 1480px) 25vw, 334px'
                       alt={`${svc.name} ${svc.italic} demo`}
                       className='absolute inset-0'
                       autoPlay

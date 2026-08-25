@@ -4,7 +4,7 @@ export const POLICY_PAGES: LegalPage[] = [
   {
     slug: "ai-usage",
     tree: "policies",
-    status: "draft",
+    status: "final",
     updated: "2026-06-05",
     title: {
       en: "AI Usage Policy — ShotStudio",
@@ -104,7 +104,7 @@ export const POLICY_PAGES: LegalPage[] = [
   {
     slug: "responsible-ai",
     tree: "policies",
-    status: "draft",
+    status: "final",
     title: {
       en: "Responsible AI — ShotStudio",
       ar: "الذكاء الاصطناعي المسؤول — سناب برو",
@@ -161,7 +161,7 @@ export const POLICY_PAGES: LegalPage[] = [
   {
     slug: "ai-transparency",
     tree: "policies",
-    status: "draft",
+    status: "final",
     title: {
       en: "AI Transparency Disclosures",
       ar: "إفصاحات شفافية الذكاء الاصطناعي",
@@ -219,7 +219,7 @@ export const POLICY_PAGES: LegalPage[] = [
   {
     slug: "ai-content-ownership",
     tree: "policies",
-    status: "draft",
+    status: "final",
     updated: "2026-06-05",
     title: {
       en: "AI Content Ownership — ShotStudio",
@@ -279,7 +279,7 @@ export const POLICY_PAGES: LegalPage[] = [
   {
     slug: "ai-abuse",
     tree: "policies",
-    status: "draft",
+    status: "final",
     title: {
       en: "AI Abuse Reporting",
       ar: "الإبلاغ عن إساءة استخدام الذكاء الاصطناعي",
@@ -338,7 +338,7 @@ export const POLICY_PAGES: LegalPage[] = [
   {
     slug: "ai-providers",
     tree: "policies",
-    status: "draft",
+    status: "final",
     title: {
       en: "AI Provider Disclosure",
       ar: "الإفصاح عن مزوّدي الذكاء الاصطناعي",
@@ -379,7 +379,7 @@ export const POLICY_PAGES: LegalPage[] = [
   {
     slug: "ai-training-opt-out",
     tree: "policies",
-    status: "draft",
+    status: "final",
     title: {
       en: "AI Training Opt-Out",
       ar: "الانسحاب من تدريب الذكاء الاصطناعي",

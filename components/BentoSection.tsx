@@ -199,6 +199,7 @@ export default function BentoSection() {
                   <LazyVideo
                     src={card.video}
                     poster={card.src}
+                    posterSizes='(max-width: 1024px) 50vw, (max-width: 1480px) 20vw, 277px'
                     alt={card.alt}
                     className='absolute inset-0'
                     autoPlay

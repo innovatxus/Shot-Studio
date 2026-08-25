@@ -12,6 +12,10 @@ import { useAuth } from "./auth/AuthProvider";
    DATA
 ───────────────────────────────────────────────────────── */
 
+/** Temporarily hides the signed-out "Sign in" trigger. Signed-in users
+    still get their account button. Flip to true to restore. */
+const SHOW_SIGN_IN = false;
+
 type Service = {
   name: string;
   desc: string;
@@ -725,7 +729,7 @@ export default function Navbar() {
             >
               {/* Compact logo on phones so the right-side CTA has room */}
               <span className='sm:hidden'>
-                <Logo size={36} fontSize={18} borderRadius={10} />
+                <Logo size={36} fontSize={18} />
               </span>
               <span className='hidden sm:inline-flex'>
                 <Logo />
@@ -849,54 +853,56 @@ export default function Navbar() {
             </button>
 
             {/* Sign in / account */}
-            <button
-              ref={authTriggerRef}
-              type='button'
-              className='hidden sm:inline-flex items-center justify-center'
-              aria-label={isSignedIn ? "Account" : "Sign in"}
-              aria-expanded={authOpen}
-              onClick={() => setAuthOpen(true)}
-              style={
-                isSignedIn
-                  ? {
-                      width: 34,
-                      height: 34,
-                      borderRadius: "50%",
-                      background: "var(--blue-grad)",
-                      color: "white",
-                      fontWeight: 700,
-                      fontSize: 13,
-                      border: "none",
-                      cursor: "pointer",
-                      flexShrink: 0,
-                    }
-                  : {
-                      gap: 6,
-                      height: 34,
-                      padding: "0 14px",
-                      borderRadius: 999,
-                      background: "var(--surface-2)",
-                      border: "1px solid var(--line-2)",
-                      color: "var(--ink)",
-                      fontFamily: "var(--font-geist-mono), monospace",
-                      fontSize: 11,
-                      letterSpacing: "0.08em",
-                      textTransform: "uppercase",
-                      cursor: "pointer",
-                      flexShrink: 0,
-                      lineHeight: 1,
-                    }
-              }
-            >
-              {isSignedIn ? (
-                (profile?.displayName ?? profile?.email ?? "?").charAt(0).toUpperCase()
-              ) : (
-                <>
-                  <AccountIcon />
-                  Sign in
-                </>
-              )}
-            </button>
+            {(isSignedIn || SHOW_SIGN_IN) && (
+              <button
+                ref={authTriggerRef}
+                type='button'
+                className='hidden sm:inline-flex items-center justify-center'
+                aria-label={isSignedIn ? "Account" : "Sign in"}
+                aria-expanded={authOpen}
+                onClick={() => setAuthOpen(true)}
+                style={
+                  isSignedIn
+                    ? {
+                        width: 34,
+                        height: 34,
+                        borderRadius: "50%",
+                        background: "var(--blue-grad)",
+                        color: "white",
+                        fontWeight: 700,
+                        fontSize: 13,
+                        border: "none",
+                        cursor: "pointer",
+                        flexShrink: 0,
+                      }
+                    : {
+                        gap: 6,
+                        height: 34,
+                        padding: "0 14px",
+                        borderRadius: 999,
+                        background: "var(--surface-2)",
+                        border: "1px solid var(--line-2)",
+                        color: "var(--ink)",
+                        fontFamily: "var(--font-geist-mono), monospace",
+                        fontSize: 11,
+                        letterSpacing: "0.08em",
+                        textTransform: "uppercase",
+                        cursor: "pointer",
+                        flexShrink: 0,
+                        lineHeight: 1,
+                      }
+                }
+              >
+                {isSignedIn ? (
+                  (profile?.displayName ?? profile?.email ?? "?").charAt(0).toUpperCase()
+                ) : (
+                  <>
+                    <AccountIcon />
+                    Sign in
+                  </>
+                )}
+              </button>
+            )}
 
             {/* Token chip */}
             <button
@@ -1362,60 +1368,62 @@ export default function Navbar() {
               })}
             </nav>
 
-            <button
-              type='button'
-              onClick={() => {
-                closeMobile();
-                setAuthOpen(true);
-              }}
-              style={{
-                marginTop: 6,
-                display: "flex",
-                alignItems: "center",
-                gap: 10,
-                padding: "12px",
-                borderRadius: 12,
-                background: "transparent",
-                border: "1px solid transparent",
-                color: "var(--ink)",
-                width: "100%",
-                textAlign: "left",
-                cursor: "pointer",
-                fontFamily: "var(--font-geist-mono), monospace",
-                fontSize: 12,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-              }}
-            >
-              {isSignedIn ? (
-                <>
-                  <span
-                    aria-hidden='true'
-                    style={{
-                      width: 24,
-                      height: 24,
-                      borderRadius: "50%",
-                      background: "var(--blue-grad)",
-                      color: "white",
-                      fontWeight: 700,
-                      fontSize: 11,
-                      display: "inline-flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexShrink: 0,
-                    }}
-                  >
-                    {(profile?.displayName ?? profile?.email ?? "?").charAt(0).toUpperCase()}
-                  </span>
-                  Account
-                </>
-              ) : (
-                <>
-                  <AccountIcon />
-                  Sign in
-                </>
-              )}
-            </button>
+            {(isSignedIn || SHOW_SIGN_IN) && (
+              <button
+                type='button'
+                onClick={() => {
+                  closeMobile();
+                  setAuthOpen(true);
+                }}
+                style={{
+                  marginTop: 6,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
+                  padding: "12px",
+                  borderRadius: 12,
+                  background: "transparent",
+                  border: "1px solid transparent",
+                  color: "var(--ink)",
+                  width: "100%",
+                  textAlign: "left",
+                  cursor: "pointer",
+                  fontFamily: "var(--font-geist-mono), monospace",
+                  fontSize: 12,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                }}
+              >
+                {isSignedIn ? (
+                  <>
+                    <span
+                      aria-hidden='true'
+                      style={{
+                        width: 24,
+                        height: 24,
+                        borderRadius: "50%",
+                        background: "var(--blue-grad)",
+                        color: "white",
+                        fontWeight: 700,
+                        fontSize: 11,
+                        display: "inline-flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
+                      }}
+                    >
+                      {(profile?.displayName ?? profile?.email ?? "?").charAt(0).toUpperCase()}
+                    </span>
+                    Account
+                  </>
+                ) : (
+                  <>
+                    <AccountIcon />
+                    Sign in
+                  </>
+                )}
+              </button>
+            )}
 
             <div
               style={{

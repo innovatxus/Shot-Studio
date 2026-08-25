@@ -1,11 +1,12 @@
 ﻿/**
  * Shared logo mark — used in Navbar and Footer.
- * Renders the snap-pro-logo.svg mark + the two-tone "ShotStudio" wordmark.
+ * Renders the shot-studio-logo mark + the two-tone "ShotStudio" wordmark.
  *
  * Props
  *   size        — logo image px (default 64)
  *   fontSize    — wordmark font-size px (default 32)
- *   borderRadius — logo image border-radius px (default 18)
+ *   borderRadius — extra logo image border-radius px (default 0; the mark
+ *                  already ships with its rounded corners baked in)
  */
 import Image from "next/image";
 
@@ -18,13 +19,13 @@ export interface LogoProps {
 export default function Logo({
   size = 64,
   fontSize = 32,
-  borderRadius = 18,
+  borderRadius = 0,
 }: LogoProps) {
   return (
     <div className="flex items-center gap-[10px]">
       {/* Mark — served via next/image so AVIF/WebP conversion applies */}
       <Image
-        src="/logo/snap-pro-logo.png"
+        src="/assets/logo/shot-studio-logo.png"
         alt="ShotStudio logo"
         width={size}
         height={size}

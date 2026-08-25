@@ -44,13 +44,6 @@ export const metadata: Metadata = {
   description:
     "Upload a photo. Pick a service. Download a hero image. 17 professional AI editing services for e-commerce sellers. 25 free credits monthly.",
   applicationName: "ShotStudio",
-  icons: {
-    // SVG is served at any resolution — modern Chrome/Firefox/Edge/Safari use this first
-    icon: [{ url: "/icon.svg", type: "image/svg+xml", sizes: "any" }],
-    shortcut: "/icon.svg",
-    // Apple home screen (180×180 is the canonical touch icon size)
-    apple: [{ url: "/icon.svg", sizes: "180x180", type: "image/svg+xml" }],
-  },
   openGraph: {
     type: "website",
     siteName: "ShotStudio",

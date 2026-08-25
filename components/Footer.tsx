@@ -749,7 +749,7 @@ export default function Footer() {
               gap: 24,
             }}
           >
-            <Logo size={56} fontSize={28} borderRadius={15} />
+            <Logo size={56} fontSize={28} />
 
             <p
               style={{

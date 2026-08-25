@@ -4,27 +4,27 @@
 # Requires ffmpeg in PATH. Check with: ffmpeg -version
 
 $dir  = "public\assets\video\tools-videos"
-$null = "NUL"   # Windows null device (use /dev/null on macOS/Linux)
+$nullDev = "NUL"   # Windows null device (use /dev/null on macOS/Linux)
 
 $files = Get-ChildItem "$dir\*.mp4" | Sort-Object Name
 Write-Host "Found $($files.Count) MP4 files to process.`n"
 
 foreach ($f in $files) {
-    $input = $f.FullName
+    $inFile = $f.FullName
     $base  = Join-Path (Split-Path $f.FullName) $f.BaseName
 
     Write-Host "[$($f.Name)]"
 
     # ── VP9 WebM — 2-pass, 640px wide, target 220 kbps / max 280 kbps ──────
     # Pass 1 (analysis only — output discarded)
-    & ffmpeg -y -i $input -an -c:v libvpx-vp9 `
+    & ffmpeg -y -i $inFile -an -c:v libvpx-vp9 `
         -vf "scale=640:-2" `
         -b:v 220k -maxrate 280k -bufsize 560k `
         -deadline good -cpu-used 4 `
-        -row-mt 1 -pass 1 -f webm $null 2>&1 | Out-Null
+        -row-mt 1 -pass 1 -f webm $nullDev 2>&1 | Out-Null
 
     # Pass 2 (final encode — overwrites existing .webm)
-    & ffmpeg -y -i $input -an -c:v libvpx-vp9 `
+    & ffmpeg -y -i $inFile -an -c:v libvpx-vp9 `
         -vf "scale=640:-2" `
         -b:v 220k -maxrate 280k -bufsize 560k `
         -deadline good -cpu-used 2 `
@@ -32,7 +32,7 @@ foreach ($f in $files) {
         "$base.webm"
 
     # ── Poster JPG — 1 frame at 0.5 s, quality 4 (≈ 20-35 KB) ─────────────
-    & ffmpeg -y -i $input -ss 0.5 -vframes 1 `
+    & ffmpeg -y -i $inFile -ss 0.5 -vframes 1 `
         -vf "scale=640:-2" `
         -q:v 4 `
         "$base.jpg"
