@@ -645,30 +645,6 @@ em.silver {
   }
 }
 
-/* ─── Scroll Indicator ─── */
-@keyframes scroll-bounce {
-  0%,
-  100% {
-    transform: translateY(0);
-    opacity: 0.6;
-  }
-  50% {
-    transform: translateY(9px);
-    opacity: 0.2;
-  }
-}
-
-.scroll-indicator-icon {
-  animation: scroll-bounce 2.6s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .scroll-indicator-icon {
-    animation: none;
-    opacity: 0.5;
-  }
-}
-
 /* ─── Hero Video Fallback ─── */
 .hero-fallback-bg {
   background: linear-gradient(

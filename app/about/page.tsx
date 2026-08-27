@@ -124,9 +124,9 @@ const OUTCOMES: Outcome[] = [
     body: "Fashion, beauty, real estate, automotive, hospitality, jewellery, electronics, food, and more.",
   },
   {
-    metric: "25",
-    label: "Free credits / month",
-    body: "Enough to ship a small catalog before you decide whether to upgrade. No card needed.",
+    metric: "1",
+    label: "Free image / day",
+    body: "Enough to build the habit before you decide whether to upgrade. No card needed.",
   },
   {
     metric: "< 60s",
@@ -741,8 +741,8 @@ export default function AboutPage() {
                   lineHeight: 1.6,
                 }}
               >
-                Twenty-five free credits. No card needed. Decide whether Snap
-                Pro earns its place after you ship your first set.
+                Start free now. No card needed. Decide whether Shot Studio
+                earns its place after you ship your first set.
               </p>
             </ScrollReveal>
             <ScrollReveal variant='up' delay={2}>
@@ -775,7 +775,7 @@ export default function AboutPage() {
                     textDecoration: "none",
                   }}
                 >
-                  Start free
+                  Start free now
                   <Icon name='arrowRight' size={14} />
                 </Link>
                 <Link

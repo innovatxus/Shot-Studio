@@ -40,12 +40,12 @@ export const MARKETING_PAGES: MarketingPageContent[] = [
     slug: "pricing",
     eyebrow: { en: "Pricing", ar: "الأسعار" },
     title: {
-      en: "Simple, credit-based pricing",
-      ar: "أسعار بسيطة قائمة على الأرصدة",
+      en: "Simple, predictable pricing",
+      ar: "أسعار بسيطة وواضحة",
     },
     lede: {
-      en: "Free monthly credits, predictable subscription tiers, and team plans for agencies.",
-      ar: "أرصدة مجانية شهرية، باقات اشتراك واضحة، وخطط فِرَق للوكالات.",
+      en: "A free image every day, predictable subscription tiers, and team plans for agencies.",
+      ar: "صورة مجانية كل يوم، باقات اشتراك واضحة، وخطط فِرَق للوكالات.",
     },
     body: {
       en: "Full pricing details live on the home page pricing section. Egyptian customers see VAT-inclusive pricing at checkout. EU customers see VAT broken out per local rate.",
@@ -65,21 +65,19 @@ export const MARKETING_PAGES: MarketingPageContent[] = [
       en: "Detailed Help Center articles are rolling out per service. In the meantime, contact support@shotstudio.ai and a real human will reply within one business day.",
       ar: "نُصدِر مقالات مركز المساعدة تباعاً لكل خدمة. في غضون ذلك، راسِل support@shotstudio.ai وسيردّ عليك إنسان حقيقي خلال يوم عمل واحد.",
     },
-    draft: true,
   },
   {
     slug: "faq",
     eyebrow: { en: "FAQ", ar: "الأسئلة الشائعة" },
     title: { en: "Frequently asked questions", ar: "الأسئلة الأكثر شيوعاً" },
     lede: {
-      en: "Quick answers about credits, plans, AI ownership, and refunds.",
-      ar: "إجابات سريعة عن الأرصدة، الخطط، ملكية الذكاء الاصطناعي، والاسترداد.",
+      en: "Quick answers about plans, allowances, AI ownership, and refunds.",
+      ar: "إجابات سريعة عن الخطط، الحصص، ملكية الذكاء الاصطناعي، والاسترداد.",
     },
     body: {
-      en: "Our top FAQ topics: monthly credit rollover, switching plans mid-cycle, downloading high-resolution outputs, refund eligibility under Egyptian Consumer Law and EU rules, and using outputs commercially.",
-      ar: "أبرز أسئلتنا الشائعة: ترحيل الأرصدة الشهرية، تغيير الخطة في منتصف الدورة، تنزيل المخرجات بدقّة عالية، شروط الاسترداد بموجب قانون حماية المستهلك المصري ولوائح الاتحاد الأوروبي، واستخدام المخرجات تجارياً.",
+      en: "Our top FAQ topics: how monthly image allowances reset, switching plans mid-cycle, downloading high-resolution outputs, refund eligibility under Egyptian Consumer Law and EU rules, and using outputs commercially.",
+      ar: "أبرز أسئلتنا الشائعة: كيفية تجديد حصص الصور الشهرية، تغيير الخطة في منتصف الدورة، تنزيل المخرجات بدقّة عالية، شروط الاسترداد بموجب قانون حماية المستهلك المصري ولوائح الاتحاد الأوروبي، واستخدام المخرجات تجارياً.",
     },
-    draft: true,
   },
   {
     slug: "careers",
@@ -109,7 +107,6 @@ export const MARKETING_PAGES: MarketingPageContent[] = [
       en: "Reporters covering AI in MENA e-commerce can email press@shotstudio.ai for interviews, embargoes, and figures.",
       ar: "للصحفيين الذين يُغطّون الذكاء الاصطناعي في تجارة الشرق الأوسط الإلكترونية: راسِلنا على press@shotstudio.ai للمقابلات والتغطية الحصرية والأرقام.",
     },
-    draft: true,
   },
   {
     slug: "partners",
@@ -123,7 +120,6 @@ export const MARKETING_PAGES: MarketingPageContent[] = [
       en: "Apply via partners@shotstudio.ai. We respond within 5 business days with next steps and a partnership tier proposal.",
       ar: "قدِّم طلبك عبر partners@shotstudio.ai. نردّ خلال 5 أيام عمل بالخطوات التالية ومستوى شراكة مقترح.",
     },
-    draft: true,
   },
   {
     slug: "affiliates",
@@ -137,7 +133,6 @@ export const MARKETING_PAGES: MarketingPageContent[] = [
       en: "Launching soon. Pre-register at affiliates@shotstudio.ai to be notified when the program opens.",
       ar: "قريباً. سجّل اهتمامك على affiliates@shotstudio.ai ليتمّ إخطارك عند فتح البرنامج.",
     },
-    draft: true,
   },
   {
     slug: "integrations",
@@ -167,7 +162,6 @@ export const MARKETING_PAGES: MarketingPageContent[] = [
       en: "Weekly entries describe shipped changes, including any updates to AI providers, pricing, or terms.",
       ar: "تشرح المداخل الأسبوعية ما تمّ إصداره، بما في ذلك أي تحديثات على مزوّدي الذكاء الاصطناعي، الأسعار، أو الشروط.",
     },
-    draft: true,
   },
   {
     slug: "roadmap",
@@ -181,7 +175,6 @@ export const MARKETING_PAGES: MarketingPageContent[] = [
       en: "Roadmap items are not commitments and may change. Major compliance milestones (SOC 2, ISO 27001) are tracked on the Compliance Center page.",
       ar: "بنود خارطة الطريق ليست تعهّدات وقد تتغيّر. تُتابَع المحطّات الرئيسية للامتثال (SOC 2 و ISO 27001) في صفحة مركز الامتثال.",
     },
-    draft: true,
   },
   {
     slug: "blog",
@@ -198,7 +191,6 @@ export const MARKETING_PAGES: MarketingPageContent[] = [
       en: "First articles publish soon. Subscribe in the footer to get them by email.",
       ar: "تُنشَر أولى المقالات قريباً. اشترك في النشرة من تذييل الموقع لتصلك بالبريد.",
     },
-    draft: true,
   },
   {
     slug: "tutorials",
@@ -212,7 +204,6 @@ export const MARKETING_PAGES: MarketingPageContent[] = [
       en: "Production is in progress. Until then, see the in-app tooltips and the Help Center for written walkthroughs.",
       ar: "الإنتاج جارٍ. حتى ذلك الحين، راجع التلميحات داخل التطبيق ومركز المساعدة للشروحات المكتوبة.",
     },
-    draft: true,
   },
   {
     slug: "community",
@@ -229,7 +220,6 @@ export const MARKETING_PAGES: MarketingPageContent[] = [
       en: "Community channels (Discord, WhatsApp groups by region) launch with public beta. Email community@shotstudio.ai to be invited early.",
       ar: "تنطلق قنوات المجتمع (Discord ومجموعات واتساب حسب المنطقة) مع النسخة التجريبية العامة. راسِل community@shotstudio.ai للحصول على دعوة مبكرة.",
     },
-    draft: true,
   },
   {
     slug: "customers",
@@ -243,7 +233,6 @@ export const MARKETING_PAGES: MarketingPageContent[] = [
       en: "Case studies publish here. To nominate your store, email stories@shotstudio.ai.",
       ar: "تُنشَر دراسات الحالة هنا. لترشيح متجرك، راسِل stories@shotstudio.ai.",
     },
-    draft: true,
   },
   {
     slug: "enterprise",
@@ -273,7 +262,6 @@ export const MARKETING_PAGES: MarketingPageContent[] = [
       en: "A human-readable site index will replace this stub. The machine-readable sitemap.xml is generated by Next.js at /sitemap.xml.",
       ar: "سيُستبدل هذا الموجز بفهرس قابل للقراءة من البشر. أمّا الملف الآلي sitemap.xml فيتم توليده تلقائياً على /sitemap.xml.",
     },
-    draft: true,
   },
   {
     slug: "status",
@@ -287,7 +275,6 @@ export const MARKETING_PAGES: MarketingPageContent[] = [
       en: "Hosted status page launching with public beta. Subscribe to incident emails at status@shotstudio.ai.",
       ar: "صفحة حالة مستضافة تنطلق مع النسخة التجريبية العامة. اشترك بإشعارات الحوادث على status@shotstudio.ai.",
     },
-    draft: true,
   },
 ];
 

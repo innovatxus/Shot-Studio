@@ -762,8 +762,8 @@ export default function Footer() {
               }}
             >
               {locale === "ar"
-                ? "تحرير صور احترافي بالذكاء الاصطناعي لبائعي التجارة الإلكترونية. 23 خدمة و25 رصيداً مجانياً شهرياً."
-                : "Professional AI photo editing for e-commerce sellers. 23 services, 25 free credits monthly."}
+                ? "تحرير صور احترافي بالذكاء الاصطناعي لبائعي التجارة الإلكترونية. 23 خدمة. ابدأ مجاناً الآن، بدون بطاقة ائتمان."
+                : "Professional AI photo editing for e-commerce sellers. 23 services. Start free now, no credit card."}
             </p>
 
             <SocialIcons />

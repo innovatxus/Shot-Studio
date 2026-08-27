@@ -13,7 +13,6 @@ const HERO_VIDEO_SOURCES = [
  * ─ Three-layer overlay for depth and readability
  * ─ Navbar floats on top of the video
  * ─ Headline / sub-headline / CTAs animate in via CSS
- * ─ Scroll indicator at the bottom
  *
  * Server component: no runtime JS required beyond HeroVideo & Navbar (both "use client").
  */
@@ -225,7 +224,7 @@ export default function Hero() {
                 letterSpacing: "-0.01em",
               }}
             >
-              Start free — 25 credits
+              Start free now
               <svg width='14' height='14' viewBox='0 0 14 14' fill='none'>
                 <path
                   d='M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5'
@@ -257,40 +256,6 @@ export default function Hero() {
             >
               See all 23 services
             </button>
-          </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className='flex justify-center pb-10 relative z-10'>
-          <div className='flex flex-col items-center gap-[10px]'>
-            <span
-              style={{
-                fontFamily: "var(--font-geist-mono), monospace",
-                fontSize: 9,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "rgba(255,255,255,0.3)",
-              }}
-            >
-              Scroll
-            </span>
-            <div className='scroll-indicator-icon'>
-              <svg
-                width='18'
-                height='18'
-                viewBox='0 0 18 18'
-                fill='none'
-                aria-hidden='true'
-              >
-                <path
-                  d='M9 3.5V14.5M9 14.5L4.5 10M9 14.5L13.5 10'
-                  stroke='rgba(255,255,255,0.35)'
-                  strokeWidth='1.5'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                />
-              </svg>
-            </div>
           </div>
         </div>
       </div>

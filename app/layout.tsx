@@ -43,14 +43,14 @@ export const metadata: Metadata = {
   ),
   title: "ShotStudio — AI Studio for Everyone",
   description:
-    "Upload a photo. Pick a service. Download a hero image. 23 professional AI editing services for e-commerce sellers. 25 free credits monthly.",
+    "Upload a photo. Pick a service. Download a hero image. 23 professional AI editing services for e-commerce sellers. Start free now, no credit card.",
   applicationName: "ShotStudio",
   openGraph: {
     type: "website",
     siteName: "ShotStudio",
     title: "ShotStudio — AI Studio for Everyone",
     description:
-      "23 professional AI editing services for e-commerce sellers. 25 free credits monthly.",
+      "23 professional AI editing services for e-commerce sellers. Start free now, no credit card.",
     images: [
       {
         url: "/assets/video/hero-videos/hero-main-poster.jpg",
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "ShotStudio — AI Studio for Everyone",
     description:
-      "23 professional AI editing services for e-commerce sellers. 25 free credits monthly.",
+      "23 professional AI editing services for e-commerce sellers. Start free now, no credit card.",
     images: [
       {
         url: "/assets/video/hero-videos/hero-main-poster.jpg",

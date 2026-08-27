@@ -69,7 +69,7 @@ export default function FinalCTA() {
               fontFamily: "var(--font-geist-sans), sans-serif",
             }}
           >
-            25 free credits every month. No credit card. No desktop.
+            Start free now. No credit card. No desktop.
           </p>
 
           {/* Store buttons */}

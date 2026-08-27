@@ -80,7 +80,13 @@ function Stat({
   );
 }
 
-export default function HeaderStats({ compact = false }: { compact?: boolean }) {
+export default function HeaderStats({
+  compact = false,
+  stacked = false,
+}: {
+  compact?: boolean;
+  stacked?: boolean;
+}) {
   const { status, data } = useAppMetrics();
 
   // A visitor whose last-seen day is earlier than today is returning. Recorded
@@ -101,13 +107,13 @@ export default function HeaderStats({ compact = false }: { compact?: boolean }) 
 
   return (
     <div
-      className='flex items-center'
-      style={{ gap: compact ? 14 : 18 }}
+      className={stacked ? "flex flex-col" : "flex items-center"}
+      style={{ gap: stacked ? 6 : compact ? 14 : 18 }}
       role='group'
       aria-label='ShotStudio activity'
     >
       <Stat
-        compact={compact}
+        compact={compact || stacked}
         icon={
           <svg width='11' height='11' viewBox='0 0 12 12' fill='none'>
             <path
@@ -125,10 +131,14 @@ export default function HeaderStats({ compact = false }: { compact?: boolean }) 
       />
       <span
         aria-hidden='true'
-        style={{ width: 1, height: 22, background: "var(--line)", flexShrink: 0 }}
+        style={
+          stacked
+            ? { height: 1, width: "100%", background: "var(--line)" }
+            : { width: 1, height: 22, background: "var(--line)", flexShrink: 0 }
+        }
       />
       <Stat
-        compact={compact}
+        compact={compact || stacked}
         icon={
           <svg width='11' height='11' viewBox='0 0 12 12' fill='none'>
             <path

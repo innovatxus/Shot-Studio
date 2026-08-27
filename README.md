@@ -127,12 +127,12 @@ hook in `features/learning/hooks/useLearningProgress.ts`.
 shows a collage of source images alongside four finished template cards, giving
 prospective customers a before/after view of output quality at scale.
 
-### Credit-based pricing
+### Subscription pricing
 
-Four tiers are defined in `components/Pricing.tsx`: Free ($0/mo, 25 credits, 5
-services), Starter ($20/mo, 200 credits, all 17 services, batch up to 20), Pro
-($50/mo, 500 credits with rollover, batch 50, Shopify and Amazon sync), and
-Studio ($100/mo, unlimited credits, 5 seats, full API access).
+Four tiers are defined in `components/Pricing.tsx`: Free ($0/mo, 1 image per
+day), Starter ($6.99/mo, 100 images per month), Mid ($25/mo, up to 350 images
+per month), and Ultra ($75/mo, up to 1,250 images per month). Paid allowances
+reset each monthly billing cycle; the Free allowance resets daily.
 
 ### Scroll-reveal and motion system
 

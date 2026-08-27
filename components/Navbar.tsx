@@ -9,7 +9,14 @@ import AccountPanelContent from "./auth/AccountPanelContent";
 import { useAuth } from "./auth/AuthProvider";
 import { useDownloadApp } from "@/components/app/DownloadAppProvider";
 import HeaderStats from "@/components/app/HeaderStats";
-import DownloadAppLink from "@/components/app/DownloadAppLink";
+import {
+  NAV_CATEGORIES,
+  NAV_SERVICES,
+  SERVICE_ACCENT,
+  serviceId,
+  servicePoster,
+} from "@/features/editor/data/services";
+import Image from "next/image";
 
 /* ─────────────────────────────────────────────────────────
    DATA
@@ -19,240 +26,14 @@ import DownloadAppLink from "@/components/app/DownloadAppLink";
     still get their account button. Flip to true to restore. */
 const SHOW_SIGN_IN = false;
 
-type Service = {
-  name: string;
-  desc: string;
-  cat: "Cut" | "Stage" | "Enhance" | "Format";
-  badge?: string;
-  href?: string;
-  comingSoon?: boolean;
-};
 
-const SERVICES: Service[] = [
-  {
-    name: "Background Removal",
-    desc: "Isolate any product instantly",
-    cat: "Cut",
-    badge: "AI",
-    href: "/edit/studio/background-remove",
-  },
-  {
-    name: "Ghost Mannequin",
-    desc: "Invisible mannequin effect",
-    cat: "Cut",
-    href: "/edit/studio/ghost-mannequin",
-  },
-  {
-    name: "Object Removal",
-    desc: "Erase distractions cleanly",
-    cat: "Cut",
-    badge: "NEW",
-    href: "/edit/studio/object-erase",
-  },
-  {
-    name: "AI Scene Staging",
-    desc: "Drop into 200+ curated environments",
-    cat: "Stage",
-    badge: "HOT",
-    href: "/edit/studio/auto-backdrop",
-  },
-  {
-    name: "Flat Lay Studio",
-    desc: "Overhead product photography",
-    cat: "Stage",
-    comingSoon: true,
-  },
-  {
-    name: "Lifestyle Composite",
-    desc: "Place product in lifestyle shots",
-    cat: "Stage",
-    comingSoon: true,
-  },
-  {
-    name: "Color Grading",
-    desc: "Professional color correction",
-    cat: "Enhance",
-    comingSoon: true,
-  },
-  {
-    name: "4× Upscaling",
-    desc: "AI-powered resolution boost",
-    cat: "Enhance",
-    badge: "NEW",
-    comingSoon: true,
-  },
-  {
-    name: "Shadow Generator",
-    desc: "Add realistic drop shadows",
-    cat: "Enhance",
-    href: "/edit/studio/cast-shadow",
-  },
-  {
-    name: "Social Resize",
-    desc: "9 platform exports in one click",
-    cat: "Format",
-    comingSoon: true,
-  },
-];
-
-const CAT_ACCENT: Record<Service["cat"], string> = {
-  Cut: "#38BDF8",
-  Stage: "#A8AEB8",
-  Enhance: "#FFC857",
-  Format: "#C8B6FF",
-};
-
-const CATEGORIES: {
-  key: Service["cat"];
-  desc: string;
-  count: number;
-  icon: string;
-}[] = [
-  { key: "Cut", desc: "Remove & isolate", count: 5, icon: "✂" },
-  { key: "Stage", desc: "Scene & studio", count: 6, icon: "◻" },
-  { key: "Enhance", desc: "Polish & refine", count: 4, icon: "✦" },
-  { key: "Format", desc: "Resize & export", count: 4, icon: "⊞" },
-];
 
 /* ─────────────────────────────────────────────────────────
    SMALL HELPERS
 ───────────────────────────────────────────────────────── */
 
 /** Tiny badge pill — AI / NEW / HOT / SOON */
-function Badge({ label }: { label: string }) {
-  const accent =
-    label === "AI"
-      ? "#38BDF8"
-      : label === "HOT"
-        ? "#FFC857"
-        : label === "SOON"
-          ? "#9CA3AF"
-          : "#C8B6FF";
-  return (
-    <span
-      style={{
-        fontSize: 8,
-        fontFamily: "var(--font-geist-mono), monospace",
-        letterSpacing: "0.14em",
-        textTransform: "uppercase",
-        color: accent,
-        background: `${accent}15`,
-        border: `1px solid ${accent}35`,
-        borderRadius: 4,
-        padding: "2px 5px",
-        flexShrink: 0,
-        lineHeight: 1.4,
-      }}
-    >
-      {label}
-    </span>
-  );
-}
 
-/** 34×34 dark icon box with a line-art SVG inside */
-function IconBox({ type }: { type: Service["cat"] | "logo" }) {
-  const accent =
-    type === "logo" ? "#38BDF8" : CAT_ACCENT[type as Service["cat"]];
-  return (
-    <div
-      style={{
-        width: 34,
-        height: 34,
-        borderRadius: 9,
-        background: "var(--surface-3)",
-        border: "1px solid var(--line-2)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexShrink: 0,
-      }}
-    >
-      {type === "Cut" && (
-        <svg width='16' height='16' viewBox='0 0 16 16' fill='none'>
-          <circle cx='4' cy='4' r='2' stroke={accent} strokeWidth='1.3' />
-          <circle cx='4' cy='12' r='2' stroke={accent} strokeWidth='1.3' />
-          <path
-            d='M6 4.5L13 11.5M6 11.5L13 4.5'
-            stroke={accent}
-            strokeWidth='1.3'
-            strokeLinecap='round'
-          />
-        </svg>
-      )}
-      {type === "Stage" && (
-        <svg width='16' height='16' viewBox='0 0 16 16' fill='none'>
-          <rect
-            x='1'
-            y='2'
-            width='14'
-            height='12'
-            rx='2'
-            stroke={accent}
-            strokeWidth='1.3'
-          />
-          <path
-            d='M1 9l4-3 3 3 3-4 4 4'
-            stroke={accent}
-            strokeWidth='1.3'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-          />
-        </svg>
-      )}
-      {type === "Enhance" && (
-        <svg width='16' height='16' viewBox='0 0 16 16' fill='none'>
-          <path
-            d='M8 1v3M8 12v3M1 8h3M12 8h3'
-            stroke={accent}
-            strokeWidth='1.3'
-            strokeLinecap='round'
-          />
-          <circle cx='8' cy='8' r='3' stroke={accent} strokeWidth='1.3' />
-        </svg>
-      )}
-      {type === "Format" && (
-        <svg width='16' height='16' viewBox='0 0 16 16' fill='none'>
-          <rect
-            x='1'
-            y='1'
-            width='6'
-            height='6'
-            rx='1.5'
-            stroke={accent}
-            strokeWidth='1.3'
-          />
-          <rect
-            x='9'
-            y='1'
-            width='6'
-            height='6'
-            rx='1.5'
-            stroke={accent}
-            strokeWidth='1.3'
-          />
-          <rect
-            x='1'
-            y='9'
-            width='6'
-            height='6'
-            rx='1.5'
-            stroke={accent}
-            strokeWidth='1.3'
-          />
-          <rect
-            x='9'
-            y='9'
-            width='6'
-            height='6'
-            rx='1.5'
-            stroke={accent}
-            strokeWidth='1.3'
-          />
-        </svg>
-      )}
-    </div>
-  );
-}
 
 /** Person-outline icon for the sign-in / account trigger. */
 function AccountIcon() {
@@ -290,7 +71,7 @@ function ToolsDropdown({ pos, onEnter, onLeave }: DropdownProps) {
         position: "fixed",
         top: pos.top,
         left: pos.left,
-        width: 760,
+        width: 880,
         zIndex: 9999,
         background: "rgba(10,10,10,0.92)",
         backdropFilter: "blur(28px)",
@@ -306,7 +87,7 @@ function ToolsDropdown({ pos, onEnter, onLeave }: DropdownProps) {
       {/* ── Left panel: service list ── */}
       <div
         style={{
-          flex: "0 0 340px",
+          flex: "0 0 360px",
           padding: "20px 0",
           borderRight: "1px solid var(--line)",
           display: "flex",
@@ -327,148 +108,118 @@ function ToolsDropdown({ pos, onEnter, onLeave }: DropdownProps) {
           Services
         </div>
 
-        {/* Service rows */}
-        {SERVICES.map((svc) => {
-          const rowContent = (
-            <>
-              <IconBox type={svc.cat} />
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div
+        {/* One row per real card: poster still as the thumbnail, and the
+            link jumps to that card's anchor in the services grid. */}
+        {NAV_SERVICES.map((svc) => {
+          const poster = servicePoster(svc);
+          return (
+            <Link
+              key={svc.id}
+              href={`/#${serviceId(svc)}`}
+              onClick={onLeave}
+              className='nav-service-row'
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 12,
+                padding: "8px 20px",
+                textDecoration: "none",
+                transition: "background 0.15s ease",
+              }}
+              onMouseEnter={(e) =>
+                ((e.currentTarget as HTMLElement).style.background =
+                  "rgba(255,255,255,0.04)")
+              }
+              onMouseLeave={(e) =>
+                ((e.currentTarget as HTMLElement).style.background =
+                  "transparent")
+              }
+            >
+              <span
+                aria-hidden='true'
+                style={{
+                  position: "relative",
+                  width: 46,
+                  height: 34,
+                  flexShrink: 0,
+                  borderRadius: 8,
+                  overflow: "hidden",
+                  border: "1px solid var(--line-2)",
+                  background: "var(--surface-3)",
+                }}
+              >
+                {poster ? (
+                  <Image
+                    src={poster}
+                    alt=''
+                    fill
+                    sizes='46px'
+                    style={{ objectFit: "cover" }}
+                  />
+                ) : (
+                  <span
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      background: `linear-gradient(135deg, ${SERVICE_ACCENT[svc.cat]}22, transparent 70%)`,
+                    }}
+                  />
+                )}
+              </span>
+
+              <span style={{ flex: 1, minWidth: 0 }}>
+                <span
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 8,
+                    display: "block",
+                    fontFamily: "var(--font-geist-sans), sans-serif",
+                    fontSize: 13,
+                    fontWeight: 500,
+                    color: "var(--ink)",
+                    letterSpacing: "-0.01em",
+                    whiteSpace: "nowrap",
                     marginBottom: 2,
                   }}
                 >
-                  <span
-                    style={{
-                      fontFamily: "var(--font-geist-sans), sans-serif",
-                      fontSize: 13,
-                      fontWeight: 500,
-                      color: "var(--ink)",
-                      letterSpacing: "-0.01em",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    {svc.name}
-                  </span>
-                  {svc.badge && <Badge label={svc.badge} />}
-                  {svc.comingSoon && <Badge label="SOON" />}
-                </div>
+                  {svc.name} {svc.italic}
+                </span>
                 <span
                   style={{
+                    display: "block",
                     fontFamily: "var(--font-geist-sans), sans-serif",
                     fontSize: 11,
                     color: "var(--mute)",
-                    letterSpacing: "-0.005em",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
                   }}
                 >
                   {svc.desc}
                 </span>
-              </div>
+              </span>
+
               <span
                 style={{
                   fontFamily: "var(--font-geist-mono), monospace",
                   fontSize: 8,
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
-                  color: CAT_ACCENT[svc.cat],
+                  color: SERVICE_ACCENT[svc.cat],
                   opacity: 0.7,
                   flexShrink: 0,
                 }}
               >
-                {svc.cat}
+                {svc.catLabel}
               </span>
-            </>
-          );
-
-          const baseRowStyle = {
-            display: "flex",
-            alignItems: "center",
-            gap: 12,
-            padding: "8px 20px",
-            background: "transparent",
-            border: "none",
-            textAlign: "left" as const,
-            transition: "background 0.15s ease",
-            width: "100%",
-            textDecoration: "none",
-          };
-
-          if (svc.href) {
-            return (
-              <DownloadAppLink
-                key={svc.name}
-                href={svc.href}
-                source='tool'
-                style={{ ...baseRowStyle, cursor: "pointer" }}
-                onMouseEnter={(e) =>
-                  ((e.currentTarget as HTMLElement).style.background =
-                    "rgba(255,255,255,0.04)")
-                }
-                onMouseLeave={(e) =>
-                  ((e.currentTarget as HTMLElement).style.background =
-                    "transparent")
-                }
-              >
-                {rowContent}
-              </DownloadAppLink>
-            );
-          }
-
-          return (
-            <div
-              key={svc.name}
-              aria-disabled='true'
-              style={{ ...baseRowStyle, cursor: "not-allowed", opacity: 0.45 }}
-            >
-              {rowContent}
-            </div>
+            </Link>
           );
         })}
-
-        {/* View all footer */}
-        <div
-          style={{
-            marginTop: "auto",
-            padding: "14px 20px 4px",
-            borderTop: "1px solid var(--line)",
-          }}
-        >
-          <Link
-            href='/#services'
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
-              fontFamily: "var(--font-geist-mono), monospace",
-              fontSize: 10,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: "#38BDF8",
-              textDecoration: "none",
-              padding: 0,
-            }}
-          >
-            Browse all 23 tools
-            <svg width='12' height='12' viewBox='0 0 12 12' fill='none'>
-              <path
-                d='M2.5 6h7M7 3.5L9.5 6 7 8.5'
-                stroke='#38BDF8'
-                strokeWidth='1.3'
-                strokeLinecap='round'
-                strokeLinejoin='round'
-              />
-            </svg>
-          </Link>
-        </div>
       </div>
 
       {/* ── Right panel: categories ── */}
       <div
         style={{
           flex: 1,
+          minWidth: 0,
           padding: 20,
           display: "flex",
           flexDirection: "column",
@@ -488,7 +239,8 @@ function ToolsDropdown({ pos, onEnter, onLeave }: DropdownProps) {
           Categories
         </div>
 
-        {/* 2×2 category cards */}
+        {/* 2×2 category tiles — artwork comes from the first live service in
+            each group, so a tile can never show a tool that no longer ships. */}
         <div
           style={{
             display: "grid",
@@ -497,80 +249,92 @@ function ToolsDropdown({ pos, onEnter, onLeave }: DropdownProps) {
             flex: 1,
           }}
         >
-          {CATEGORIES.map((cat) => (
-            <button
+          {NAV_CATEGORIES.map((cat) => (
+            <Link
               key={cat.key}
+              href='/#services'
+              onClick={onLeave}
               style={{
+                position: "relative",
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "flex-start",
-                gap: 6,
-                padding: "14px 16px",
-                background: "var(--surface-2)",
-                border: "1px solid var(--line)",
+                justifyContent: "flex-end",
+                minHeight: 96,
+                padding: "12px 14px",
                 borderRadius: 14,
-                cursor: "pointer",
-                textAlign: "left",
-                transition: "border-color 0.2s ease, background 0.2s ease",
+                overflow: "hidden",
+                border: "1px solid var(--line)",
+                background: "var(--surface-2)",
+                textDecoration: "none",
+                transition: "border-color 0.2s ease",
               }}
               onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.borderColor = `${CAT_ACCENT[cat.key as Service["cat"]]}35`;
-                el.style.background = "var(--surface-3)";
+                (e.currentTarget as HTMLElement).style.borderColor =
+                  `${cat.accent}55`;
               }}
               onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.borderColor = "var(--line)";
-                el.style.background = "var(--surface-2)";
+                (e.currentTarget as HTMLElement).style.borderColor =
+                  "var(--line)";
               }}
             >
-              {/* Icon + count row */}
-              <div
+              {cat.poster && (
+                <Image
+                  src={cat.poster}
+                  alt=''
+                  fill
+                  sizes='200px'
+                  aria-hidden='true'
+                  style={{ objectFit: "cover", opacity: 0.42 }}
+                />
+              )}
+              {/* Scrim keeps the label legible over any frame */}
+              <span
+                aria-hidden='true'
                 style={{
+                  position: "absolute",
+                  inset: 0,
+                  background:
+                    "linear-gradient(to top, rgba(8,10,14,0.94) 30%, rgba(8,10,14,0.55) 70%, rgba(8,10,14,0.35) 100%)",
+                }}
+              />
+
+              <span
+                style={{
+                  position: "relative",
                   display: "flex",
-                  alignItems: "center",
+                  alignItems: "baseline",
                   justifyContent: "space-between",
-                  width: "100%",
+                  gap: 8,
+                  marginBottom: 3,
                 }}
               >
                 <span
                   style={{
-                    fontSize: 18,
-                    lineHeight: 1,
-                    color: CAT_ACCENT[cat.key as Service["cat"]],
+                    fontFamily: "var(--font-geist-sans), sans-serif",
+                    fontSize: 14,
+                    fontWeight: 600,
+                    color: "var(--ink)",
+                    letterSpacing: "-0.02em",
                   }}
                 >
-                  {cat.icon}
+                  {cat.label}
                 </span>
                 <span
                   style={{
                     fontFamily: "var(--font-geist-mono), monospace",
                     fontSize: 9,
                     letterSpacing: "0.1em",
-                    color: CAT_ACCENT[cat.key as Service["cat"]],
-                    opacity: 0.65,
+                    color: cat.accent,
+                    flexShrink: 0,
                   }}
                 >
-                  {cat.count} tools
+                  {cat.count}
                 </span>
-              </div>
-
-              {/* Label */}
-              <span
-                style={{
-                  fontFamily: "var(--font-geist-sans), sans-serif",
-                  fontSize: 14,
-                  fontWeight: 600,
-                  color: "var(--ink)",
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                {cat.key}
               </span>
 
-              {/* Desc */}
               <span
                 style={{
+                  position: "relative",
                   fontFamily: "var(--font-geist-sans), sans-serif",
                   fontSize: 11,
                   color: "var(--mute)",
@@ -579,10 +343,9 @@ function ToolsDropdown({ pos, onEnter, onLeave }: DropdownProps) {
               >
                 {cat.desc}
               </span>
-            </button>
+            </Link>
           ))}
         </div>
-
         {/* Bottom CTA strip */}
         <div
           style={{
@@ -606,7 +369,7 @@ function ToolsDropdown({ pos, onEnter, onLeave }: DropdownProps) {
                 marginBottom: 2,
               }}
             >
-              Start with 25 free credits
+              Start with an image a day on us
             </div>
           </div>
           <button
@@ -717,7 +480,7 @@ export default function Navbar() {
   const handleNavEnter = (key: string, e: React.MouseEvent) => {
     cancelClose();
     const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-    const W = 760;
+    const W = 880;
     const vw = typeof window !== "undefined" ? window.innerWidth : 1440;
     const left = Math.min(Math.max(12, rect.left - 80), vw - W - 12);
     setDropPos({ top: rect.bottom + 10, left });
@@ -727,26 +490,35 @@ export default function Navbar() {
   return (
     <>
       <nav className='mb-15 flex items-center justify-between relative z-10'>
-        <div className='flex w-full items-center justify-between px-3 py-3 sm:px-5.5 sm:py-3.5'>
+        {/* Three columns: the side tracks share the leftover space equally, so
+            the nav stays optically centred while remaining in flow — an
+            absolutely positioned nav can silently overlap the right cluster. */}
+        <div
+          className='grid w-full items-center px-3 py-3 sm:px-5.5 sm:py-3.5'
+          style={{ gridTemplateColumns: "1fr auto 1fr", columnGap: 12 }}
+        >
           {/* ── Left: Logo ── */}
-          <div className='flex items-center min-w-0'>
+          <div className='flex items-center min-w-0 overflow-hidden'>
             <Link
               href='/'
               aria-label='ShotStudio — home'
               style={{ display: "inline-flex", textDecoration: "none" }}
             >
-              {/* Compact logo on phones so the right-side CTA has room */}
+              {/* Two sizes only. Mixing an arbitrary min-[1440px] variant with
+                  the named sm: one is not reliably ordered, which rendered both
+                  marks at once — so the desktop mark is sized to fit the ~285px
+                  left track at 1280 rather than swapped at a third breakpoint. */}
               <span className='sm:hidden'>
                 <Logo size={36} fontSize={18} />
               </span>
               <span className='hidden sm:inline-flex'>
-                <Logo />
+                <Logo size={52} fontSize={26} />
               </span>
             </Link>
           </div>
 
           {/* ── Center: Nav links ── */}
-          <div className='hidden lg:flex items-center gap-5 xl:gap-6 absolute left-1/2 -translate-x-1/2'>
+          <div className='hidden lg:flex items-center justify-center gap-4 xl:gap-6'>
             {NAV_LINKS.map(({ label, key, href }, i) => (
               <div
                 key={label}
@@ -817,7 +589,7 @@ export default function Navbar() {
           </div>
 
           {/* ── Right: Token chip + CTA ── */}
-          <div className='flex items-center gap-2 sm:gap-3'>
+          <div className='flex items-center justify-end gap-2 sm:gap-3 min-w-0'>
             {/* Mobile hamburger */}
             <button
               type='button'
@@ -912,121 +684,123 @@ export default function Navbar() {
               </button>
             )}
 
-            {/* Live activity — hidden below lg so the bar never crowds */}
-            <div className='hidden lg:flex items-center' style={{ gap: 14 }}>
-              <HeaderStats />
-              <span
-                aria-hidden='true'
-                style={{ width: 1, height: 22, background: "var(--line)" }}
-              />
+            {/* Live activity, in the gap immediately left of the CTA column.
+                Stacking the two stats halves the block to ~66px, so it clears
+                the nav from 1280 up; the side-by-side layout needed 161px and
+                only fit at 1440. */}
+            <div className='hidden xl:flex items-center shrink-0 mr-1'>
+              <HeaderStats stacked />
             </div>
 
-            {/* Token chip */}
-            <button
-              className='hidden sm:inline-flex items-center'
-              onMouseEnter={() => setTokenHover(true)}
-              onMouseLeave={() => setTokenHover(false)}
-              style={{
-                gap: 8,
-                background:
-                  "linear-gradient(135deg, rgba(20,22,28,0.9), rgba(10,12,16,0.9))",
-                border: `1px solid ${tokenHover ? "rgba(56,189,248,0.45)" : "var(--line-2, rgba(255,255,255,0.08))"}`,
-                padding: "7px 12px 7px 9px",
-                borderRadius: 999,
-                boxShadow: tokenHover
-                  ? "inset 0 1px 0 rgba(255,255,255,0.05), 0 4px 14px rgba(0,0,0,0.3), 0 0 18px rgba(56,189,248,0.18)"
-                  : "inset 0 1px 0 rgba(255,255,255,0.05), 0 4px 14px rgba(0,0,0,0.3)",
-                transform: tokenHover ? "translateY(-1px)" : "translateY(0)",
-                transition:
-                  "border-color 0.2s, box-shadow 0.2s, transform 0.2s",
-                cursor: "pointer",
-              }}
-            >
-              {/* Silver coin icon */}
-              <span
-                className='flex items-center justify-center flex-shrink-0'
+            {/* CTA with the balance tucked underneath, so the row keeps
+                its width for the counters. */}
+            <div className='flex flex-col items-center shrink-0' style={{ gap: 5 }}>
+              {/* CTA */}
+              <Link
+                href='/#get-the-app'
+                className='px-3 py-2 text-[11px] sm:px-4 sm:py-2.25 sm:text-[12px] inline-flex items-center justify-center'
                 style={{
-                  width: 18,
-                  height: 18,
                   borderRadius: 999,
-                  background:
-                    "linear-gradient(135deg, #ffffff 0%, #d8dce3 14%, #4e535c 32%, #b5bac2 48%, #2e323a 60%, #c8cdd4 76%, #ffffff 100%)",
+                  background: "var(--blue-grad)",
+                  color: "white",
+                  fontWeight: 600,
+                  border: "none",
+                  cursor: "pointer",
                   boxShadow:
-                    "inset 0 1px 0 rgba(255,255,255,0.6), 0 0 10px rgba(232,234,237,0.25)",
-                  fontSize: 9,
-                  fontWeight: 800,
-                  color: "#000",
-                  lineHeight: 1,
-                }}
-              >
-                ★
-              </span>
-              {/* Number */}
-              <span
-                style={{
-                  color: "var(--blue)",
-                  fontWeight: 700,
-                  fontSize: 13,
+                    "inset 0 0 0 1px rgba(255,255,255,0.2), 0 0 24px var(--blue-glow)",
                   fontFamily: "var(--font-geist-sans), sans-serif",
-                  lineHeight: 1,
+                  whiteSpace: "nowrap",
+                  flexShrink: 0,
+                  textDecoration: "none",
                 }}
               >
-                25
-              </span>
-              {/* Label */}
-              <span
+                Get the app
+              </Link>
+              {/* Token chip */}
+              <button
+                className='hidden sm:inline-flex items-center'
+                onMouseEnter={() => setTokenHover(true)}
+                onMouseLeave={() => setTokenHover(false)}
                 style={{
-                  fontFamily: "var(--font-geist-mono), monospace",
-                  fontSize: 9,
-                  fontWeight: 500,
-                  letterSpacing: "0.14em",
-                  textTransform: "uppercase",
-                  color: "var(--mute)",
-                  lineHeight: 1,
-                }}
-              >
-                tokens
-              </span>
-              {/* Plus circle */}
-              <span
-                className='flex items-center justify-center flex-shrink-0'
-                style={{
-                  width: 16,
-                  height: 16,
+                  gap: 6,
+                  background:
+                    "linear-gradient(135deg, rgba(20,22,28,0.9), rgba(10,12,16,0.9))",
+                  border: `1px solid ${tokenHover ? "rgba(56,189,248,0.45)" : "var(--line-2, rgba(255,255,255,0.08))"}`,
+                  padding: "5px 10px 5px 7px",
                   borderRadius: 999,
-                  background: "var(--blue, #38bdf8)",
-                  color: "#000",
-                  fontWeight: 800,
-                  fontSize: 11,
-                  lineHeight: 1,
-                  boxShadow: "0 0 10px var(--blue-glow, rgba(56,189,248,0.5))",
+                  boxShadow: tokenHover
+                    ? "inset 0 1px 0 rgba(255,255,255,0.05), 0 4px 14px rgba(0,0,0,0.3), 0 0 18px rgba(56,189,248,0.18)"
+                    : "inset 0 1px 0 rgba(255,255,255,0.05), 0 4px 14px rgba(0,0,0,0.3)",
+                  transform: tokenHover ? "translateY(-1px)" : "translateY(0)",
+                  transition:
+                    "border-color 0.2s, box-shadow 0.2s, transform 0.2s",
+                  cursor: "pointer",
                 }}
               >
-                +
-              </span>
-            </button>
-
-            {/* CTA */}
-            <Link
-              href='/#get-the-app'
-              className='px-3 py-2 text-[11px] sm:px-4 sm:py-2.25 sm:text-[12px] inline-flex items-center justify-center'
-              style={{
-                borderRadius: 999,
-                background: "var(--blue-grad)",
-                color: "white",
-                fontWeight: 600,
-                border: "none",
-                cursor: "pointer",
-                boxShadow:
-                  "inset 0 0 0 1px rgba(255,255,255,0.2), 0 0 24px var(--blue-glow)",
-                fontFamily: "var(--font-geist-sans), sans-serif",
-                whiteSpace: "nowrap",
-                flexShrink: 0,
-                textDecoration: "none",
-              }}
-            >
-              Get the app
-            </Link>
+                {/* Silver coin icon */}
+                <span
+                  className='flex items-center justify-center flex-shrink-0'
+                  style={{
+                    width: 18,
+                    height: 18,
+                    borderRadius: 999,
+                    background:
+                      "linear-gradient(135deg, #ffffff 0%, #d8dce3 14%, #4e535c 32%, #b5bac2 48%, #2e323a 60%, #c8cdd4 76%, #ffffff 100%)",
+                    boxShadow:
+                      "inset 0 1px 0 rgba(255,255,255,0.6), 0 0 10px rgba(232,234,237,0.25)",
+                    fontSize: 9,
+                    fontWeight: 800,
+                    color: "#000",
+                    lineHeight: 1,
+                  }}
+                >
+                  ★
+                </span>
+                {/* Number */}
+                <span
+                  style={{
+                    color: "var(--blue)",
+                    fontWeight: 700,
+                    fontSize: 13,
+                    fontFamily: "var(--font-geist-sans), sans-serif",
+                    lineHeight: 1,
+                  }}
+                >
+                  25
+                </span>
+                {/* Label */}
+                <span
+                  style={{
+                    fontFamily: "var(--font-geist-mono), monospace",
+                    fontSize: 9,
+                    fontWeight: 500,
+                    letterSpacing: "0.14em",
+                    textTransform: "uppercase",
+                    color: "var(--mute)",
+                    lineHeight: 1,
+                  }}
+                >
+                  tokens
+                </span>
+                {/* Plus circle */}
+                <span
+                  className='flex items-center justify-center flex-shrink-0'
+                  style={{
+                    width: 16,
+                    height: 16,
+                    borderRadius: 999,
+                    background: "var(--blue, #38bdf8)",
+                    color: "#000",
+                    fontWeight: 800,
+                    fontSize: 11,
+                    lineHeight: 1,
+                    boxShadow: "0 0 10px var(--blue-glow, rgba(56,189,248,0.5))",
+                  }}
+                >
+                  +
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       </nav>
@@ -1243,7 +1017,7 @@ export default function Navbar() {
                             padding: "8px 4px 12px",
                           }}
                         >
-                          {CATEGORIES.map((cat) => (
+                          {NAV_CATEGORIES.map((cat) => (
                             <Link
                               key={cat.key}
                               href={href}
@@ -1268,20 +1042,21 @@ export default function Navbar() {
                                 }}
                               >
                                 <span
+                                  aria-hidden='true'
                                   style={{
-                                    fontSize: 16,
-                                    color: CAT_ACCENT[cat.key],
+                                    width: 8,
+                                    height: 8,
+                                    borderRadius: "50%",
+                                    background: cat.accent,
                                   }}
-                                >
-                                  {cat.icon}
-                                </span>
+                                />
                                 <span
                                   style={{
                                     fontFamily:
                                       "var(--font-geist-mono), monospace",
                                     fontSize: 9,
                                     letterSpacing: "0.1em",
-                                    color: CAT_ACCENT[cat.key],
+                                    color: cat.accent,
                                     opacity: 0.7,
                                   }}
                                 >
@@ -1297,7 +1072,7 @@ export default function Navbar() {
                                   letterSpacing: "-0.01em",
                                 }}
                               >
-                                {cat.key}
+                                {cat.label}
                               </span>
                               <span
                                 style={{
