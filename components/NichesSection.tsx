@@ -183,17 +183,28 @@ export default function NichesSection() {
                 className='p-4 flex flex-col gap-3 relative h-37 sm:h-58'
                 style={{ zIndex: 10, pointerEvents: "none" }}
               >
+                {/* flex-1 + overflow-hidden, never a transform: a
+                      translated chip row keeps its original layout box, so
+                      a wrapped third chip used to render straight over the
+                      CTA arrow below. Real layout can only ever clip. */}
                 <div
-                  className='flex flex-wrap gap-2 translate-y-6 sm:translate-y-22'
+                  className='flex flex-wrap gap-2 flex-1 min-h-0 overflow-hidden'
                   style={{
-                    minHeight: 52,
                     alignItems: "flex-start",
-                    alignContent: "flex-start",
+                    alignContent: "flex-end",
                   }}
                 >
-                  {niche.services.slice(0, 3).map((svc) => (
-                    <DownloadAppLink
+                  {niche.services.slice(0, 3).map((svc, si) => (
+                    /* Only one chip line clears the CTA row on a 158px phone
+                       card, so chips 2-3 are dropped there rather than
+                       clipped. `contents` keeps them in the same flex row at
+                       sm+; a display utility on the chip itself would lose to
+                       the unlayered .chip rule. */
+                    <span
                       key={svc.name}
+                      className={si === 0 ? "contents" : "hidden sm:contents"}
+                    >
+                    <DownloadAppLink
                       href={`/edit/${niche.id}/${toolSlug(svc.name)}`}
                       source='tool'
                       className={`chip ${svc.featured ? "chip-blue" : ""}`}
@@ -203,6 +214,9 @@ export default function NichesSection() {
                         position: "relative",
                         zIndex: 20,
                         pointerEvents: "auto",
+                        maxWidth: "100%",
+                        overflow: "hidden",
+                        whiteSpace: "nowrap",
                       }}
                     >
                       {svc.featured && (
@@ -218,12 +232,21 @@ export default function NichesSection() {
                           }}
                         />
                       )}
-                      {svc.name}
+                      <span
+                        style={{
+                          minWidth: 0,
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
+                      >
+                        {svc.name}
+                      </span>
                     </DownloadAppLink>
+                    </span>
                   ))}
                 </div>
 
-                <div className='flex items-center justify-between'>
+                <div className='flex items-center justify-between shrink-0'>
                   <span />
                   <span
                     style={{
@@ -241,7 +264,7 @@ export default function NichesSection() {
                       handles navigation. Kept as a div so we don't nest
                       <a> tags. */}
                 <div
-                  className='flex items-center justify-between mt-auto pt-2'
+                  className='flex items-center justify-between shrink-0 pt-2'
                   style={{ borderTop: "1px solid var(--line)" }}
                 >
                   <span
@@ -249,15 +272,21 @@ export default function NichesSection() {
                       fontFamily: "var(--font-geist-sans)",
                       fontSize: 13,
                       color: "var(--mute)",
+                      minWidth: 0,
+                      overflow: "hidden",
+                      whiteSpace: "nowrap",
+                      textOverflow: "ellipsis",
                     }}
                   >
-                    Explore {niche.name}
+                    <span className='hidden sm:inline'>Explore </span>
+                    {niche.name}
                   </span>
                   <span
                     aria-hidden='true'
                     style={{
                       width: 32,
                       height: 32,
+                      flexShrink: 0,
                       borderRadius: 999,
                       background: "var(--silver-grad)",
                       border: "none",
