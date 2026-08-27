@@ -494,7 +494,7 @@ export default function Navbar() {
             the nav stays optically centred while remaining in flow — an
             absolutely positioned nav can silently overlap the right cluster. */}
         <div
-          className='grid w-full items-center px-3 py-3 sm:px-5.5 sm:py-3.5'
+          className='flex lg:grid w-full items-center justify-between gap-3 px-3 py-3 sm:px-5.5 sm:py-3.5'
           style={{ gridTemplateColumns: "1fr auto 1fr", columnGap: 12 }}
         >
           {/* ── Left: Logo ── */}
@@ -506,10 +506,12 @@ export default function Navbar() {
             >
               {/* Two sizes only. Mixing an arbitrary min-[1440px] variant with
                   the named sm: one is not reliably ordered, which rendered both
-                  marks at once — so the desktop mark is sized to fit the ~285px
-                  left track at 1280 rather than swapped at a third breakpoint. */}
+                  marks at once — so each mark is sized to fit the tightest
+                  track it has to survive rather than swapped at a third
+                  breakpoint: 32/16 measures 153px against the 161px left track
+                  at 320, and 52/26 fits the ~285px track at 1280. */}
               <span className='sm:hidden'>
-                <Logo size={36} fontSize={18} />
+                <Logo size={32} fontSize={16} />
               </span>
               <span className='hidden sm:inline-flex'>
                 <Logo size={52} fontSize={26} />
