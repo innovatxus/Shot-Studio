@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import type { Niche, NicheService } from "../data/niches";
 import { toolSlug } from "../data/niches";
+import { useDownloadApp } from "@/components/app/DownloadAppProvider";
 
 /**
  * Shared, reusable editing surface.
@@ -39,6 +40,7 @@ export default function EditorCanvas({
     return idx >= 0 ? idx : 0;
   }, [focusedTool, tools]);
 
+  const { open: openDownloadApp } = useDownloadApp();
   const [imageDataUrl, setImageDataUrl] = useState<string | null>(null);
   const [selectedIndex, setSelectedIndex] = useState(initialIndex);
   const [hasApplied, setHasApplied] = useState(false);
@@ -91,12 +93,15 @@ export default function EditorCanvas({
         window.setTimeout(() => {
           setBusy(false);
           setHasApplied(true);
+          // The canvas previews the look; rendering and export happen in the
+          // app, so surface the prompt once the user has seen the result.
+          openDownloadApp("editor");
         }, 250);
       } else {
         setProgress(p);
       }
     }, 90);
-  }, [imageDataUrl, busy]);
+  }, [imageDataUrl, busy, openDownloadApp]);
 
   const handleSelectTool = useCallback((i: number) => {
     // Reset transient apply state when the user picks a different tool so

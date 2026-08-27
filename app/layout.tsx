@@ -5,6 +5,7 @@ import { LocaleProvider } from "@/components/legal/LocaleProvider";
 import ConsentBanner from "@/components/legal/ConsentBanner";
 import FloatingWidgets from "@/components/widgets/FloatingWidgets";
 import { AuthProvider } from "@/components/auth/AuthProvider";
+import { DownloadAppProvider } from "@/components/app/DownloadAppProvider";
 import "./globals.css";
 
 // Inline script: read the persisted locale before hydration so RTL pages render
@@ -42,14 +43,14 @@ export const metadata: Metadata = {
   ),
   title: "ShotStudio — AI Studio for Everyone",
   description:
-    "Upload a photo. Pick a service. Download a hero image. 17 professional AI editing services for e-commerce sellers. 25 free credits monthly.",
+    "Upload a photo. Pick a service. Download a hero image. 23 professional AI editing services for e-commerce sellers. 25 free credits monthly.",
   applicationName: "ShotStudio",
   openGraph: {
     type: "website",
     siteName: "ShotStudio",
     title: "ShotStudio — AI Studio for Everyone",
     description:
-      "17 professional AI editing services for e-commerce sellers. 25 free credits monthly.",
+      "23 professional AI editing services for e-commerce sellers. 25 free credits monthly.",
     images: [
       {
         url: "/assets/video/hero-videos/hero-main-poster.jpg",
@@ -64,7 +65,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "ShotStudio — AI Studio for Everyone",
     description:
-      "17 professional AI editing services for e-commerce sellers. 25 free credits monthly.",
+      "23 professional AI editing services for e-commerce sellers. 25 free credits monthly.",
     images: [
       {
         url: "/assets/video/hero-videos/hero-main-poster.jpg",
@@ -105,10 +106,12 @@ export default function RootLayout({
         </a>
         <AuthProvider>
           <LocaleProvider>
-            {children}
-            <ScrollFloater />
-            <ConsentBanner />
-            <FloatingWidgets />
+            <DownloadAppProvider>
+              {children}
+              <ScrollFloater />
+              <ConsentBanner />
+              <FloatingWidgets />
+            </DownloadAppProvider>
           </LocaleProvider>
         </AuthProvider>
       </body>

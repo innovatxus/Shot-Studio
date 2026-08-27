@@ -1,5 +1,6 @@
 ﻿import Link from "next/link";
 import type { Metadata } from "next";
+import DownloadAppLink from "@/components/app/DownloadAppLink";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -69,8 +70,9 @@ export default function NotFound() {
             >
               Back to home
             </Link>
-            <Link
+            <DownloadAppLink
               href='/edit/studio'
+              source='cta'
               style={{
                 padding: "12px 22px",
                 borderRadius: 999,
@@ -83,7 +85,7 @@ export default function NotFound() {
               }}
             >
               Open the studio
-            </Link>
+            </DownloadAppLink>
           </div>
         </div>
       </main>

@@ -1,24 +1,70 @@
 import "server-only";
-import { cert, getApps, getApp, initializeApp, type App } from "firebase-admin/app";
-import { getAuth, type Auth } from "firebase-admin/auth";
-import { getFirestore, type Firestore } from "firebase-admin/firestore";
+import type { App } from "firebase-admin/app";
+import type { Firestore } from "firebase-admin/firestore";
 
-// The Admin SDK service-account key IS a secret: server-only, never
-// `NEXT_PUBLIC_`, never committed. The `server-only` import above makes any
-// accidental client-bundle import a build error rather than a leak.
-const serviceAccountKey = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
+/**
+ * Server-side Firebase, mirroring the lazy pattern in `firebase/client.ts`:
+ * the admin SDK is dynamically imported on first use so it never lands in a
+ * bundle, and everything returns null when credentials are absent rather than
+ * throwing — callers degrade to an empty state instead of breaking the page.
+ *
+ * Requires FIREBASE_SERVICE_ACCOUNT_KEY (the service-account JSON, raw or
+ * base64). See FIREBASE_SETUP.md.
+ */
+export const isAdminConfigured = Boolean(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
 
-export const isFirebaseAdminConfigured = Boolean(serviceAccountKey);
+let cached: Firestore | null | undefined;
 
-let app: App | null = null;
-let auth: Auth | null = null;
-let db: Firestore | null = null;
-
-if (isFirebaseAdminConfigured) {
-  const credentials = JSON.parse(serviceAccountKey as string) as Record<string, string>;
-  app = getApps().length ? getApp() : initializeApp({ credential: cert(credentials) });
-  auth = getAuth(app);
-  db = getFirestore(app);
+function parseServiceAccount(raw: string): Record<string, string> | null {
+  try {
+    const json = raw.trim().startsWith("{")
+      ? raw
+      : Buffer.from(raw, "base64").toString("utf8");
+    return JSON.parse(json) as Record<string, string>;
+  } catch {
+    return null;
+  }
 }
 
-export { app, auth, db };
+export async function getAdminDb(): Promise<Firestore | null> {
+  if (cached !== undefined) return cached;
+
+  const raw = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
+  if (!raw) {
+    cached = null;
+    return cached;
+  }
+
+  const serviceAccount = parseServiceAccount(raw);
+  if (!serviceAccount) {
+    console.error("[analytics] FIREBASE_SERVICE_ACCOUNT_KEY is not valid JSON");
+    cached = null;
+    return cached;
+  }
+
+  try {
+    const [{ getApps, initializeApp, cert }, { getFirestore }] = await Promise.all([
+      import("firebase-admin/app"),
+      import("firebase-admin/firestore"),
+    ]);
+
+    const existing = getApps();
+    const app: App =
+      existing.length > 0
+        ? existing[0]
+        : initializeApp({
+            credential: cert({
+              projectId: serviceAccount.project_id,
+              clientEmail: serviceAccount.client_email,
+              privateKey: serviceAccount.private_key?.replace(/\\n/g, "\n"),
+            }),
+          });
+
+    cached = getFirestore(app);
+    return cached;
+  } catch (err) {
+    console.error("[analytics] admin init failed", err);
+    cached = null;
+    return cached;
+  }
+}

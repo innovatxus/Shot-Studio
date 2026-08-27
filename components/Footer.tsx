@@ -45,7 +45,7 @@ const COLUMNS: FooterColumn[] = [
     heading: UI.footer.headings.solutions,
     links: [
       {
-        label: { en: "All 17 Services", ar: "كل الخدمات الـ17" },
+        label: { en: "All 23 Services", ar: "كل الخدمات الـ23" },
         href: "/#services",
       },
       {
@@ -762,8 +762,8 @@ export default function Footer() {
               }}
             >
               {locale === "ar"
-                ? "تحرير صور احترافي بالذكاء الاصطناعي لبائعي التجارة الإلكترونية. 17 خدمة و25 رصيداً مجانياً شهرياً."
-                : "Professional AI photo editing for e-commerce sellers. 17 services, 25 free credits monthly."}
+                ? "تحرير صور احترافي بالذكاء الاصطناعي لبائعي التجارة الإلكترونية. 23 خدمة و25 رصيداً مجانياً شهرياً."
+                : "Professional AI photo editing for e-commerce sellers. 23 services, 25 free credits monthly."}
             </p>
 
             <SocialIcons />

@@ -1,6 +1,7 @@
 import { preload } from "react-dom";
 import HeroVideo from "./HeroVideo";
 import Navbar from "./Navbar";
+import DownloadAppTrigger from "@/components/app/DownloadAppTrigger";
 
 const HERO_VIDEO_SOURCES = [
   "/assets/video/hero-videos/hero-main-web.webm",
@@ -201,7 +202,8 @@ export default function Hero() {
           {/* CTA row */}
           <div className='hero-animate hero-animate-d4 flex items-center justify-center gap-3 mt-10 flex-wrap'>
             {/* Primary blue CTA */}
-            <button
+            <DownloadAppTrigger
+              source='cta'
               className='btn-lift'
               style={{
                 padding: "14px 28px",
@@ -233,7 +235,7 @@ export default function Hero() {
                   strokeLinejoin='round'
                 />
               </svg>
-            </button>
+            </DownloadAppTrigger>
 
             {/* Secondary glass CTA */}
             <button
@@ -253,7 +255,7 @@ export default function Hero() {
                 letterSpacing: "-0.01em",
               }}
             >
-              See all 17 services
+              See all 23 services
             </button>
           </div>
         </div>

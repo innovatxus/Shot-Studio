@@ -1,4 +1,5 @@
 import ScrollReveal from "./ScrollReveal";
+import DownloadAppTrigger from "@/components/app/DownloadAppTrigger";
 
 const PLANS = [
   {
@@ -6,13 +7,8 @@ const PLANS = [
     name: "Free",
     price: "$0",
     period: "/mo",
-    tagline: "Try before you commit.",
-    features: [
-      "25 credits / month",
-      "5 services unlocked",
-      "Single photo only",
-      "Community support",
-    ],
+    tagline: "Process one image every day at no cost.",
+    features: ["1 image per day"],
     cta: "Get started free",
     ctaStyle: "silver",
     featured: false,
@@ -20,54 +16,34 @@ const PLANS = [
   {
     id: "starter",
     name: "Starter",
-    price: "$20",
+    price: "$6.99",
     period: "/mo",
-    tagline: "For solo sellers.",
-    features: [
-      "200 credits / month",
-      "All 17 services",
-      "Batch up to 20 photos",
-      "3 industry presets",
-      "Email support",
-    ],
-    cta: "Start Starter — $20/mo",
+    tagline: "A flexible entry plan for regular image processing.",
+    features: ["100 images per month"],
+    cta: "Start Starter — $6.99/mo",
     ctaStyle: "silver",
     featured: false,
   },
   {
-    id: "pro",
-    name: "Pro",
-    price: "$50",
+    id: "mid",
+    name: "Mid",
+    price: "$25",
     period: "/mo",
-    tagline: "For serious sellers.",
+    tagline: "More monthly capacity for growing creative needs.",
     badge: "MOST POPULAR",
-    features: [
-      "500 credits / month · rollover",
-      "All 17 services",
-      "Batch up to 50 photos",
-      "All 9 industry presets",
-      "Shopify + Amazon sync",
-      "Priority queue",
-    ],
-    cta: "Start Pro — $50/mo",
+    features: ["Up to 350 images per month"],
+    cta: "Start Mid — $25/mo",
     ctaStyle: "blue",
     featured: true,
   },
   {
-    id: "studio",
-    name: "Studio",
-    price: "$100",
+    id: "ultra",
+    name: "Ultra",
+    price: "$75",
     period: "/mo",
-    tagline: "For teams & agencies.",
-    features: [
-      "Unlimited credits",
-      "Unlimited batch",
-      "5 team seats",
-      "All integrations + API",
-      "Custom presets + brand kit",
-      "Dedicated Slack support",
-    ],
-    cta: "Start Studio — $100/mo",
+    tagline: "High-volume image processing for demanding workflows.",
+    features: ["Up to 1,250 images per month"],
+    cta: "Start Ultra — $75/mo",
     ctaStyle: "silver",
     featured: false,
   },
@@ -110,8 +86,7 @@ export default function Pricing() {
                 lineHeight: 1.55,
               }}
             >
-              Start free and scale as you grow. Credits roll over month to month
-              on Pro.
+              Choose the plan that matches your monthly image-processing needs.
             </p>
           </div>
         </ScrollReveal>
@@ -260,7 +235,8 @@ export default function Pricing() {
               </ul>
 
               {/* CTA */}
-              <button
+              <DownloadAppTrigger
+                source='premium'
                 className='btn-lift'
                 style={{
                   width: "100%",
@@ -286,10 +262,23 @@ export default function Pricing() {
                 }}
               >
                 {plan.cta}
-              </button>
+              </DownloadAppTrigger>
             </div>
           ))}
         </ScrollReveal>
+
+        <p
+          style={{
+            marginTop: 28,
+            maxWidth: 680,
+            color: "var(--mute)",
+            fontSize: 13,
+            lineHeight: 1.6,
+          }}
+        >
+          Paid-plan image allowances reset each monthly billing cycle. The Free
+          plan allowance resets daily.
+        </p>
       </div>
     </section>
   );

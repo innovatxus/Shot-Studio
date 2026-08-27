@@ -1,3 +1,4 @@
+import AppStoreBadges from "@/components/app/AppStoreBadges";
 export default function FinalCTA() {
   return (
     <section
@@ -72,111 +73,7 @@ export default function FinalCTA() {
           </p>
 
           {/* Store buttons */}
-          <div className='flex flex-col sm:flex-row items-center gap-5 mb-10'>
-            {/* App Store */}
-            <button
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 16,
-                padding: "18px 32px",
-                borderRadius: 20,
-                background: "#000",
-                border: "1px solid rgba(255,255,255,0.18)",
-                cursor: "pointer",
-                transition: "all 0.2s ease",
-                minWidth: 220,
-              }}
-            >
-              <svg width='28' height='34' viewBox='0 0 22 26' fill='none'>
-                <path
-                  d='M18.2 13.8C18.2 10.8 20.6 9.5 20.7 9.4C19.3 7.3 17 7 16.3 6.9C14.3 6.7 12.4 8 11.4 8C10.4 8 8.8 7 7.1 7C4.9 7.1 2.9 8.2 1.7 10C-0.6 13.6 1.1 19 3.4 21.9C4.5 23.3 5.8 24.9 7.5 24.9C9.2 24.9 9.8 23.9 11.8 23.9C13.8 23.9 14.4 24.9 16.2 24.9C17.9 24.9 19.1 23.4 20.2 22C21.5 20.4 22 18.8 22 18.7C22 18.7 18.2 17.2 18.2 13.8Z'
-                  fill='white'
-                />
-                <path
-                  d='M14.8 4.9C15.7 3.8 16.3 2.3 16.1 0.8C14.8 0.8 13.3 1.6 12.3 2.7C11.4 3.7 10.7 5.2 10.9 6.7C12.3 6.8 13.9 5.9 14.8 4.9Z'
-                  fill='white'
-                />
-              </svg>
-              <div className='text-left'>
-                <p
-                  style={{
-                    fontSize: 10,
-                    color: "rgba(255,255,255,0.5)",
-                    fontFamily: "var(--font-geist-mono)",
-                    letterSpacing: "0.07em",
-                    textTransform: "uppercase",
-                    marginBottom: 2,
-                  }}
-                >
-                  Download on the
-                </p>
-                <p
-                  style={{
-                    fontSize: 18,
-                    fontWeight: 600,
-                    color: "white",
-                    fontFamily: "var(--font-geist-sans)",
-                  }}
-                >
-                  App Store
-                </p>
-              </div>
-            </button>
-
-            {/* Google Play */}
-            <button
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 16,
-                padding: "18px 32px",
-                borderRadius: 20,
-                background: "#000",
-                border: "1px solid rgba(255,255,255,0.18)",
-                cursor: "pointer",
-                transition: "all 0.2s ease",
-                minWidth: 220,
-              }}
-            >
-              <svg width='28' height='31' viewBox='0 0 22 24' fill='none'>
-                <path
-                  d='M1.5 0.5L13.5 12L1.5 23.5C0.9 23.2 0.5 22.6 0.5 22V2C0.5 1.4 0.9 0.8 1.5 0.5Z'
-                  fill='#00D2FF'
-                />
-                <path d='M17.5 8L13.5 12L1.5 0.5L17.5 8Z' fill='#FFD900' />
-                <path
-                  d='M21 10.1C21.6 10.5 22 11.2 22 12C22 12.8 21.6 13.5 21 13.9L17.5 16L13.5 12L17.5 8L21 10.1Z'
-                  fill='#FF3D00'
-                />
-                <path d='M1.5 23.5L13.5 12L17.5 16L1.5 23.5Z' fill='#00F076' />
-              </svg>
-              <div className='text-left'>
-                <p
-                  style={{
-                    fontSize: 10,
-                    color: "rgba(255,255,255,0.5)",
-                    fontFamily: "var(--font-geist-mono)",
-                    letterSpacing: "0.07em",
-                    textTransform: "uppercase",
-                    marginBottom: 2,
-                  }}
-                >
-                  Get it on
-                </p>
-                <p
-                  style={{
-                    fontSize: 18,
-                    fontWeight: 600,
-                    color: "white",
-                    fontFamily: "var(--font-geist-sans)",
-                  }}
-                >
-                  Google Play
-                </p>
-              </div>
-            </button>
-          </div>
+          <AppStoreBadges size='lg' className='mb-10' />
         </div>
       </div>
     </section>

@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from "react";
-import Link from "next/link";
+import DownloadAppLink from "@/components/app/DownloadAppLink";
 import ScrollReveal from "./ScrollReveal";
 import { toolSlug } from "@/features/editor/data/niches";
 import {
@@ -264,9 +264,9 @@ function PlatformCard({ platform: p }: { platform: Platform }) {
       }}
     >
       {/* Header — links to the platform editor */}
-      <Link
+      <DownloadAppLink
         href={`/edit/${nicheSlug}`}
-        prefetch={false}
+        source='card'
         className='flex items-center justify-between gap-3'
         style={{
           padding: "20px 20px 16px",
@@ -306,7 +306,7 @@ function PlatformCard({ platform: p }: { platform: Platform }) {
         >
           {p.sizes.length} sizes
         </span>
-      </Link>
+      </DownloadAppLink>
 
       {/* Divider */}
       <div style={{ height: 1, background: "var(--line)", margin: "0 20px" }} />
@@ -316,10 +316,10 @@ function PlatformCard({ platform: p }: { platform: Platform }) {
         {p.sizes.map((s, i) => {
           const slug = toolSlug(socialServiceName(s));
           return (
-            <Link
+            <DownloadAppLink
               key={s.name}
               href={`/edit/${nicheSlug}/${slug}`}
-              prefetch={false}
+              source='tool'
               className='flex items-center justify-between social-size-row'
               style={
                 {
@@ -354,7 +354,7 @@ function PlatformCard({ platform: p }: { platform: Platform }) {
               >
                 {s.dim}
               </span>
-            </Link>
+            </DownloadAppLink>
           );
         })}
       </div>

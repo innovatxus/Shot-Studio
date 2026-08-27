@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import DownloadAppLink from "@/components/app/DownloadAppLink";
 import ScrollReveal from "./ScrollReveal";
 import LazyVideo from "./LazyVideo";
 import { NICHES, toolSlug } from "@/features/editor/data/niches";
@@ -83,12 +83,15 @@ export default function NichesSection() {
               {/* Whole-card click target. Sits above the media/overlay
                     but below the interactive chips below (z-index 20+),
                     so chip deep-links still win their own clicks. */}
-              <Link
+              <DownloadAppLink
                 href={`/edit/${niche.id}`}
-                aria-label={`Open ${niche.name}${niche.suffix ? " " + niche.suffix : ""} editor`}
+                source='card'
+                aria-label={`Get the app to use ${niche.name}${niche.suffix ? " " + niche.suffix : ""}`}
                 className='absolute inset-0'
                 style={{ zIndex: 5 }}
-              />
+              >
+                <span className='sr-only'>Get the ShotStudio app</span>
+              </DownloadAppLink>
               {/* Video background with lazy loading */}
               {niche.video && (
                 <LazyVideo
@@ -189,9 +192,10 @@ export default function NichesSection() {
                   }}
                 >
                   {niche.services.slice(0, 3).map((svc) => (
-                    <Link
+                    <DownloadAppLink
                       key={svc.name}
                       href={`/edit/${niche.id}/${toolSlug(svc.name)}`}
+                      source='tool'
                       className={`chip ${svc.featured ? "chip-blue" : ""}`}
                       style={{
                         fontSize: 10,
@@ -215,7 +219,7 @@ export default function NichesSection() {
                         />
                       )}
                       {svc.name}
-                    </Link>
+                    </DownloadAppLink>
                   ))}
                 </div>
 

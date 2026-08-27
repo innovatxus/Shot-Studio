@@ -48,6 +48,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.7,
     },
+    {
+      url: `${SITE_URL}/accessibility`,
+      lastModified,
+      changeFrequency: "yearly",
+      priority: 0.4,
+    },
   ];
 
   // Non-draft marketing stub pages only.

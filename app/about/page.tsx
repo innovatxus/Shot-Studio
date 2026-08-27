@@ -114,7 +114,7 @@ interface Outcome {
 
 const OUTCOMES: Outcome[] = [
   {
-    metric: "17",
+    metric: "23",
     label: "Professional services",
     body: "From ghost mannequin and reflection clean to virtual staging and color match. Engineered, not generic.",
   },

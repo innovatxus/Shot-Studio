@@ -1,29 +1,26 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import MarketingStub from "@/components/legal/MarketingStub";
-import { getMarketingMetadata, getMarketingPage } from "@/lib/legal/marketing";
+import LegalArticle from "@/components/legal/LegalArticle";
+import { ACCESSIBILITY_PAGE } from "@/lib/legal/content/accessibility";
 
-const SLUG = "accessibility";
-const page = getMarketingPage(SLUG);
-
-export const metadata: Metadata = getMarketingMetadata(SLUG);
+export const metadata: Metadata = {
+  title: ACCESSIBILITY_PAGE.title.en,
+  description: ACCESSIBILITY_PAGE.meta.en,
+  alternates: {
+    languages: {
+      en: "/accessibility",
+      ar: "/accessibility?lang=ar",
+    },
+  },
+};
 
 export default function Page_accessibility() {
-  if (!page) notFound();
   return (
     <>
       <Navbar />
       <main className='relative min-h-screen overflow-x-hidden' id='content'>
-        <MarketingStub
-          eyebrow={page.eyebrow}
-          title={page.title}
-          lede={page.lede}
-          body={page.body}
-          ctas={page.ctaPrimary ? [page.ctaPrimary] : undefined}
-          draft={page.draft}
-        />
+        <LegalArticle page={ACCESSIBILITY_PAGE} />
         <Footer />
       </main>
     </>

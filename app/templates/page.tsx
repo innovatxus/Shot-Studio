@@ -281,7 +281,7 @@ export default function TemplatesPage() {
             {[
               { value: "12", label: "industries" },
               { value: "48", label: "templates" },
-              { value: "17", label: "AI services" },
+              { value: "23", label: "AI services" },
               { value: "1-click", label: "apply" },
             ].map(({ value, label }) => (
               <div

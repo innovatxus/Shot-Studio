@@ -58,8 +58,8 @@ export const MARKETING_PAGES: MarketingPageContent[] = [
     eyebrow: { en: "Help Center", ar: "مركز المساعدة" },
     title: { en: "How can we help?", ar: "كيف يمكننا المساعدة؟" },
     lede: {
-      en: "Guides, walkthroughs, and answers to common questions across all 17 services.",
-      ar: "أدلّة، شروحات، وإجابات للأسئلة الشائعة عبر الخدمات الـ17.",
+      en: "Guides, walkthroughs, and answers to common questions across all 23 services.",
+      ar: "أدلّة، شروحات، وإجابات للأسئلة الشائعة عبر الخدمات الـ23.",
     },
     body: {
       en: "Detailed Help Center articles are rolling out per service. In the meantime, contact support@shotstudio.ai and a real human will reply within one business day.",
@@ -228,20 +228,6 @@ export const MARKETING_PAGES: MarketingPageContent[] = [
     body: {
       en: "Community channels (Discord, WhatsApp groups by region) launch with public beta. Email community@shotstudio.ai to be invited early.",
       ar: "تنطلق قنوات المجتمع (Discord ومجموعات واتساب حسب المنطقة) مع النسخة التجريبية العامة. راسِل community@shotstudio.ai للحصول على دعوة مبكرة.",
-    },
-    draft: true,
-  },
-  {
-    slug: "accessibility",
-    eyebrow: { en: "Accessibility", ar: "إمكانية الوصول" },
-    title: { en: "Accessibility statement", ar: "بيان إمكانية الوصول" },
-    lede: {
-      en: "Our commitment to WCAG 2.2 AA and to continuously improving access for users with disabilities.",
-      ar: "التزامنا بمعيار WCAG 2.2 AA والتحسين المستمرّ للوصول للمستخدمين ذوي الإعاقات.",
-    },
-    body: {
-      en: "We audit ShotStudio against WCAG 2.2 AA. Report accessibility issues to accessibility@shotstudio.ai and we will respond within 5 business days with a remediation plan.",
-      ar: "نراجع سناب برو وفقاً لمعيار WCAG 2.2 AA. أبلِغ عن أي مشكلات في الوصول إلى accessibility@shotstudio.ai وسنردّ خلال 5 أيام عمل بخطة معالجة.",
     },
     draft: true,
   },

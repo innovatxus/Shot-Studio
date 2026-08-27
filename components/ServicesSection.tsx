@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import DownloadAppLink from "@/components/app/DownloadAppLink";
 import type { ReactElement } from "react";
-import Link from "next/link";
 import LazyVideo from "./LazyVideo";
 import ScrollReveal from "./ScrollReveal";
 import { toolSlug } from "@/features/editor/data/niches";
@@ -29,8 +29,10 @@ const SERVICES = [
     cat: "cut",
     catLabel: "CUT",
     credit: "2 cr",
-    desc: "Auto-fills the inside of garments. Perfect for apparel listings.",
-    video: "/assets/video/tools-videos/ghost-mannequin.mp4",
+    desc: "Puts your garment on a photoreal AI model. No casting, no shoot day.",
+    // Awaiting its own footage — it previously reused the ghost-mannequin clip,
+    // which shows a garment with no model and misrepresents this tool. Falls
+    // back to the category mark until the real clip lands.
   },
   {
     id: 3,
@@ -260,6 +262,7 @@ const SERVICES = [
     catLabel: "ENHANCE",
     credit: "3 cr",
     desc: "2× to 4× resolution. Detail recovery for printable catalogs and Amazon zoom.",
+    video: "/assets/video/tools-videos/upscale-4k.mp4",
     comingSoon: true,
   },
   {
@@ -273,6 +276,10 @@ const SERVICES = [
     comingSoon: true,
   },
 ];
+
+// Tools a user can actually run today; the two `comingSoon` cards still
+// render, badged SOON, but are excluded from every published count.
+const LIVE_SERVICE_COUNT = SERVICES.filter((s) => !("comingSoon" in s && s.comingSoon)).length;
 
 // ─── Tab config ───────────────────────────────────────────────────────────────
 // Cut 4 · Stage 11 · Enhance 10 · Format 3 = 28 total
@@ -470,7 +477,7 @@ export default function ServicesSection() {
                 lineHeight: 1.55,
               }}
             >
-              {SERVICES.length} specialist services across cutting, staging,
+              {LIVE_SERVICE_COUNT} specialist services across cutting, staging,
               enhancing, and formatting. All AI-powered, all under one roof.
             </p>
           </div>
@@ -655,16 +662,16 @@ export default function ServicesSection() {
             }
 
             return (
-              <Link
+              <DownloadAppLink
                 key={svc.id}
                 href={`/edit/studio/${toolSlug(studioServiceName(svc))}`}
-                prefetch={false}
-                aria-label={`Open ${svc.name} ${svc.italic} editor`}
+                source='tool'
+                aria-label={`Get the app to use ${svc.name} ${svc.italic}`}
                 className='stagger-item card-hover sheen service-card flex flex-col overflow-hidden'
                 style={baseStyle}
               >
                 {cardInner}
-              </Link>
+              </DownloadAppLink>
             );
           })}
         </ScrollReveal>

@@ -1062,7 +1062,7 @@ export const LEGAL_PAGES: LegalPage[] = [
         },
         paragraphs: {
           en: [
-            "4.1 What the Service does. ShotStudio is an AI-powered photo-editing platform for e-commerce sellers, retail businesses, photographers and creative professionals. It provides seventeen AI editing tools — including background removal, ghost mannequin, scene staging, colour grading, jewellery retouching, face analysis and textile processing — through a credit-based usage model.",
+            "4.1 What the Service does. ShotStudio is an AI-powered photo-editing platform for e-commerce sellers, retail businesses, photographers and creative professionals. It provides 23 AI editing tools — including background removal, ghost mannequin, scene staging, colour grading, jewellery retouching, face analysis and textile processing — through a credit-based usage model.",
             "4.2 Plans and Credits. The Service operates on tiered plans (Free, Starter, Pro, Studio) with differing Credit allowances, batch-processing limits and feature access, as described on the Pricing page. Credits are consumed per AI operation.",
             "4.3 How Credits behave. This clause states the only rules that apply to Credits; sections 13 and 19 refer back to it.",
             "4.4 Face analysis and images of people. Several tools, including face analysis, operate on images that depict identifiable people. Those tools detect facial regions to place edits correctly. They do not identify anyone, do not match a face across images, and do not retain facial measurements or templates after the operation completes. Clause 6.4(c) requires you to hold the documented consent of any identifiable person you upload, and clause 11.4 of these Terms and the Privacy Policy govern what happens to those images afterwards.",
@@ -1070,7 +1070,7 @@ export const LEGAL_PAGES: LegalPage[] = [
             "4.6 API and automated access. Automated and programmatic access, including batch processing and API calls, is permitted within the documented rate limits for your plan. Access that circumvents those limits, that is designed to evade metering, or that materially degrades the Service for other users is prohibited under clause 8.2.",
           ],
           ar: [
-            "4.1 What the Service does. ShotStudio is an AI-powered photo-editing platform for e-commerce sellers, retail businesses, photographers and creative professionals. It provides seventeen AI editing tools — including background removal, ghost mannequin, scene staging, colour grading, jewellery retouching, face analysis and textile processing — through a credit-based usage model.",
+            "4.1 What the Service does. ShotStudio is an AI-powered photo-editing platform for e-commerce sellers, retail businesses, photographers and creative professionals. It provides 23 AI editing tools — including background removal, ghost mannequin, scene staging, colour grading, jewellery retouching, face analysis and textile processing — through a credit-based usage model.",
             "4.2 Plans and Credits. The Service operates on tiered plans (Free, Starter, Pro, Studio) with differing Credit allowances, batch-processing limits and feature access, as described on the Pricing page. Credits are consumed per AI operation.",
             "4.3 How Credits behave. This clause states the only rules that apply to Credits; sections 13 and 19 refer back to it.",
             "4.4 Face analysis and images of people. Several tools, including face analysis, operate on images that depict identifiable people. Those tools detect facial regions to place edits correctly. They do not identify anyone, do not match a face across images, and do not retain facial measurements or templates after the operation completes. Clause 6.4(c) requires you to hold the documented consent of any identifiable person you upload, and clause 11.4 of these Terms and the Privacy Policy govern what happens to those images afterwards.",
@@ -2826,8 +2826,8 @@ export const LEGAL_PAGES: LegalPage[] = [
           head: { en: ["Field", "Value"], ar: ["الحقل", "القيمة"] },
           rows: [
             {
-              en: ["Legal name", "Innovatx (trading as ShotStudio)"],
-              ar: ["الاسم القانوني", "Innovatx (تعمل باسم ShotStudio)"],
+              en: ["Legal name", "Innovatx Technologies (trading as ShotStudio)"],
+              ar: ["الاسم القانوني", "Innovatx Technologies (تعمل باسم ShotStudio)"],
             },
             {
               en: ["Place of establishment", "Austin, Texas, United States"],

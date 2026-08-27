@@ -7,6 +7,9 @@ import WidgetShell from "./widgets/WidgetShell";
 import AuthPanelContent from "./auth/AuthPanelContent";
 import AccountPanelContent from "./auth/AccountPanelContent";
 import { useAuth } from "./auth/AuthProvider";
+import { useDownloadApp } from "@/components/app/DownloadAppProvider";
+import HeaderStats from "@/components/app/HeaderStats";
+import DownloadAppLink from "@/components/app/DownloadAppLink";
 
 /* ─────────────────────────────────────────────────────────
    DATA
@@ -277,6 +280,7 @@ interface DropdownProps {
 }
 
 function ToolsDropdown({ pos, onEnter, onLeave }: DropdownProps) {
+  const { open: openDownloadApp } = useDownloadApp();
   return (
     <div
       className='nav-dropdown'
@@ -394,9 +398,10 @@ function ToolsDropdown({ pos, onEnter, onLeave }: DropdownProps) {
 
           if (svc.href) {
             return (
-              <Link
+              <DownloadAppLink
                 key={svc.name}
                 href={svc.href}
+                source='tool'
                 style={{ ...baseRowStyle, cursor: "pointer" }}
                 onMouseEnter={(e) =>
                   ((e.currentTarget as HTMLElement).style.background =
@@ -408,7 +413,7 @@ function ToolsDropdown({ pos, onEnter, onLeave }: DropdownProps) {
                 }
               >
                 {rowContent}
-              </Link>
+              </DownloadAppLink>
             );
           }
 
@@ -446,7 +451,7 @@ function ToolsDropdown({ pos, onEnter, onLeave }: DropdownProps) {
               padding: 0,
             }}
           >
-            Browse all 17 tools
+            Browse all 23 tools
             <svg width='12' height='12' viewBox='0 0 12 12' fill='none'>
               <path
                 d='M2.5 6h7M7 3.5L9.5 6 7 8.5'
@@ -604,13 +609,16 @@ function ToolsDropdown({ pos, onEnter, onLeave }: DropdownProps) {
               Start with 25 free credits
             </div>
           </div>
-          <div
+          <button
+            type='button'
+            onClick={() => openDownloadApp("cta")}
             style={{
               display: "flex",
               alignItems: "center",
               gap: 6,
               padding: "8px 14px",
               background: "var(--blue-grad)",
+              border: "none",
               borderRadius: 999,
               boxShadow:
                 "inset 0 0 0 1px rgba(255,255,255,0.2), 0 0 20px rgba(56,189,248,0.3)",
@@ -637,7 +645,7 @@ function ToolsDropdown({ pos, onEnter, onLeave }: DropdownProps) {
                 strokeLinejoin='round'
               />
             </svg>
-          </div>
+          </button>
         </div>
       </div>
     </div>
@@ -903,6 +911,15 @@ export default function Navbar() {
                 )}
               </button>
             )}
+
+            {/* Live activity — hidden below lg so the bar never crowds */}
+            <div className='hidden lg:flex items-center' style={{ gap: 14 }}>
+              <HeaderStats />
+              <span
+                aria-hidden='true'
+                style={{ width: 1, height: 22, background: "var(--line)" }}
+              />
+            </div>
 
             {/* Token chip */}
             <button
@@ -1191,7 +1208,7 @@ export default function Navbar() {
                               lineHeight: 1.4,
                             }}
                           >
-                            17
+                            23
                           </span>
                         </span>
                         <svg
@@ -1318,7 +1335,7 @@ export default function Navbar() {
                                 "inset 0 0 0 1px rgba(255,255,255,0.18), 0 0 18px rgba(56,189,248,0.25)",
                             }}
                           >
-                            Browse all 17 tools
+                            Browse all 23 tools
                           </Link>
                         </div>
                       )}
@@ -1509,6 +1526,19 @@ export default function Navbar() {
               >
                 Get the app
               </Link>
+            </div>
+
+            {/* Activity — in the sheet on phones rather than the cramped bar */}
+            <div
+              style={{
+                marginTop: 14,
+                paddingTop: 14,
+                borderTop: "1px solid var(--line)",
+                display: "flex",
+                justifyContent: "flex-start",
+              }}
+            >
+              <HeaderStats compact />
             </div>
           </div>
         </>
