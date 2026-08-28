@@ -15,6 +15,18 @@ interface ScrollRevealProps {
   /** Re-trigger every time it enters viewport. Default false (one-shot). */
   repeat?: boolean;
   threshold?: number;
+  /**
+   * For content that is above the fold on first paint.
+   *
+   * The normal variants hold their element at `opacity: 0` until an observer
+   * adds `.in` after hydration. That is correct for anything the user scrolls
+   * to, but for the first screenful it means the largest text on the page
+   * cannot paint until the bundle has hydrated — measured on /learn as an LCP
+   * of 4056ms against an FCP of 1116ms. `immediate` swaps the fade for a
+   * transform-only entrance, so the text is painted and readable on the first
+   * frame and still travels into place. Same trade as `.hero-animate`.
+   */
+  immediate?: boolean;
 }
 
 export default function ScrollReveal({
@@ -26,10 +38,14 @@ export default function ScrollReveal({
   as: Tag = "div",
   repeat = false,
   threshold = 0.12,
+  immediate = false,
 }: ScrollRevealProps) {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    // `immediate` content is painted from the first frame and animates in CSS;
+    // there is nothing for an observer to wait for.
+    if (immediate) return;
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
@@ -45,9 +61,9 @@ export default function ScrollReveal({
     );
     obs.observe(el);
     return () => obs.disconnect();
-  }, [repeat, threshold]);
+  }, [repeat, threshold, immediate]);
 
-  const variantClass = `reveal-${variant}`;
+  const variantClass = immediate ? "reveal-immediate" : `reveal-${variant}`;
   const delayClass = delay > 0 ? `reveal-d${delay}` : "";
   const staggerClass = stagger ? "stagger" : "";
 

@@ -19,7 +19,9 @@ export function LearnHero({ stats }: LearnHeroProps) {
   return (
     <section id='learn-hero' className='relative z-10 mt-32'>
       <div className='max-w-370 mx-auto px-12 max-[720px]:px-4'>
-        <ScrollReveal variant='blur'>
+        {/* Above the fold on first paint: this block holds the page's LCP
+            heading, so it must not wait on hydration to become visible. */}
+        <ScrollReveal variant='blur' immediate>
           <div
             style={{
               borderBottom: "1px solid var(--line)",

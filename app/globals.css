@@ -1546,3 +1546,21 @@ html {
 :root[data-consent="set"] .consent-banner {
   display: none;
 }
+
+/* ─── Above-the-fold reveal ───
+ * Transform-only entrance for content that is on screen at first paint.
+ * The other `.reveal-*` variants start at `opacity: 0` and wait for the
+ * observer that runs after hydration, which is correct for content the user
+ * scrolls to but leaves first-screen text unpaintable until the bundle has
+ * hydrated. This keeps the movement and drops the fade, so the text is
+ * legible on the first frame — the same trade already made by `.hero-animate`. */
+.reveal-immediate {
+  animation: hero-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-immediate {
+    animation: none !important;
+    transform: none !important;
+  }
+}
