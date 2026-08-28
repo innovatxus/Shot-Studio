@@ -10,20 +10,34 @@ an earlier claim turned out to be wrong, it says so.
 ## 1. Headline
 
 Measured under **applied** throttling (real CPU + network throttling), mobile,
-n=5, medians:
+n=5, medians. All five routes meet the 2500 ms target:
 
-| Route | Before | After | Target 2500 ms |
-| --- | --- | --- | --- |
-| `/` | 1192 ms | **1116 ms** | met |
-| `/learn` | 4056 ms | **1672 ms** (−2384) | met |
+| Route | LCP | Target |
+| --- | --- | --- |
+| `/edit/fashion/ghost-mannequin` | **1068 ms** | met |
+| `/` | **1116 ms** | met |
+| `/pricing` | **1316 ms** | met |
+| `/legal/privacy` | **1572 ms** | met |
+| `/learn` | **1692 ms** | met |
+
+Where a before-figure exists on the same instrument:
+
+| Route | Before | After |
+| --- | --- | --- |
+| `/learn` | 4056 ms | **1692 ms** (-2364) |
+| `/` | 1192 ms | **1116 ms** |
+
+`/pricing`, the tool page and `/legal/privacy` have no applied-throttling
+"before" — they were only ever measured under the simulation this document
+shows to be unreliable, so no delta is claimed for them.
 
 | Payload | Before | After |
 | --- | --- | --- |
 | `/` total transfer | 777 KB | **~600 KB** |
-| Card art, per image | — | **42–45 % smaller** |
+| Card art, per image | — | **42-45 % smaller** |
 | Hero poster | 90.7 KB | **36.8 KB** |
 | `public/` on disk | 468 MB | **118 MB** |
-| Source | — | −168 lines unreferenced |
+| Source | — | -168 lines unreferenced |
 
 CLS remained **0.000** on every route throughout.
 
@@ -109,6 +123,22 @@ page the visitor was already on (~39 KB).
 number invites the wrong conclusion: these files were never requested by any
 page. Repo, clone and deploy win only.
 
+### Early layout flush — `void document.body.offsetHeight`
+**`/` 1588 ms → 1120 ms.**
+
+One statement, last in `<body>`. Reading `offsetHeight` forces the browser to
+compute layout while the document is still parsing instead of deferring it,
+which lets first paint happen a frame earlier. On ~670 KB of markup across
+fourteen sections that is worth ~470 ms.
+
+This was found by accident and then pinned down deliberately. The dead reveal
+bootstrap (§4) turned out to be carrying this benefit incidentally, via the
+`getBoundingClientRect` call in its no-op loop. Isolating it took three
+measurements: full script 1116 ms, trivial `0;` script 1536 ms, no script
+1588 ms — which ruled out "any inline script forces a paint" and pointed at the
+layout read specifically. The one-line version reproduces it exactly (1120 ms)
+with nothing misleading left in the file.
+
 ### `d720bf6` — remove seven unreferenced exports
 −168 lines, **no measurable bundle change** — already tree-shaken. Hygiene.
 
@@ -120,7 +150,7 @@ and was not separable under applied throttling. Retained.
 
 ---
 
-## 4. What failed, and was reverted or is documented as inert
+## 4. What failed, and was reverted
 
 ### The global reveal bootstrap — **did not do what it claimed**
 `ee46b25` shipped an inline script intended to reveal above-the-fold content
@@ -134,12 +164,11 @@ Three attempts to fix it (`DOMContentLoaded`, `readystatechange`,
 by ~430 ms** while helping `/learn`, so the approach was abandoned in favour of
 the surgical `immediate` prop.
 
-**The inert script is deliberately still in the tree.** Deleting it regresses
-`/` from 1116 ms to 1588 ms, reproducible across clean rebuilds (5 runs each).
-A parser-blocking inline script after the body content appears to force an
-earlier paint flush. That is an accidental benefit resting on browser
-internals; it is documented in `app/layout.tsx` rather than tidied away, and
-flagged for replacement with something intentional.
+Removing it, however, *regressed* `/` from 1116 ms to 1588 ms — reproducible
+across clean rebuilds. Chasing that down gave the result in §3
+("early layout flush"): the benefit was never the reveal logic, it was the
+incidental synchronous layout forced by `getBoundingClientRect`. It has been
+replaced by one deliberate line that does the same thing on purpose.
 
 ### Shared `IntersectionObserver` — **not shipped**
 Collapsed 54 observers to 5 and cut main-thread work 2574→2319 ms and bootup
@@ -196,14 +225,12 @@ Three rig defects invalidated earlier results and were fixed:
 
 | Item | Why |
 | --- | --- |
-| **Replace the accidental paint-flush script** | `/` depends on an inert inline script for ~470 ms. Works, but rests on browser internals. Deserves an intentional mechanism. |
 | **`'use client'` boundary refactor** | 5 below-fold sections are client components. Measured ceiling ~400–800 ms of main-thread work; the shared-observer experiment suggests LCP would not follow. Not attempted. |
 | **`old photo.png` (2.36 MB)** | No exact-filename reference, but its stem collides with the service name `"Old Photo"`. Probably dead; not enough to delete on. |
 | **11 unnecessary exports / 20 type-only exports** | Zero runtime bytes. Deleting the former would break them (used in-module). |
 | **Production / edge measurement** | No production URL supplied. TTFB and Cloudflare behaviour for Egypt and Iraq remain unmeasured. |
 | **Authenticated route** | No Firebase credentials in the environment. |
 | **Real video cost on scroll** | Lighthouse fetches ~1 KB of video; a human scrolling `/` pulls far more. Likely the largest real-world number on the site. |
-| **Only 2 routes measured at the end** | `/pricing`, the tool page and `/legal/privacy` were measured under simulation only; they have no `.hero-animate` or above-fold `ScrollReveal`, so they are expected to resemble `/`. Unverified. |
 
 ### Bug noted, not fixed
 `LOCALE_COOKIE` was deleted as unreferenced, but the literal `"snap-locale"`
@@ -219,7 +246,7 @@ remains hardcoded in `LOCALE_BOOTSTRAP` in `app/layout.tsx`, duplicating
 | JS transferred per route | 250 KB | ~227 KB |
 | Fonts per route | 160 KB | 151 KB |
 | Total transfer, marketing routes | 700 KB | ~600 KB |
-| LCP (applied throttling, mobile) | 2500 ms | `/` 1116 ms · `/learn` 1672 ms |
+| LCP (applied throttling, mobile) | 2500 ms | 1068-1692 ms across all five routes |
 | CLS | 0.05 | 0.000 |
 
 Enforcement, learned the hard way:
@@ -245,6 +272,8 @@ site cold:
 - **The home page was already fast** — about 1.1 seconds — and still is. Much
   of this engagement was spent chasing a number that turned out to be a
   simulation artifact rather than something a real user experienced.
+- Pricing, the tool pages and the legal pages all land between 1.1 and 1.6
+  seconds. Every route measured is inside the target.
 - They download meaningfully less: card imagery is 42–45 % smaller, the hero
   poster is a third of its old size, and the site no longer prefetches a stack
   of pages nobody asked for.
@@ -252,4 +281,4 @@ site cold:
   headings now slide into place without fading, everything else animates as
   before, and the page still does not shift while loading (CLS 0.000).
 
-Both measured routes are now inside the 2500 ms target.
+All five measured routes are now inside the 2500 ms target.
