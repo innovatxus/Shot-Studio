@@ -601,23 +601,35 @@ em.silver {
 }
 
 /* ─── Hero Content Entrance ─── */
+/* Rise only — deliberately no opacity or blur.
+ *
+ * Largest Contentful Paint ignores anything at `opacity: 0`, and blurred text
+ * is not legible content. Fading the hero headline in behind a staggered delay
+ * meant the LCP element was withheld for 0.32-0.48s plus the fade ramp, which
+ * measured as a ~1000ms element render delay and put LCP on `/` at 4.7s while
+ * every byte the page needed had already arrived by ~674ms.
+ *
+ * Animating transform alone lets the text paint legibly on the first frame and
+ * still travel into place, so the staggered choreography below is preserved
+ * exactly — it simply no longer decides when the page is allowed to appear.
+ * Dropping the blur also removes a full-width filter repaint per frame, which
+ * is the expensive part of this animation on a mid-range Android GPU. */
 @keyframes hero-rise {
   from {
-    opacity: 0;
     transform: translateY(36px);
-    filter: blur(8px);
   }
   to {
-    opacity: 1;
     transform: translateY(0);
-    filter: blur(0);
   }
 }
 
 .hero-animate {
-  opacity: 0;
-  animation: hero-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: transform, opacity;
+  /* `both` (not `forwards`) applies the from-state during the delay, so a
+     staggered element sits at its start offset rather than snapping there when
+     its turn arrives. No `opacity: 0` base state: the text is painted and
+     readable from the first frame, which is what unblocks LCP. */
+  animation: hero-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform;
 }
 
 .hero-animate-d1 {
@@ -1523,4 +1535,14 @@ html {
   .fab-orb-shine {
     animation-duration: 8s;
   }
+}
+
+/* ─── Consent banner pre-paint visibility ───
+ * The banner is server-rendered so a first-time visitor sees it in the first
+ * frame instead of after hydration. For anyone who has already chosen, the
+ * bootstrap in `app/layout.tsx` stamps `data-consent` on <html> before the
+ * first paint and this rule keeps the banner from ever being painted, so
+ * React unmounting it after hydration is invisible. */
+:root[data-consent="set"] .consent-banner {
+  display: none;
 }
