@@ -12,6 +12,20 @@ import "./globals.css";
 // in the correct direction on first paint and avoid a layout flash.
 const LOCALE_BOOTSTRAP = `(function(){try{var l=localStorage.getItem('snap-locale');if(l==='ar'){document.documentElement.setAttribute('dir','rtl');document.documentElement.setAttribute('lang','ar');}}catch(e){}})();`;
 
+// Reveals whatever is already on screen, before React hydrates.
+//
+// `ScrollReveal` starts its elements at `opacity: 0` and only adds `.in` from
+// inside `useEffect`, so anything above the fold stayed invisible until the
+// bundle had downloaded, parsed and hydrated. Measured on /learn that put the
+// LCP <h1> at a 1309ms render delay — the headline was waiting on JS it did
+// not need. This runs at the end of <body>, when the markup is parsed but
+// hydration has not started, and only touches elements intersecting the
+// viewport; everything below the fold is left for the observer exactly as
+// before. The class is applied on the next frame so the CSS transition still
+// has a starting frame to animate from — the entrance motion is unchanged,
+// it simply no longer waits.
+const REVEAL_BOOTSTRAP = `(function(){try{var e=document.querySelectorAll('.reveal-up,.reveal-fade,.reveal-right,.reveal-left,.reveal-scale,.reveal-blur'),h=innerHeight,p=[],i,r;for(i=0;i<e.length;i++){r=e[i].getBoundingClientRect();if(r.top<h&&r.bottom>0)p.push(e[i]);}if(p.length)requestAnimationFrame(function(){for(var j=0;j<p.length;j++)p[j].classList.add('in');});}catch(x){}})();`;
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -119,6 +133,8 @@ export default function RootLayout({
             </DownloadAppProvider>
           </LocaleProvider>
         </AuthProvider>
+        {/* Must stay last in <body>: it reads the rendered markup. */}
+        <script dangerouslySetInnerHTML={{ __html: REVEAL_BOOTSTRAP }} />
       </body>
     </html>
   );
