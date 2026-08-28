@@ -8,8 +8,7 @@ import {
 } from "@/features/editor/data/niches";
 import { LEGAL_PAGES, POLICY_PAGES, TRUST_PAGES } from "@/lib/legal";
 import { MARKETING_PAGES } from "@/lib/legal/marketing";
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://shotstudio.ai";
+import { SITE_URL } from "@/lib/site-url";
 
 /**
  * Production sitemap.

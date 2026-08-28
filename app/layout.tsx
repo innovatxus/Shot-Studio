@@ -6,6 +6,7 @@ import ConsentBanner from "@/components/legal/ConsentBanner";
 import FloatingWidgets from "@/components/widgets/FloatingWidgets";
 import { AuthProvider } from "@/components/auth/AuthProvider";
 import { DownloadAppProvider } from "@/components/app/DownloadAppProvider";
+import { SITE_URL } from "@/lib/site-url";
 import "./globals.css";
 
 // Inline script: read the persisted locale before hydration so RTL pages render
@@ -75,9 +76,7 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://shotstudio.ai",
-  ),
+  metadataBase: new URL(SITE_URL),
   title: "Shot Studio",
   description:
     "Professional AI-powered tools for editing, enhancing, and transforming images.",
