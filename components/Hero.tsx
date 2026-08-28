@@ -22,7 +22,14 @@ export default function Hero() {
   // Only the poster is preloaded. `as: "video"` is not a valid preload
   // destination — browsers drop the hint and warn — and the clip itself is
   // streamed on demand by HeroVideo rather than raced against the LCP text.
-  preload("/assets/video/hero-videos/hero-main-poster.jpg", { as: "image", fetchPriority: "high" });
+  //
+  // Deliberately *not* `fetchPriority: "high"`. Both video slots start at
+  // opacity 0 until `isVisible` flips, so the poster is not painted for the
+  // first ~800ms and is never the LCP element — measurement puts LCP on the
+  // hero sub-headline. At high priority this 92 KB image was competing with
+  // the fonts and CSS that the text actually waits on. It stays preloaded so
+  // it is ready as the crossfade guard, just no longer ahead of the queue.
+  preload("/assets/video/hero-videos/hero-main-poster.jpg", { as: "image" });
 
   return (
     <section
