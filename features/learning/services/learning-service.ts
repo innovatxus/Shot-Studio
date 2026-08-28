@@ -87,10 +87,6 @@ export async function listLearningPaths(): Promise<LearningPath[]> {
   return LEARNING_PATHS;
 }
 
-export async function listFeaturedLearningPaths(): Promise<LearningPath[]> {
-  return LEARNING_PATHS.filter((p) => p.isFeatured);
-}
-
 export async function listCertifications(): Promise<Certification[]> {
   return CERTIFICATIONS;
 }
@@ -101,22 +97,6 @@ export async function listResources(): Promise<Resource[]> {
 
 export async function listFaqs(): Promise<FaqItem[]> {
   return FAQS;
-}
-
-export async function getTutorialBySlug(
-  slug: string,
-): Promise<Tutorial | undefined> {
-  return TUTORIALS.find((t) => t.slug === slug);
-}
-
-export async function listRelatedTutorials(
-  tutorial: Tutorial,
-  limit = 3,
-): Promise<Tutorial[]> {
-  return tutorial.relatedTutorialIds
-    .map((id) => TUTORIALS.find((t) => t.id === id))
-    .filter((t): t is Tutorial => Boolean(t))
-    .slice(0, limit);
 }
 
 /**

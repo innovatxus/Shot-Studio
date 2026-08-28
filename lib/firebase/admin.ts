@@ -11,7 +11,6 @@ import type { Firestore } from "firebase-admin/firestore";
  * Requires FIREBASE_SERVICE_ACCOUNT_KEY (the service-account JSON, raw or
  * base64). See FIREBASE_SETUP.md.
  */
-export const isAdminConfigured = Boolean(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
 
 let cached: Firestore | null | undefined;
 

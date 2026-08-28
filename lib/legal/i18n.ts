@@ -5,7 +5,6 @@
 
 export type Locale = "en" | "ar";
 
-export const LOCALE_COOKIE = "snap-locale";
 export const LOCALE_STORAGE_KEY = "snap-locale";
 
 export const DIR: Record<Locale, "ltr" | "rtl"> = {
