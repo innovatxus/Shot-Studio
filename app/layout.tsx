@@ -12,6 +12,16 @@ import "./globals.css";
 // in the correct direction on first paint and avoid a layout flash.
 const LOCALE_BOOTSTRAP = `(function(){try{var l=localStorage.getItem('snap-locale');if(l==='ar'){document.documentElement.setAttribute('dir','rtl');document.documentElement.setAttribute('lang','ar');}}catch(e){}})();`;
 
+// Hides the consent banner before the first paint for anyone who has already
+// made a choice.
+//
+// The banner is server-rendered so it appears immediately for a first-time
+// visitor rather than waiting on hydration. That would otherwise flash for
+// returning users, whose decision only exists in localStorage. Reading it here
+// — synchronously, in <head>, before any paint — settles visibility in CSS, so
+// React removing the node after hydration is never seen.
+const CONSENT_BOOTSTRAP = `(function(){try{var c=localStorage.getItem('snap-consent-v1');if(c&&JSON.parse(c).ts)document.documentElement.setAttribute('data-consent','set');}catch(e){}})();`;
+
 // Reveals whatever is already on screen, before React hydrates.
 //
 // `ScrollReveal` starts its elements at `opacity: 0` and only adds `.in` from
@@ -118,6 +128,7 @@ export default function RootLayout({
         <link rel='preconnect' href='https://images.unsplash.com' />
         <link rel='dns-prefetch' href='https://images.unsplash.com' />
         <script dangerouslySetInnerHTML={{ __html: LOCALE_BOOTSTRAP }} />
+        <script dangerouslySetInnerHTML={{ __html: CONSENT_BOOTSTRAP }} />
       </head>
       <body className='min-h-screen antialiased' suppressHydrationWarning>
         <a href='#content' className='skip-link'>

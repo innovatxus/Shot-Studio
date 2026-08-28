@@ -49,8 +49,18 @@ export default function ConsentBanner() {
     return () => window.removeEventListener(CONSENT_OPEN_EVENT, onOpen);
   }, []);
 
-  if (!hydrated) return null;
-  const open = forceOpen || consent === null;
+  // Rendered on the server so the banner paints with the first frame. It used
+  // to return null until `hydrated`, which meant the largest box in the
+  // viewport did not exist until the bundle had hydrated — measured at 4x CPU
+  // that made this paragraph the LCP element at ~3.9s, on a page whose bytes
+  // had all arrived by ~0.7s.
+  //
+  // The first client render must still match the server's, so it ignores the
+  // stored decision. Anyone who has already chosen never sees it: the
+  // pre-paint bootstrap in `app/layout.tsx` stamps `data-consent` on <html>
+  // and CSS hides the banner before the first paint, so React dropping it a
+  // moment later is invisible.
+  const open = hydrated ? forceOpen || consent === null : true;
   if (!open) return null;
 
   const C = UI.consent;
@@ -88,6 +98,7 @@ export default function ConsentBanner() {
       aria-modal='false'
       aria-labelledby='consent-title'
       aria-describedby='consent-body'
+      className='consent-banner'
       style={{
         position: "fixed",
         left: 16,
