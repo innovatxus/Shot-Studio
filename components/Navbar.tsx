@@ -501,6 +501,8 @@ export default function Navbar() {
           <div className='flex items-center min-w-0 overflow-hidden'>
             <Link
               href='/'
+              /* Prefetching the route the visitor is already on. */
+              prefetch={false}
               aria-label='ShotStudio — home'
               style={{ display: "inline-flex", textDecoration: "none" }}
             >

@@ -156,6 +156,8 @@ export default function ConsentBanner() {
         {C.body[locale]}{" "}
         <Link
           href='/legal/cookies'
+          /* Six copies of this RSC payload were being prefetched on load. */
+          prefetch={false}
           style={{
             color: "var(--blue, #38BDF8)",
             textDecoration: "underline",

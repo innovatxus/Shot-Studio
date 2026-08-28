@@ -489,6 +489,11 @@ function LinkColumn({ column }: { column: FooterColumn }) {
             <Link
               key={link.href + link.label.en}
               href={link.href}
+              /* The footer holds every route on the site. Prefetching them all
+                 as it scrolls into view cost ~39 KB of RSC payload before the
+                 visitor had clicked anything — on a metered connection that is
+                 spent on navigations most people never make. */
+              prefetch={false}
               className='footer-link'
               style={{
                 display: "inline-flex",
@@ -817,6 +822,7 @@ export default function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
+                prefetch={false}
                 className='footer-legal-link'
                 style={{
                   fontFamily: "var(--font-geist-mono), monospace",
