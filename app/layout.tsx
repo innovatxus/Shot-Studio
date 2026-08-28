@@ -78,37 +78,28 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://shotstudio.ai",
   ),
-  title: "ShotStudio — AI Studio for Everyone",
+  title: "Shot Studio",
   description:
-    "Upload a photo. Pick a service. Download a hero image. 23 professional AI editing services for e-commerce sellers. Start free now, no credit card.",
-  applicationName: "ShotStudio",
+    "Professional AI-powered tools for editing, enhancing, and transforming images.",
+  applicationName: "Shot Studio",
+  // No `images` entries here on purpose. `app/opengraph-image.png` and
+  // `app/twitter-image.png` are picked up by Next's file convention, which
+  // emits the absolute URL (resolved against `metadataBase`) together with
+  // og:image:width, og:image:height and og:image:type read from the file
+  // itself — so the declared 1200x630 can never drift from the real artwork.
   openGraph: {
     type: "website",
-    siteName: "ShotStudio",
-    title: "ShotStudio — AI Studio for Everyone",
+    siteName: "Shot Studio",
+    title: "Shot Studio",
     description:
-      "23 professional AI editing services for e-commerce sellers. Start free now, no credit card.",
-    images: [
-      {
-        url: "/assets/video/hero-videos/hero-main-poster.jpg",
-        width: 1920,
-        height: 1080,
-        alt: "ShotStudio — AI Studio for Everyone",
-      },
-    ],
+      "Professional AI-powered tools for editing, enhancing, and transforming images.",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "ShotStudio — AI Studio for Everyone",
+    title: "Shot Studio",
     description:
-      "23 professional AI editing services for e-commerce sellers. Start free now, no credit card.",
-    images: [
-      {
-        url: "/assets/video/hero-videos/hero-main-poster.jpg",
-        alt: "ShotStudio — AI Studio for Everyone",
-      },
-    ],
+      "Professional AI-powered tools for editing, enhancing, and transforming images.",
   },
 };
 

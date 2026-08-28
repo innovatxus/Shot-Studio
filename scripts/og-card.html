@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Shot Studio — social card source (1200×630)</title>
+    <!--
+      Source for `app/opengraph-image.png` and `app/twitter-image.png`.
+
+      The card is committed as a static PNG rather than generated per request
+      by `next/og`'s ImageResponse: the artwork never changes, so there is no
+      reason to spend serverless compute on every crawler hit, and nothing has
+      to be traced into the function bundle at deploy time.
+
+      To regenerate: open this file in Chrome, set the device size to exactly
+      1200×630 in DevTools, and capture a full-size screenshot — or point any
+      headless browser at it with that viewport. Then overwrite both PNGs.
+      Keep it lossless: JPEG chroma subsampling puts visible colour fringing
+      on the thin subtitle type against this dark background.
+    -->
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1200px; height: 630px; }
+      body {
+        font-family: "Geist", -apple-system, "Segoe UI", Roboto, sans-serif;
+        /* Dark navy, sitting alongside the site's near-black surfaces, with
+           the brand cyan (--blue #38bdf8) as a soft directional glow. */
+        background:
+          radial-gradient(900px 520px at 18% 50%, rgba(56, 189, 248, 0.16), transparent 70%),
+          radial-gradient(700px 420px at 88% 12%, rgba(56, 189, 248, 0.08), transparent 72%),
+          linear-gradient(145deg, #071120 0%, #0a1728 45%, #060d18 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* Safe margins — nothing meaningful within ~96px of any edge, so
+           platform cropping cannot clip the mark or the wordmark. */
+        padding: 0 96px;
+        position: relative;
+        overflow: hidden;
+      }
+      .edge { position: absolute; inset: 0; border-top: 1px solid rgba(56, 189, 248, 0.2); }
+      .row { display: flex; align-items: center; gap: 56px; position: relative; }
+      .logoWrap {
+        position: relative;
+        width: 248px; height: 248px; flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center;
+      }
+      /* Glow sits behind the mark; the logo bitmap itself is never altered. */
+      .glow {
+        position: absolute; width: 340px; height: 340px; border-radius: 50%;
+        background: radial-gradient(circle, rgba(56, 189, 248, 0.3) 0%, rgba(56, 189, 248, 0.1) 42%, transparent 68%);
+      }
+      /* 248×248 for a 512×512 source — square in, square out, no distortion. */
+      .logo { position: relative; width: 248px; height: 248px; display: block; }
+      .name {
+        font-size: 92px; font-weight: 700; letter-spacing: -0.025em;
+        line-height: 1; white-space: nowrap; display: flex;
+      }
+      /* Same blue gradient the in-app wordmark uses. */
+      .shot {
+        background: linear-gradient(135deg, #7dd3fc 0%, #38bdf8 38%, #0ea5e9 72%, #0369a1 100%);
+        -webkit-background-clip: text; background-clip: text; color: transparent;
+      }
+      .studio { color: #f2f5f8; margin-left: 22px; }
+      .sub {
+        margin-top: 26px; font-size: 31px; font-weight: 400;
+        letter-spacing: -0.005em; color: rgba(226, 238, 248, 0.66); white-space: nowrap;
+      }
+      .rule {
+        margin-top: 30px; width: 132px; height: 4px; border-radius: 2px;
+        background: linear-gradient(90deg, #38bdf8, rgba(56, 189, 248, 0));
+      }
+    </style>
+  </head>
+  <body>
+    <div class="edge"></div>
+    <div class="row">
+      <div class="logoWrap">
+        <div class="glow"></div>
+        <img
+          class="logo"
+          src="../public/assets/logo/shot-studio-logo.png"
+          alt="Shot Studio logo"
+        />
+      </div>
+      <div>
+        <div class="name"><span class="shot">Shot</span><span class="studio">Studio</span></div>
+        <div class="sub">Professional AI-Powered Image Editing</div>
+        <div class="rule"></div>
+      </div>
+    </div>
+  </body>
+</html>
