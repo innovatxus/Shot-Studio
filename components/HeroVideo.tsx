@@ -88,6 +88,10 @@ export default function HeroVideo({ sources }: HeroVideoProps) {
     if (active.readyState >= 1) tryPlay(active);
     const onCanPlay = () => tryPlay(active);
     active.addEventListener("canplay", onCanPlay, { once: true });
+    // With preload="metadata" the browser stops after the header and never
+    // buffers far enough to fire "canplay" on its own — play() is what starts
+    // the stream, so kick it as soon as the metadata lands.
+    active.addEventListener("loadedmetadata", onCanPlay, { once: true });
 
     const onLoadedData = () => setIsVisible(true);
     active.addEventListener("loadeddata", onLoadedData, { once: true });
@@ -115,6 +119,7 @@ export default function HeroVideo({ sources }: HeroVideoProps) {
 
     return () => {
       active.removeEventListener("canplay", onCanPlay);
+      active.removeEventListener("loadedmetadata", onCanPlay);
       active.removeEventListener("loadeddata", onLoadedData);
       active.removeEventListener("ended", onEnded);
       clearTimeout(fallbackTimer);
@@ -151,7 +156,20 @@ export default function HeroVideo({ sources }: HeroVideoProps) {
               ref={slotRefs[slot]}
               muted
               playsInline
-              preload='auto'
+              /* The active clip streams rather than downloading whole before
+                 the page settles, so it stops competing with the hero text
+                 for bandwidth. The standby slot only buffers ahead when there
+                 is genuinely a *different* clip queued behind it — on a
+                 single-clip playlist both slots share one URL, and letting
+                 both fetch it eagerly cost a duplicate download of the whole
+                 file. */
+              preload={
+                activeSlot === slot
+                  ? "metadata"
+                  : sources.length > 1
+                    ? "auto"
+                    : "none"
+              }
               disablePictureInPicture
               disableRemotePlayback
               className='hero-video absolute inset-0 w-full h-full object-cover object-center z-[1]'

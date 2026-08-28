@@ -2,6 +2,11 @@
 
 import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
+import { getMediaPolicy } from "@/lib/media/policy";
+import {
+  distanceFromViewport,
+  requestVideoSlot,
+} from "@/lib/media/videoScheduler";
 
 interface LazyVideoProps {
   src: string;
@@ -47,6 +52,11 @@ export default function LazyVideo({
   const containerRef = useRef<HTMLDivElement>(null);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
+  // Admission from the page-wide download queue. Being in view is no longer
+  // enough to start fetching — a card also has to win a slot, so a fast scroll
+  // past twenty cards no longer opens twenty simultaneous video requests.
+  const [hasSlot, setHasSlot] = useState(false);
+  const releaseSlotRef = useRef<(() => void) | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [needsManualPlay, setNeedsManualPlay] = useState(false);
   const [sourcesFailed, setSourcesFailed] = useState(false);
@@ -55,7 +65,13 @@ export default function LazyVideo({
       ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
       : false,
   );
+  // Lazy initial state: reading the connection during render keeps the first
+  // paint honest on a metered link, and avoids a setState-in-effect pass.
+  const [policy] = useState(getMediaPolicy);
   const webmSrc = src.replace(/\.mp4$/i, ".webm");
+
+  // On a metered or 2G connection the card is a poster and nothing else.
+  const videoSuppressed = reducedMotion || !policy.allowVideo;
 
   // Track prefers-reduced-motion changes at runtime
   useEffect(() => {
@@ -75,8 +91,14 @@ export default function LazyVideo({
   // scroll and can crash the renderer (seen as a black screen), even though
   // desktop/emulated testing has enough memory headroom to never show it.
   useEffect(() => {
-    if (reducedMotion || !containerRef.current) return;
+    const container = containerRef.current;
+    if (videoSuppressed || !container) return;
     let unloadTimer: ReturnType<typeof setTimeout> | null = null;
+
+    const dropSlot = () => {
+      releaseSlotRef.current?.();
+      releaseSlotRef.current = null;
+    };
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -87,29 +109,43 @@ export default function LazyVideo({
             unloadTimer = null;
           }
           setHasLoaded(true);
+          // Join the download queue. The slot is handed back as soon as the
+          // clip is playable, so it caps concurrent fetches, not playback.
+          if (!releaseSlotRef.current) {
+            releaseSlotRef.current = requestVideoSlot(
+              () => distanceFromViewport(container),
+              () => setHasSlot(true),
+            );
+          }
         } else {
+          // Give the slot up immediately on exit — a card the user has
+          // scrolled past should not keep a queue position ahead of one
+          // they are scrolling towards.
+          dropSlot();
           unloadTimer = setTimeout(() => {
             setHasLoaded(false);
+            setHasSlot(false);
             setIsPlaying(false);
             setNeedsManualPlay(false);
             setSourcesFailed(false);
           }, 1000);
         }
       },
-      { rootMargin: "120px" },
+      { rootMargin: policy.rootMargin },
     );
 
-    observer.observe(containerRef.current);
+    observer.observe(container);
     return () => {
       if (unloadTimer) clearTimeout(unloadTimer);
+      dropSlot();
       observer.disconnect();
     };
-  }, [reducedMotion]);
+  }, [videoSuppressed, policy.rootMargin]);
 
   // Play while in view, pause while scrolled away.
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || !hasLoaded || reducedMotion || !autoPlay) return;
+    if (!video || !hasLoaded || !hasSlot || videoSuppressed || !autoPlay) return;
 
     if (!isInView) {
       video.pause();
@@ -130,42 +166,59 @@ export default function LazyVideo({
 
     video.addEventListener("canplay", playVideo, { once: true });
     return () => video.removeEventListener("canplay", playVideo);
-  }, [hasLoaded, isInView, reducedMotion, autoPlay]);
+  }, [hasLoaded, hasSlot, isInView, videoSuppressed, autoPlay]);
 
   // If playback hasn't actually started a few seconds after the video
   // became loadable and in-view, offer a manual play affordance — covers
   // autoplay blocks that resolve neither play() nor canplay in time.
+  // Gated on the download slot too: a card still queued behind others has
+  // not failed to autoplay, it simply hasn't been allowed to start yet.
   useEffect(() => {
-    if (!hasLoaded || !isInView || reducedMotion || isPlaying) return;
+    if (!hasLoaded || !hasSlot || !isInView || videoSuppressed || isPlaying) {
+      return;
+    }
     const timer = setTimeout(() => setNeedsManualPlay(true), 4000);
     return () => clearTimeout(timer);
-  }, [hasLoaded, isInView, reducedMotion, isPlaying]);
+  }, [hasLoaded, hasSlot, isInView, videoSuppressed, isPlaying]);
 
   // Track playing state for opacity transition
   useEffect(() => {
     if (!videoRef.current) return;
 
     const video = videoRef.current;
+    // Hand the download slot back the instant the clip is playable (or has
+    // failed). Holding it for the clip's lifetime would cap how many cards
+    // can animate at once; releasing here caps only the fetch burst.
+    const yieldSlot = () => {
+      releaseSlotRef.current?.();
+      releaseSlotRef.current = null;
+    };
     const handlePlay = () => {
       setIsPlaying(true);
       setNeedsManualPlay(false);
+      yieldSlot();
     };
     const handlePause = () => setIsPlaying(false);
     const handleEnded = () => setIsPlaying(false);
-    const handleError = () => setSourcesFailed(true);
+    const handleError = () => {
+      setSourcesFailed(true);
+      yieldSlot();
+    };
 
+    video.addEventListener("canplay", yieldSlot);
     video.addEventListener("play", handlePlay);
     video.addEventListener("pause", handlePause);
     video.addEventListener("ended", handleEnded);
     video.addEventListener("error", handleError);
 
     return () => {
+      video.removeEventListener("canplay", yieldSlot);
       video.removeEventListener("play", handlePlay);
       video.removeEventListener("pause", handlePause);
       video.removeEventListener("ended", handleEnded);
       video.removeEventListener("error", handleError);
     };
-  }, [hasLoaded]);
+  }, [hasLoaded, hasSlot]);
 
   const handleManualPlay = () => {
     videoRef.current?.play().catch(() => {});
@@ -197,7 +250,7 @@ export default function LazyVideo({
           a given encode, VP9 typically takes an entirely separate (often
           software) decode path, so listing it first gives playback a second,
           independent way to succeed before falling back to the MP4. */}
-      {hasLoaded && !reducedMotion && !sourcesFailed && (
+      {hasLoaded && hasSlot && !videoSuppressed && !sourcesFailed && (
         <video
           ref={videoRef}
           autoPlay={autoPlay}

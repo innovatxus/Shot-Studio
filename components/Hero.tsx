@@ -3,9 +3,11 @@ import HeroVideo from "./HeroVideo";
 import Navbar from "./Navbar";
 import DownloadAppTrigger from "@/components/app/DownloadAppTrigger";
 
-const HERO_VIDEO_SOURCES = [
-  "/assets/video/hero-videos/hero-main-web.webm",
-];
+// Listed as .mp4: HeroVideo derives the WebM sibling from this path and emits
+// both <source> elements. Pointing the playlist at the .webm made that
+// derivation a no-op, so both sources resolved to the same VP9 file and the
+// H.264 fallback never existed on browsers that need it.
+const HERO_VIDEO_SOURCES = ["/assets/video/hero-videos/hero-main-web.mp4"];
 
 /**
  * Full-screen cinematic hero section.
@@ -17,11 +19,9 @@ const HERO_VIDEO_SOURCES = [
  * Server component: no runtime JS required beyond HeroVideo & Navbar (both "use client").
  */
 export default function Hero() {
-  // Kick off the fetch for the first (above-the-fold) clip as early as
-  // possible — before HeroVideo even hydrates — via React's resource hint API.
-  preload(HERO_VIDEO_SOURCES[0], { as: "video", fetchPriority: "high" });
-  // Also preload the poster so it's ready the instant the video element mounts,
-  // giving users a styled fallback frame rather than a blank well.
+  // Only the poster is preloaded. `as: "video"` is not a valid preload
+  // destination — browsers drop the hint and warn — and the clip itself is
+  // streamed on demand by HeroVideo rather than raced against the LCP text.
   preload("/assets/video/hero-videos/hero-main-poster.jpg", { as: "image", fetchPriority: "high" });
 
   return (

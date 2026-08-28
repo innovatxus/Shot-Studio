@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import LazyVideo from "@/components/LazyVideo";
 
 /**
  * CreativePowerSection — "ShotStudio Intelligence"
@@ -202,24 +203,17 @@ export default function CreativePowerSection() {
                   border: "1px solid var(--line)",
                 }}
               >
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload='auto'
-                  disablePictureInPicture
-                  disableRemotePlayback
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
-                >
-                  <source src='/assets/video/carosel-videos/studio-carosel.mp4' type='video/mp4' />
-                </video>
+                {/* Below the fold, so it mounts on approach rather than
+                    downloading the whole clip during first paint — this was
+                    the last raw <video preload="auto"> on the page and cost
+                    ~985KB before anything the visitor could see. */}
+                <LazyVideo
+                  src='/assets/video/carosel-videos/studio-carosel.mp4'
+                  poster='/assets/video/carosel-videos/studio-carosel.jpg'
+                  posterSizes='236px'
+                  alt='Product hero image being generated in the studio'
+                  className='absolute inset-0'
+                />
                 <svg
                   viewBox='0 0 236 174'
                   fill='none'

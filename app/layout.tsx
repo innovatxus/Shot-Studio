@@ -22,19 +22,27 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// Fraunces is a variable font. Naming discrete weights makes next/font fetch a
+// separate static instance per weight per style — eight files for the four
+// weights and two styles this site uses. Omitting `weight` ships the variable
+// axis instead: one file per style, covering every weight, and the display
+// headline stops waiting on a font race it used to lose.
 const fraunces = Fraunces({
   variable: "--font-fraunces",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
   style: ["normal", "italic"],
   display: "swap",
 });
 
+// 800 measured unused across the whole site, and Syne only sets the niche
+// card headings — all below the fold — so it does not belong in the preload
+// block competing with the hero's Fraunces and Geist faces.
 const syne = Syne({
   variable: "--font-syne",
   subsets: ["latin"],
-  weight: ["700", "800"],
+  weight: ["700"],
   display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -87,14 +95,11 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        {/* Hero video — highest-priority fetch so it wins the network race
-            against niche and tool card videos that mount shortly after */}
-        <link
-          rel='preload'
-          as='video'
-          href='/assets/video/hero-videos/hero-main-web.webm'
-          type='video/webm'
-        />
+        {/* No `<link rel="preload" as="video">` here: "video" is not a valid
+            preload destination, so browsers drop the hint and log a warning.
+            The hero clip is streamed on demand by HeroVideo, and Hero itself
+            preloads the poster — which is the element that actually decides
+            LCP — at high fetch priority. */}
         {/* Preconnect to external image CDNs used by gallery and bento sections */}
         <link rel='preconnect' href='https://images.unsplash.com' />
         <link rel='dns-prefetch' href='https://images.unsplash.com' />

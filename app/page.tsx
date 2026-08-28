@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import DeferredSection from "@/components/DeferredSection";
 import NichesSection from "@/components/NichesSection";
 import SubCategoriesSection from "@/components/SubCategoriesSection";
 import CreativePowerSection from "@/components/CreativePowerSection";
@@ -23,25 +24,68 @@ export default function Home() {
        */}
       <Hero />
 
-      {/* ── Below-the-fold sections ── */}
-      <NichesSection />
-      <CreativePowerSection />
-      <SubCategoriesSection />
-      <ServicesSection />
-      <PhoneShowcase />
-      <BeforeAfterGallery />
-      <SocialSizes />
-      <Pricing />
-      <Integrations />
-      <AIFeaturesSection />
+      {/*
+       * ── Below-the-fold sections ──
+       *
+       * Each is wrapped in DeferredSection so the browser can skip its layout
+       * and paint until it approaches the viewport. The estimates are the
+       * measured desktop heights — they only govern scrollbar length before a
+       * section has been rendered once, after which the browser uses the real
+       * height. Order is fixed; see the skill file before changing it.
+       */}
+      <DeferredSection estimatedHeight={3200}>
+        <NichesSection />
+      </DeferredSection>
 
-      <div className='pb-60 max-[720px]:pb-40'>
-        <FinalCTA />
-      </div>
+      <DeferredSection estimatedHeight={1800}>
+        <CreativePowerSection />
+      </DeferredSection>
 
-      <BentoSection />
+      <DeferredSection estimatedHeight={2000}>
+        <SubCategoriesSection />
+      </DeferredSection>
 
-      <Footer />
+      <DeferredSection estimatedHeight={3400}>
+        <ServicesSection />
+      </DeferredSection>
+
+      <DeferredSection estimatedHeight={1600}>
+        <PhoneShowcase />
+      </DeferredSection>
+
+      <DeferredSection estimatedHeight={1400}>
+        <BeforeAfterGallery />
+      </DeferredSection>
+
+      <DeferredSection estimatedHeight={1200}>
+        <SocialSizes />
+      </DeferredSection>
+
+      <DeferredSection estimatedHeight={1600}>
+        <Pricing />
+      </DeferredSection>
+
+      <DeferredSection estimatedHeight={1000}>
+        <Integrations />
+      </DeferredSection>
+
+      <DeferredSection estimatedHeight={1400}>
+        <AIFeaturesSection />
+      </DeferredSection>
+
+      <DeferredSection estimatedHeight={800}>
+        <div className='pb-60 max-[720px]:pb-40'>
+          <FinalCTA />
+        </div>
+      </DeferredSection>
+
+      <DeferredSection estimatedHeight={1600}>
+        <BentoSection />
+      </DeferredSection>
+
+      <DeferredSection estimatedHeight={900}>
+        <Footer />
+      </DeferredSection>
     </main>
   );
 }

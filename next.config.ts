@@ -58,6 +58,19 @@ const nextConfig: NextConfig = {
     // the original format — negotiated automatically per-request via the
     // Accept header. No separate asset files needed for any of this.
     formats: ["image/avif", "image/webp"],
+    // Every source image is content-addressed by filename here, so a cached
+    // derivative can never go stale without the URL changing. The 4-hour
+    // default meant the optimizer re-encoded the same card art several times
+    // a day, and each miss is a slow first paint for whoever triggers it.
+    minimumCacheTTL: 31536000,
+    // Next 16 requires the quality allowlist to be explicit. 75 is the
+    // component default and the only value this codebase asks for.
+    qualities: [75],
+    // The widest container on the site is `max-w-370` (1480px), so a 2×
+    // retina render tops out around 2960px. The stock list also carries
+    // 3840, and every entry is a variant the optimizer may be asked to
+    // build and store.
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     remotePatterns: [
       {
         protocol: "https",
