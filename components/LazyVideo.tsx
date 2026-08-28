@@ -236,6 +236,9 @@ export default function LazyVideo({
           alt={alt}
           fill
           sizes={posterSizes}
+          // Card art sits under a gradient overlay and is replaced by the clip
+          // as soon as it plays, so it does not need full quality.
+          quality={60}
           className='absolute inset-0 w-full h-full object-cover'
           style={{
             opacity: isPlaying ? 0 : 1,

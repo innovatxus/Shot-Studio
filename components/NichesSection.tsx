@@ -117,6 +117,8 @@ export default function NichesSection() {
                   className='object-cover'
                   style={{ zIndex: 0 }}
                   sizes='(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw'
+                  // Card background, always under the gradient overlay below.
+                  quality={60}
                 />
               )}
 

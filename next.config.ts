@@ -64,8 +64,11 @@ const nextConfig: NextConfig = {
     // a day, and each miss is a slow first paint for whoever triggers it.
     minimumCacheTTL: 31536000,
     // Next 16 requires the quality allowlist to be explicit. 75 is the
-    // component default and the only value this codebase asks for.
-    qualities: [75],
+    // component default. 60 is for card art — niche/tool/UGC posters that
+    // render ~384px wide behind a gradient overlay, where the source PNGs are
+    // photographic and AVIF at 75 was costing 24-51 KB per card. The overlay
+    // hides the difference at that size; full-bleed imagery stays at 75.
+    qualities: [60, 75],
     // The widest container on the site is `max-w-370` (1480px), so a 2×
     // retina render tops out around 2960px. The stock list also carries
     // 3840, and every entry is a variant the optimizer may be asked to
